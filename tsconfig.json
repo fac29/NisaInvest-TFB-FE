@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",                         // Target ECMAScript 2022
+    "target": "ES2022",
+    "types": ["node", "react", "storybook__react"],                         // Target ECMAScript 2022
     "lib": ["ES2022", "DOM", "DOM.Iterable"],   // Include ES2022 and DOM types
     "jsx": "react-jsx",                         // Use the new JSX transform
     "allowJs": true,                            // Allow JavaScript files

@@ -1,11 +1,16 @@
 {
-    "compilerOptions": {
-      "jsx": "react",
-      "module": "commonjs",
-      "target": "es5",
-      "lib": ["es6", "dom"],
-      "strict": true,
-      "esModuleInterop": true
-    }
-  }
-  
+  "compilerOptions": {
+    "target": "ES2022",                         // Target ECMAScript 2022
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],   // Include ES2022 and DOM types
+    "jsx": "react-jsx",                         // Use the new JSX transform
+    "allowJs": true,                            // Allow JavaScript files
+    "strict": true,                             // Enable all strict type-checking options
+    "esModuleInterop": true,                    // Enable compatibility with CommonJS
+    "moduleDetection": "force",                 // Force module detection
+    "noUncheckedIndexedAccess": true,           // Ensure strict array index checking
+    "moduleResolution": "Bundler",              // Use bundler-specific module resolution
+    "module": "ESNext",                         // Use ESNext module system
+    "noEmit": true                              // Do not emit output files
+  },
+  "include": ["src"]                            // Include all files in the src directory
+}

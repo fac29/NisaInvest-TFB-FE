@@ -1,17 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "types": ["node", "react", "storybook__react"],                         // Target ECMAScript 2022
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],   // Include ES2022 and DOM types
-    "jsx": "react-jsx",                         // Use the new JSX transform
-    "allowJs": true,                            // Allow JavaScript files
-    "strict": true,                             // Enable all strict type-checking options
-    "esModuleInterop": true,                    // Enable compatibility with CommonJS
-    "moduleDetection": "force",                 // Force module detection
-    "noUncheckedIndexedAccess": true,           // Ensure strict array index checking
-    "moduleResolution": "Bundler",              // Use bundler-specific module resolution
-    "module": "ESNext",                         // Use ESNext module system
-    "noEmit": true                              // Do not emit output files
-  },
-  "include": ["src"]                            // Include all files in the src directory
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"jsx": "react-jsx",
+		"allowJs": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"moduleDetection": "force",
+		"noUncheckedIndexedAccess": true,
+		"moduleResolution": "bundler",
+		"module": "ESNext",
+		"noEmit": true,
+		"types": ["node", "react", "@storybook/react"]
+	},
+	"include": ["src"]
 }

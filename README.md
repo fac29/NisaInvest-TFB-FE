@@ -1,8 +1,58 @@
-# NISA invest
+# NISA Invest
 
-tech stack
+NISA Invest is a platform for Muslim woment to receive personal finance advice.
 
-React + TypeScript + Vite
+## Tech Stack
 
-Front end UI: Tailwind 
+This project uses the following technologies:
 
+- **Frontend Framework**: React
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **UI Styling**: Tailwind CSS
+
+## Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/fac29/NisaInvest-TFB-FE.git
+```
+
+2. Navigate to the repository:
+
+```bash
+cd NISAINVEST-TFB-FE
+```
+
+3. Install NPM packages:
+
+```bash
+npm install
+```
+
+4. Create a .env file :
+
+```bash
+ touch .env
+```
+
+and include the following line:
+
+```env
+[placeholder]
+```
+
+5. Enter the following script to run the server in the development mode:
+
+```bash
+npm run dev
+```
+
+## Style Guide
+
+Contributors should refer to our style guide for coding conventions and best practices. The style guide can be found at:
+
+[./docs/STYLEGUIDE.md](./docs/STYLEGUIDE.md)
+
+Please make sure to read and follow the style guide before submitting any pull requests.

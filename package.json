@@ -13,6 +13,8 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
+		"@radix-ui/react-label": "^2.1.0",
+		"@radix-ui/react-radio-group": "^1.2.0",
 		"autoprefixer": "^10.4.19",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",

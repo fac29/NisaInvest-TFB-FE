@@ -92,7 +92,7 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 };
 ```
 
-6. Styling with Tailwind CSS
+## 6. Styling with Tailwind CSS
 
 - Use Tailwind CSS classes for styling
 - Group related classes for readability

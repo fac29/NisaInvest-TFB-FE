@@ -1,7 +1,12 @@
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
+
 function App() {
 	return (
 		<>
-			<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>
+			<BrowserRouter>
+				<AppRoutes />
+			</BrowserRouter>
 		</>
 	);
 }

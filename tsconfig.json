@@ -11,7 +11,11 @@
 		"moduleResolution": "bundler",
 		"module": "ESNext",
 		"noEmit": true,
-		"types": ["node", "react", "@storybook/react"]
+		"types": ["node", "react", "@storybook/react"],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
 	},
 	"include": ["src"]
 }

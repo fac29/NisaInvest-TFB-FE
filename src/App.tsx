@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
+import { LoginForm } from '@/components/LoginForm/LoginForm';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				</div>
 			</RadioGroup>
 			<Textarea></Textarea>
+			<LoginForm></LoginForm>
 		</>
 	);
 }

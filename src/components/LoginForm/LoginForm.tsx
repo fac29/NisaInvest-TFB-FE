@@ -70,7 +70,11 @@ export function LoginForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type='submit'>Log in</Button>
+				<div className='flex justify-center'>
+					<Button type='submit' variant={'outline'}>
+						Log in
+					</Button>
+				</div>
 			</form>
 		</Form>
 	);

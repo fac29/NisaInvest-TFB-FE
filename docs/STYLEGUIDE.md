@@ -2,12 +2,12 @@
 
 ## 1. File Structure and Naming
 
-- Use PascalCase for component file names: `UserProfile.tsx`
-- Use camelCase for non-component file names: `utils.ts`, `hooks.ts`
+- Use ``PascalCase`` for component file names: `UserProfile.tsx`
+- Use ``camelCase`` for non-component file names: `utils.ts`, `hooks.ts`
 - Group related files in directories: `components/`, `hooks/`, `utils/`
 - Use index files to export from directories: `components/index.ts`
 - Variables:
-	- Use camelCase for variables. 
+	- Use ``camelCase`` for variables. 
 	- Choose variable names that clearly describe the variable's purpose or content.
 	- Choose names that can be pronounced, making discussions about the code easier.
 	- Avoid single-letter names or numeric constants without context. Opt for names that can be easily searched in the codebase.
@@ -92,16 +92,24 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 };
 ```
 
-## 6. Styling
+## 6. Styling with Tailwind CSS
 
-- Prefer CSS-in-JS solutions (styled-components, emotion) or CSS modules
-- For inline styles, use the `React.CSSProperties` type
+- Use Tailwind CSS classes for styling
+- Group related classes for readability
+- Use custom Tailwind classes for frequently used combinations
+- Avoid inline styles unless absolutely necessary
 
 ```typescript
-const styles: React.CSSProperties = {
-  color: 'blue',
-  fontSize: '14px'
-};
+// Good
+<div className="p-4 bg-white shadow rounded">
+  <h1 className="text-2xl font-bold text-gray-800 mb-2">Title</h1>
+  <p className="text-gray-600">Content</p>
+</div>
+
+// Avoid
+<div style={{ padding: '1rem', backgroundColor: 'white', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}>
+  {/* ... */}
+</div>
 ```
 
 ## 7. Imports and Exports

@@ -63,5 +63,10 @@
 		"typescript": "^5.2.2",
 		"vite": "^5.3.4"
 	},
+	"overrides": {
+		"@storybook/test": {
+			"@testing-library/jest-dom": "6.2.0"
+		}
+	},
 	"homepage": "."
 }

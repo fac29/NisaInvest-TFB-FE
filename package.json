@@ -18,6 +18,7 @@
 		"@hookform/resolvers": "^3.9.0",
 		"@radix-ui/react-label": "^2.1.0",
 		"@radix-ui/react-radio-group": "^1.2.0",
+		"@radix-ui/react-separator": "^1.1.0",
 		"@radix-ui/react-slot": "^1.1.0",
 		"@testing-library/jest-dom": "^6.4.8",
 		"autoprefixer": "^10.4.19",
@@ -67,7 +68,9 @@
 		"@storybook/test": {
 			"@testing-library/jest-dom": "6.2.0"
 		}
+
 	},
 	"homepage": "https://fac29.github.io/NisaInvest-TFB-FE"
   
 }
+

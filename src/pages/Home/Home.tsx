@@ -1,7 +1,9 @@
+import { Footer } from '@/components/Footer/Footer';
+
 function Home() {
 	return (
 		<>
-			<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>;
+			<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>
 		</>
 	);
 }

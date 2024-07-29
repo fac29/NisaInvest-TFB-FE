@@ -12,7 +12,7 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
@@ -68,5 +68,6 @@
 			"@testing-library/jest-dom": "6.2.0"
 		}
 	},
-	"homepage": "."
+	"homepage": "https://fac29.github.io/nisainvest-tfb-fe"
+  
 }

@@ -37,7 +37,7 @@ const Reasons = [
 	},
 ];
 
-const defaultReason: string = Reasons[0]!.name!;
+// const defaultReason: string = Reasons[0]!.name!;
 
 const formSchema = z.object({
 	username: z.string().min(2, {
@@ -58,9 +58,8 @@ const formSchema = z.object({
 	reason: z.enum(['savings', 'expenses', 'investments', 'community']),
 });
 
-// reason has an error because it's suggesting 'undefined' is a possible value for defaultReason
-// however I have specifically said Reasons[0] will exist with the ! operator, so I'm not sure why this
-// is happening!
+// I wanted reason to have the default value `defaultReason` but this caused a type error, so I've
+// hard-coded for now. Something to come back to if we have time!
 export function SignUpForm() {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -70,7 +69,7 @@ export function SignUpForm() {
 			firstName: '',
 			lastName: '',
 			password: '',
-			reason: defaultReason,
+			reason: 'savings',
 		},
 	});
 

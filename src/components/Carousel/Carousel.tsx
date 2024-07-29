@@ -19,22 +19,22 @@ function Carousel({quotes}:{quotes:QuoteProp[]}) {
     useEffect(() => {
         setTimeout(() => {
             slideRight();
-          }, 3500);
+          }, 4000);
     }),[current]
 
 const slideRight = () => {
     setCurrent(  current === (quotes.length-1) ? 0 : current + 1 )
 }
   return (
-    <div className='carousel-container h-64 w-96 relative'>
-    <div className='box-content bg-violet-400 border-4 rounded-lg shadow-lg p-4 h-full'>
-        <ul className='object-contain'>
+    <div className='carousel-container h-64 w-1/3 relative'>
+    <div className='box-content bg-lilac border-4 rounded-full shadow-lg p-4 h-full'>
+        <ul className='text-wrap'>
             {quotes.map((quote: QuoteProp, index: number) => (
                 <li key={quote.id} className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out 
                 ${index === current ? 'opacity-100' : 'opacity-0'} ${index === current ? 'pointer-events-auto' : 'pointer-events-none'}`}>
-             <blockquote className='flex flex-col justify-center h-full'>
-                                <p className='text-lg mb-4'>{quote.text}</p>
-                                <footer className='text-sm italic'>— {quote.author}</footer>
+             <blockquote className='flex flex-col justify-center items-center h-full text-center px-7'>
+                                <p className='font-playfair font-semibold mb-4 text-offWhite'>{quote.text}</p>
+                                <footer className='source-sans italic'>— {quote.author}</footer>
                             </blockquote>
                 </li>
             ))}

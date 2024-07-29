@@ -1,4 +1,5 @@
 import { SignUpForm } from '@/components/SignUpForm/SignUpForm';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 function SignUp() {
@@ -15,7 +16,10 @@ function SignUp() {
 				</div>
 				<SignUpForm />
 				<p className='text-center'>
-					I already have an account. <Link to={'/login'}>Log in</Link>
+					I already have an account.{' '}
+					<Button variant={'link'} className='px-0 text-base'>
+						<Link to={'/login'}>Log in</Link>
+					</Button>
 				</p>
 			</div>
 		</div>

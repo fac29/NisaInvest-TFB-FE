@@ -12,7 +12,8 @@ import {
 
 function NavBar() {
 	return (
-		<div className='max-w-max'>
+		<div className='max-w-max flex'>
+			<img src='/logo.webp' alt='Nisa Invest' />
 			<NavigationMenu>
 				<NavigationMenuList>
 					<NavigationMenuItem>

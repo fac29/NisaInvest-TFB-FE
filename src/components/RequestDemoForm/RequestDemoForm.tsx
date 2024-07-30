@@ -26,27 +26,40 @@ lastName: z.string({
 email: z.string().email(),
 companyName: z.string(),
 socialMediaLink: z.string(),
-futherInfo: z.string(),
+furtherInfo: z.string(),
 });
 
 export function RequestDemoForm() {
 	// 1. Define your form.
-const form = useForm();
+const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName:"",
+      email:"",
+      companyName:"",
+      socialMediaLink:"",
+      furtherInfo:"",
+
+    },
+  })
 
 	// 2. Define a submit handler.
-
+    function onSubmit(data: z.infer<typeof formSchema>) {
+        console.log(data);
+      }
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 				<FormField
 					control={form.control}
-					name='email'
+					name='firstName'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Email</FormLabel>
+							<FormLabel>Your First Name</FormLabel>
 							<FormControl>
-								<Input type='email' placeholder='Enter your email' {...field} />
+								<Input type='text' placeholder='How should we call you? :)' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -54,12 +67,45 @@ const form = useForm();
 				/>
 				<FormField
 					control={form.control}
-					name='password'
+					name='lastName'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Your Last Name</FormLabel>
+							<FormControl>
+								<Input
+                                type = "text"
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+                <FormField
+					control={form.control}
+					name='email'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Your Email</FormLabel>
+							<FormControl>
+								<Input
+									type='email'
+									placeholder='Enter your email so we can get in contact with you'
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+                <FormField
+					control={form.control}
+					name='companyName'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Your Password</FormLabel>
 							<FormControl>
-								<Textarea
+								<Input
 									type='password'
 									placeholder='Enter your password'
 									{...field}
@@ -69,9 +115,42 @@ const form = useForm();
 						</FormItem>
 					)}
 				/>
+                				<FormField
+					control={form.control}
+					name='socialMediaLink'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>LinkedIn / Website / Social Media links</FormLabel>
+							<FormControl>
+								<Input
+									type='text'
+									placeholder='feel free to share your social media so we can get to know you more!'
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+                <FormField
+					control={form.control}
+					name='furtherInfo'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>How can Nisa Invest Help?</FormLabel>
+							<FormControl>
+								<Textarea
+									placeholder='This is where you can tell us how we can help or any info you want to get!'
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 				<div className='flex justify-center'>
 					<Button type='submit' variant={'outline'}>
-						Log in
+						submit
 					</Button>
 				</div>
 			</form>

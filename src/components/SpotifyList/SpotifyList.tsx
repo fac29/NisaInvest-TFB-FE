@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '../ui/button';
 
+/* Refer to documentation for help:
+ https://developer.spotify.com/documentation/embeds/tutorials/using-the-iframe-api */
+
 export interface EpisodeProp {
 	name: string;
 	uri: string;

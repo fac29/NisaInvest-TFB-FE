@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 
 interface SpotifyEmbedProps {
 	uri: string;
+	width?: string;
+	height?: string;
 }
 
 declare global {
@@ -12,7 +14,11 @@ declare global {
 	}
 }
 
-const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ uri }) => {
+const SpotifyEmbedPlayer: React.FC<SpotifyEmbedProps> = ({
+	uri,
+	width = '100%',
+	height = '350px',
+}) => {
 	const embedRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -37,6 +43,8 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ uri }) => {
 					embedRef.current,
 					{
 						uri,
+						width,
+						height,
 					},
 					(EmbedController: any) => {
 						console.log('Spotify Embed created successfully');
@@ -48,9 +56,9 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ uri }) => {
 		return () => {
 			// Cleanup if necessary
 		};
-	}, [uri]);
+	}, [uri, width, height]);
 
 	return <div ref={embedRef} />;
 };
 
-export default SpotifyEmbed;
+export default SpotifyEmbedPlayer;

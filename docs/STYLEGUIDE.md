@@ -124,8 +124,13 @@ import axios from 'axios';
 import { Button } from './components';
 import { useDataFetcher } from './hooks';
 ```
+## 8. Environments
 
-## 8. Comments and Documentation
+- use ``.env.development`` and ``.env.production`` environment files
+- use ``VITE_BASE_URL = 'Your URL' `` format for setting base URL in the ``env`` file.
+- use `` const baseUrl = import.meta.env.VITE_BASE_URL; `` to import the variable in the application
+
+## 9. Comments and Documentation
 
 - Use JSDoc comments for components and functions
 - Keep comments concise and meaningful
@@ -141,7 +146,7 @@ const UserInfo: React.FC<UserProps> = ({ name, age }) => {
 };
 ```
 
-## 9. Testing
+## 10. Testing
 
 - Name test files with `.test.ts` or `.test.tsx` extension
 - Use Jest and React Testing Library for tests
@@ -155,7 +160,7 @@ describe('UserInfo', () => {
 });
 ```
 
-## 10. Linting and Formatting
+## 11. Linting and Formatting
 
 - Use ESLint with TypeScript support
 ```json

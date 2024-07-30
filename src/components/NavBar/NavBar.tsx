@@ -39,21 +39,6 @@ const navItems = [
 	},
 ];
 
-// const navButtons = [
-// 	{
-// 		name: 'login',
-// 		true: [
-// 			{ name: 'Account', path: '/account' },
-// 			{ name: 'Log Out', path: '/logout' },
-// 		],
-// 		false: [
-// 			{ name: 'Login', path: '/login' },
-// 			{ name: 'Sign Up', path: '/signup' },
-// 		],
-// 	},
-// 	{ name: 'Book a Demo', path: '/corporate' },
-// ];
-
 function NavBar() {
 	const isMobile = useMediaQuery({ maxWidth: 768 });
 	const [isLoggedIn, setLogIn] = useState(true);
@@ -137,18 +122,6 @@ function NavBar() {
 						</Link>
 					</Button>
 				</NavigationMenuItem>
-				{/* {navButtons.map((button) => (
-					<NavigationMenuItem key={button.name}>
-						{button.name == 'login' && isLoggedIn ? (
-							{button['true'].map(())
-							<Button type='button' variant={'outline'}>
-								<Link to={button.true.path}>
-									<NavigationMenuLink>{button.name}</NavigationMenuLink>
-								</Link>
-							</Button>}
-							)}
-					</NavigationMenuItem>
-				))} */}
 			</NavigationMenuList>
 		</NavigationMenu>
 	);
@@ -159,108 +132,6 @@ function NavBar() {
 				<img src='/logo.png' className='size-20' alt='Nisa Invest' />
 			</Link>
 			<NavItems />
-			{/* <NavigationMenu>
-				<NavigationMenuList>
-					<NavigationMenuItem>
-						<Button type='button' variant={'link'}>
-							<Link to='/'>
-								<NavigationMenuLink>Home</NavigationMenuLink>
-							</Link>
-						</Button>
-					</NavigationMenuItem>
-					<NavigationMenuItem>
-						<NavigationMenuTrigger>About</NavigationMenuTrigger>
-						<NavigationMenuContent>
-							<ul>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/about'>
-											<NavigationMenuLink>Our Story</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/advisors'>
-											<NavigationMenuLink>Meet the Planners</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-							</ul>
-						</NavigationMenuContent>
-					</NavigationMenuItem>
-					<NavigationMenuItem>
-						<NavigationMenuTrigger>Knowledge Hub</NavigationMenuTrigger>
-						<NavigationMenuContent>
-							<ul>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/book'>
-											<NavigationMenuLink>Book a Session</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/advisors'>
-											<NavigationMenuLink>Resources</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/advisors'>
-											<NavigationMenuLink>Podcast</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/faq'>
-											<NavigationMenuLink>FAQs</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/corporate'>
-											<NavigationMenuLink>For Employers</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-								<li>
-									<Button type='button' variant={'link'}>
-										<Link to='/contact'>
-											<NavigationMenuLink>Contact Us</NavigationMenuLink>
-										</Link>
-									</Button>
-								</li>
-							</ul>
-						</NavigationMenuContent>
-					</NavigationMenuItem>
-					<NavigationMenuItem>
-						<Button type='button' variant={'link'}>
-							<Link to='/corporate'>
-								<NavigationMenuLink>For Employers</NavigationMenuLink>
-							</Link>
-						</Button>
-					</NavigationMenuItem>
-					<NavigationMenuItem>
-						<Button type='button' variant={'outline'}>
-							<Link to='/login'>
-								<NavigationMenuLink>Login</NavigationMenuLink>
-							</Link>
-						</Button>
-					</NavigationMenuItem>
-					<NavigationMenuItem>
-						<Button type='button' variant={'outline'}>
-							<Link to='/signup'>
-								<NavigationMenuLink>Sign up</NavigationMenuLink>
-							</Link>
-						</Button>
-					</NavigationMenuItem>
-				</NavigationMenuList>
-			</NavigationMenu> */}
 		</div>
 	);
 }

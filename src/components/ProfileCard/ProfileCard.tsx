@@ -1,16 +1,19 @@
 import React from 'react';
 import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 
 interface ProfileCardProps {
 	imageUrl: string;
 	name: string;
 	position: string;
+	bioPage: string;
 }
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({
 	imageUrl,
 	name,
 	position,
+	bioPage,
 }) => {
 	return (
 		<div className='flex flex-col items-center'>
@@ -34,7 +37,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
 				</div>
 			</div>
 			<Button className='mt-4' variant='outline'>
-				Book My Session
+				<Link to={`/advisors/${bioPage}`}>Book My Session</Link>
 			</Button>
 		</div>
 	);

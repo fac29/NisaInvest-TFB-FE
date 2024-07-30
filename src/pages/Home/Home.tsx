@@ -11,6 +11,7 @@ function Home() {
 				name='Fahan Ibrahim Fashi'
 				position='Financial Advisor'
 				imageUrl='placeholder'
+				bioPage='fahan'
 			></ProfileCard>
 		</>
 	);

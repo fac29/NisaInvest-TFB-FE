@@ -40,11 +40,11 @@ npm install
 
 and include the following line:
 
-- production:
+- development:
 ```env
 VITE_BASE_URL = "http://localhost:3000"
 ```
-- development:
+- production:
 ```env
 VITE_BASE_URL = "DEPLOYED_APP_URL"
 ```

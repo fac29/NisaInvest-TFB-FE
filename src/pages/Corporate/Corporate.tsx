@@ -1,5 +1,5 @@
 import Carousel from "@/components/CarouselQuote/CarouselQuote";
-
+import { RequestDemoForm } from "@/components/RequestDemoForm/RequestDemoForm";
 function Corporate() {
     return (
      <>
@@ -17,8 +17,8 @@ function Corporate() {
 		<li> tailored presentations</li>
 		<li> content and media</li>
 	</ul>
-	<Carousel {quotes = {...quotes}}/>
-
+	{/* <Carousel {quotes = {...quotes}}/> */}
+	<RequestDemoForm/>
 	</div>
 	<div>
 		<h2>Our feedback</h2>

@@ -31,16 +31,22 @@ cd NISAINVEST-TFB-FE
 npm install
 ```
 
-4. Create a .env file :
+4. Create .env files :
 
 ```bash
- touch .env
+ touch .env.development
+ touch .env.production
 ```
 
 and include the following line:
 
+- production:
 ```env
-[placeholder]
+VITE_BASE_URL = "http://localhost:3000"
+```
+- development:
+```env
+VITE_BASE_URL = "DEPLOYED_APP_URL"
 ```
 
 5. Enter the following script to run the server in the development mode:

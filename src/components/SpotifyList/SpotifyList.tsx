@@ -15,7 +15,7 @@ declare global {
 	}
 }
 
-function PodcastEpisodes({ episodes }: { episodes: EpisodeProp[] }) {
+function SpotifyList({ episodes }: { episodes: EpisodeProp[] }) {
 	const [currentEpisode, setCurrentEpisode] = useState<EpisodeProp | null>(
 		episodes[0] || null
 	);
@@ -57,13 +57,13 @@ function PodcastEpisodes({ episodes }: { episodes: EpisodeProp[] }) {
 	};
 
 	return (
-		<div className='flex flex-col max-w-3xl mx-auto p-4 font-source-sans text-offWhite'>
+		<div className='flex flex-col max-w-3xl mx-auto p-4 font-source-sans text-primaryBlack'>
 			<div ref={embedRef}></div>
 			<div className='h-[400px] overflow-y-auto bg-offWhite rounded-lg shadow-inner p-4 border-solid border-2 border-lilac'>
 				{episodes.map((episode, index) => (
 					<div
 						key={index}
-						className='flex justify-between items-center mb-4 bg-lilac rounded-lg shadow-md p-4'
+						className='flex justify-between items-center mb-4 bg-white rounded-lg shadow-md p-4'
 					>
 						<div>
 							<h3 className='text-lg font-semibold mb-2'>{episode.name}</h3>
@@ -79,4 +79,4 @@ function PodcastEpisodes({ episodes }: { episodes: EpisodeProp[] }) {
 	);
 }
 
-export default PodcastEpisodes;
+export default SpotifyList;

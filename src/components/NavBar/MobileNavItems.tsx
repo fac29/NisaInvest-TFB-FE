@@ -17,9 +17,7 @@ import { NavItemsProps, navItems } from './NavItems';
  * The buttons are currently hardcoded but as these are unlikely to change, hopefully
  * this isn't an issue.
  */
-function MobileNavItems({ classNameValue }: NavItemsProps) {
-	const [isLoggedIn, setLogIn] = useState(false);
-
+function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>

@@ -12,6 +12,7 @@ import { Button } from '../ui/button';
 
 export interface NavItemsProps {
 	classNameValue: string;
+	isLoggedIn: boolean;
 }
 
 /**
@@ -46,9 +47,7 @@ export const navItems = [
  * The buttons are currently hardcoded but as these are unlikely to change, hopefully
  * this isn't an issue.
  */
-function NavItems({ classNameValue }: NavItemsProps) {
-	const [isLoggedIn, setLogIn] = useState(false);
-
+function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>

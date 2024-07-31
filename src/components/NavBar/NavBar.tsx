@@ -19,6 +19,7 @@ import { FaBars } from 'react-icons/fa6';
 
 function NavBar() {
 	const isMobile = useMediaQuery({ maxWidth: 768 });
+	const [isLoggedIn, setLogIn] = useState(false);
 
 	return (
 		<div className='w-full flex items-center justify-between p-4'>
@@ -33,11 +34,14 @@ function NavBar() {
 						</Button>
 					</SheetTrigger>
 					<SheetContent side='right'>
-						<MobileNavItems classNameValue={'flex-col gap-2'} />
+						<MobileNavItems
+							classNameValue={'flex-col gap-2'}
+							isLoggedIn={isLoggedIn}
+						/>
 					</SheetContent>
 				</Sheet>
 			) : (
-				<NavItems classNameValue='' />
+				<NavItems classNameValue='' isLoggedIn={isLoggedIn} />
 			)}
 		</div>
 	);

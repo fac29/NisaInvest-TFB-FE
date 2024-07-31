@@ -9,7 +9,7 @@ export interface QuoteProp {
 	created_at?: string | Date; // Change the type to string
 }
 
-function Carousel({ quotes }: { quotes: QuoteProp[] }) {
+function CarouselQuote({ quotes }: { quotes: QuoteProp[] }) {
 	const [current, setCurrent] = useState(0);
 	//const [autoPlay, setAutoPlay] = useState(true);
 	//let timeOut = null;
@@ -46,4 +46,4 @@ function Carousel({ quotes }: { quotes: QuoteProp[] }) {
 	);
 }
 
-export default Carousel;
+export default CarouselQuote;

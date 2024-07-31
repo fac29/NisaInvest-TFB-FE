@@ -1,5 +1,7 @@
-import Carousel from '@/components/CarouselQuote/CarouselQuote';
+import CarouselQuote from '@/components/CarouselQuote/CarouselQuote';
 import { quotes } from '@/components/CarouselQuote/data';
+import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
+import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import Widget from '@/components/Widget/Widget';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
@@ -7,14 +9,21 @@ import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 function Home() {
 	return (
 		<>
-			<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>;
-			<Carousel quotes={quotes} />
-			<ProfileCard
-				name='Fahan Ibrahim-Hashi'
-				position='Financial Advisor'
-				imageUrl='placeholder'
-				bioPage='fahan'
-			></ProfileCard>
+			<div className='min-h-screen h-fit flex flex-col items-center justify-around'>
+				<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>
+				<CarouselQuote quotes={quotes} />
+				<div className='flex justify-center'>
+					<CarouselTestimonial
+						testimonials={testimonials}
+					></CarouselTestimonial>
+				</div>
+				<ProfileCard
+					name='Fahan Ibrahim-Hashi'
+					position='Financial Advisor'
+					imageUrl='placeholder'
+					bioPage='fahan'
+				></ProfileCard>
+			</div>{' '}
 			<WidgetHeader
 				category='expenses'
 				heading='Investing in the Future'

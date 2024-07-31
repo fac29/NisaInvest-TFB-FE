@@ -43,7 +43,7 @@ function Corporate() {
 						content and media
 					</li>
 				</ul>
-				{/* <Carousel {quotes = {...quotes}}/> */}
+				{/*  this is optional will add later <Carousel {quotes = {...quotes}}/> */}
 				<div className='px-28'>
 					<RequestDemoForm />
 				</div>

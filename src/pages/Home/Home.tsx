@@ -1,7 +1,7 @@
-
 import Carousel from '@/components/CarouselQuote/CarouselQuote';
 import { quotes } from '@/components/CarouselQuote/data';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import Widget from '@/components/Widget/Widget';
 
 function Home() {
 	return (
@@ -14,7 +14,7 @@ function Home() {
 				imageUrl='placeholder'
 				bioPage='fahan'
 			></ProfileCard>
-
+			<Widget category='expenses' isCoreTask={false} />
 		</>
 	);
 }

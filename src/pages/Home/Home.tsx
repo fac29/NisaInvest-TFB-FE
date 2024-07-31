@@ -2,6 +2,7 @@ import CarouselQuote from '@/components/CarouselQuote/CarouselQuote';
 import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
+import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 
 function Home() {
 	return (
@@ -13,6 +14,12 @@ function Home() {
 					<CarouselTestimonial
 						testimonials={testimonials}
 					></CarouselTestimonial>
+        <ProfileCard
+				name='Fahan Ibrahim-Hashi'
+				position='Financial Advisor'
+				imageUrl='placeholder'
+				bioPage='fahan'
+			></ProfileCard>
 				</div>
 			</div>
 		</>

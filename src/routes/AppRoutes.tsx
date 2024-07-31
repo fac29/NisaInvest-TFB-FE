@@ -6,6 +6,7 @@ import About from '../pages/About/About';
 import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
 import { RequestDemoForm } from '@/components/RequestDemoForm/RequestDemoForm';
+import Corporate from '@/pages/Corporate/Corporate';
 function AppRoutes() {
 	return (
 		<Routes>
@@ -15,7 +16,7 @@ function AppRoutes() {
 			<Route path='/about' element={<About />} />
 			<Route path='/contact' element={<ContactUs />} />
 			<Route path='/faq' element={<FAQs />} />
-			<Route path='/corporate' element={<RequestDemoForm/>}/>
+			<Route path='/corporate' element={<Corporate/>}/>
 		</Routes>
 	);
 }

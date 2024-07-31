@@ -9,9 +9,13 @@ import { Badge } from '@/components/ui/badge';
 import { IconType } from 'react-icons/lib';
 import { string } from 'zod';
 
-interface WidgetProps {
+interface HeaderProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
-	isCoreTask: boolean;
+	heading:
+		| 'Emergency Savings'
+		| 'Managing Expenses'
+		| 'Investing in the Future'
+		| 'Giving Back';
 }
 
 interface Category {
@@ -38,26 +42,19 @@ const categoriesList: Category[] = [
 	},
 ];
 
-function Widget({ category, isCoreTask }: WidgetProps) {
+function WidgetHeader({ category, heading }: HeaderProps) {
 	return (
 		<div className='group grid max-w-64 mx-auto my-4 items-center rounded-2xl border p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
-			<div className='flex justify-between items-center'>
+			<div className='flex items-center'>
 				<Badge variant='secondary'>
 					{categoriesList.map((item) =>
 						item.category == category ? <item.element /> : ''
 					)}
 				</Badge>
-				{isCoreTask ? (
-					<FaStar className='text-lilac group-hover:text-offWhite' />
-				) : (
-					''
-				)}
-			</div>
-			<div className='py-2 text-center'>
-				I have at least 50% of one month's salary saved
+				<h2>{heading}</h2>
 			</div>
 		</div>
 	);
 }
 
-export default Widget;
+export default WidgetHeader;

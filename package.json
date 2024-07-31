@@ -30,6 +30,7 @@
 		"react-calendly": "^4.3.1",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.52.1",
+		"react-icons": "^5.2.1",
 		"react-router-dom": "^6.25.1",
 		"tailwind-merge": "^2.4.0",
 		"tailwindcss-animate": "^1.0.7",
@@ -69,9 +70,6 @@
 		"@storybook/test": {
 			"@testing-library/jest-dom": "6.2.0"
 		}
-
 	},
 	"homepage": "https://fac29.github.io/NisaInvest-TFB-FE"
-  
 }
-

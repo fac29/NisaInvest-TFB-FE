@@ -27,7 +27,7 @@ export function CarouselTestimonial({
 	testimonials,
 }: CarouselTestimonialProps) {
 	return (
-		<div className='px-12'>
+		<div className='px-12 max-w-[400px] sm:max-w-[600px] md:max-w-full'>
 			<Carousel
 				opts={{
 					align: 'end',
@@ -46,7 +46,7 @@ export function CarouselTestimonial({
 					{testimonials.map((testimonial, index) => (
 						<CarouselItem
 							key={index}
-							className='pl-2 md:pl-20  md:basis-1/2 lg:basis-1/3'
+							className='pl-2 md:pl-20 sm:basis-1/2 md:basis-1/3'
 						>
 							<TestimonialCard
 								name={testimonial.name}

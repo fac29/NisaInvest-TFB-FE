@@ -5,8 +5,11 @@ import SignUp from '../pages/SignUp/SignUp';
 import About from '../pages/About/About';
 import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
-import { RequestDemoForm } from '@/components/RequestDemoForm/RequestDemoForm';
 import Corporate from '@/pages/Corporate/Corporate';
+import Advisors from '@/pages/Advisors/Advisors';
+import Corporate from '@/pages/Corporate/Corporate';
+import Booking from '@/pages/Booking/Booking';
+
 function AppRoutes() {
 	return (
 		<Routes>
@@ -17,6 +20,9 @@ function AppRoutes() {
 			<Route path='/contact' element={<ContactUs />} />
 			<Route path='/faq' element={<FAQs />} />
 			<Route path='/corporate' element={<Corporate/>}/>
+			<Route path='/advisors' element={<Advisors />} />
+			<Route path='/corporate' element={<Corporate />} />
+			<Route path='/booking' element={<Booking />} />
 		</Routes>
 	);
 }

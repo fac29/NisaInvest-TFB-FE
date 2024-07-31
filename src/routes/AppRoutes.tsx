@@ -7,6 +7,7 @@ import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
 import Advisors from '@/pages/Advisors/Advisors';
 import Corporate from '@/pages/Corporate/Corporate';
+import Booking from '@/pages/Booking/Booking';
 
 function AppRoutes() {
 	return (
@@ -19,6 +20,7 @@ function AppRoutes() {
 			<Route path='/faq' element={<FAQs />} />
 			<Route path='/advisors' element={<Advisors />} />
 			<Route path='/corporate' element={<Corporate />} />
+			<Route path='/booking' element={<Booking />} />
 		</Routes>
 	);
 }

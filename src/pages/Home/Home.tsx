@@ -23,7 +23,7 @@ function Home() {
 					imageUrl='placeholder'
 					bioPage='fahan'
 				></ProfileCard>
-			</div>{' '}
+			</div>
 			<WidgetHeader
 				category='expenses'
 				heading='Investing in the Future'

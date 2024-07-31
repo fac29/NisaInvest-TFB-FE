@@ -15,39 +15,38 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
-firstName: z.string({
-    required_error: "Name is required",
-    invalid_type_error: "Name must be a string",
-  }),
-lastName: z.string({
-    required_error: "Last name is required",
-    invalid_type_error: "Name must be a string",
-  }),
-email: z.string().email(),
-companyName: z.string(),
-socialMediaLink: z.string(),
-furtherInfo: z.string(),
+	firstName: z.string({
+		required_error: 'Name is required',
+		invalid_type_error: 'Name must be a string',
+	}),
+	lastName: z.string({
+		required_error: 'Last name is required',
+		invalid_type_error: 'Name must be a string',
+	}),
+	email: z.string().email(),
+	companyName: z.string(),
+	socialMediaLink: z.string(),
+	furtherInfo: z.string(),
 });
 
 export function RequestDemoForm() {
 	// 1. Define your form.
-const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName:"",
-      email:"",
-      companyName:"",
-      socialMediaLink:"",
-      furtherInfo:"",
-
-    },
-  })
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			firstName: '',
+			lastName: '',
+			email: '',
+			companyName: '',
+			socialMediaLink: '',
+			furtherInfo: '',
+		},
+	});
 
 	// 2. Define a submit handler.
-    function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data);
-      }
+	function onSubmit(data: z.infer<typeof formSchema>) {
+		console.log(data);
+	}
 
 	return (
 		<Form {...form}>
@@ -59,7 +58,11 @@ const form = useForm<z.infer<typeof formSchema>>({
 						<FormItem>
 							<FormLabel>Your First Name</FormLabel>
 							<FormControl>
-								<Input type='text' placeholder='How should we call you? :)' {...field} />
+								<Input
+									type='text'
+									placeholder='How should we call you? :)'
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -73,7 +76,8 @@ const form = useForm<z.infer<typeof formSchema>>({
 							<FormLabel>Your Last Name</FormLabel>
 							<FormControl>
 								<Input
-                                type = "text"
+									type='text'
+									placeholder='Please enter your last name'
 									{...field}
 								/>
 							</FormControl>
@@ -81,7 +85,7 @@ const form = useForm<z.infer<typeof formSchema>>({
 						</FormItem>
 					)}
 				/>
-                <FormField
+				<FormField
 					control={form.control}
 					name='email'
 					render={({ field }) => (
@@ -98,24 +102,7 @@ const form = useForm<z.infer<typeof formSchema>>({
 						</FormItem>
 					)}
 				/>
-                <FormField
-					control={form.control}
-					name='companyName'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Your Password</FormLabel>
-							<FormControl>
-								<Input
-									type='password'
-									placeholder='Enter your password'
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-                				<FormField
+				<FormField
 					control={form.control}
 					name='socialMediaLink'
 					render={({ field }) => (
@@ -124,7 +111,7 @@ const form = useForm<z.infer<typeof formSchema>>({
 							<FormControl>
 								<Input
 									type='text'
-									placeholder='feel free to share your social media so we can get to know you more!'
+									placeholder='Feel free to share your social media so we can get to know you more!'
 									{...field}
 								/>
 							</FormControl>
@@ -132,7 +119,7 @@ const form = useForm<z.infer<typeof formSchema>>({
 						</FormItem>
 					)}
 				/>
-                <FormField
+				<FormField
 					control={form.control}
 					name='furtherInfo'
 					render={({ field }) => (

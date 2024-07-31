@@ -7,7 +7,6 @@ import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
 import Corporate from '@/pages/Corporate/Corporate';
 import Advisors from '@/pages/Advisors/Advisors';
-import Corporate from '@/pages/Corporate/Corporate';
 import Booking from '@/pages/Booking/Booking';
 
 function AppRoutes() {
@@ -19,7 +18,7 @@ function AppRoutes() {
 			<Route path='/about' element={<About />} />
 			<Route path='/contact' element={<ContactUs />} />
 			<Route path='/faq' element={<FAQs />} />
-			<Route path='/corporate' element={<Corporate/>}/>
+			<Route path='/corporate' element={<Corporate />} />
 			<Route path='/advisors' element={<Advisors />} />
 			<Route path='/corporate' element={<Corporate />} />
 			<Route path='/booking' element={<Booking />} />

@@ -7,20 +7,20 @@ import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 function Home() {
 	return (
 		<>
-			<div className='h-screen flex flex-col items-center justify-around'>
+			<div className='min-h-screen h-fit flex flex-col items-center justify-around'>
 				<p>$ We are Nisa Invest. We are here to sort out your finances! $</p>
 				<CarouselQuote quotes={quotes} />
 				<div className='flex justify-center'>
 					<CarouselTestimonial
 						testimonials={testimonials}
 					></CarouselTestimonial>
-        <ProfileCard
-				name='Fahan Ibrahim-Hashi'
-				position='Financial Advisor'
-				imageUrl='placeholder'
-				bioPage='fahan'
-			></ProfileCard>
 				</div>
+				<ProfileCard
+					name='Fahan Ibrahim-Hashi'
+					position='Financial Advisor'
+					imageUrl='placeholder'
+					bioPage='fahan'
+				></ProfileCard>
 			</div>
 		</>
 	);

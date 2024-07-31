@@ -9,36 +9,7 @@ import {
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Button } from '../ui/button';
-
-export interface NavItemsProps {
-	classNameValue: string;
-}
-
-/**
- * Here you can determine the navigation links you want to include.
- * If navigation links come under a header, store them in an array of items.
- * Otherwise, store them as an object with the name and path keys.
- */
-export const navItems = [
-	{ name: 'Home', path: '/' },
-	{
-		name: 'About',
-		items: [
-			{ name: 'Our Story', path: '/about' },
-			{ name: 'Meet the Planners', path: '/advisors' },
-		],
-	},
-	{
-		name: 'Knowledge Hub',
-		items: [
-			{ name: 'Book a Session', path: '/booking' },
-			{ name: 'Resources', path: '/resources' },
-			{ name: 'Podcast', path: '/podcast' },
-			{ name: 'FAQs', path: '/faq' },
-			{ name: 'Contact Us', path: '/contact' },
-		],
-	},
-];
+import { NavItemsProps, navItems } from './NavItems';
 
 /**
  * This iterates over the navItems array to render the navigation menu items automatically.
@@ -46,42 +17,31 @@ export const navItems = [
  * The buttons are currently hardcoded but as these are unlikely to change, hopefully
  * this isn't an issue.
  */
-function NavItems({ classNameValue }: NavItemsProps) {
+function MobileNavItems({ classNameValue }: NavItemsProps) {
 	const [isLoggedIn, setLogIn] = useState(false);
 
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>
-				{navItems.map((item) => (
-					<NavigationMenuItem key={item.name}>
-						{item.items ? (
-							<>
-								<NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
-								<NavigationMenuContent>
-									<ul>
-										{item.items.map((subItem) => (
-											<li>
-												<Button type='button' variant={'link'}>
-													<Link to={subItem.path}>
-														<NavigationMenuLink>
-															{subItem.name}
-														</NavigationMenuLink>
-													</Link>
-												</Button>
-											</li>
-										))}
-									</ul>
-								</NavigationMenuContent>
-							</>
-						) : (
-							<Button type='button' variant={'link'}>
-								<Link to={item.path}>
-									<NavigationMenuLink>{item.name}</NavigationMenuLink>
-								</Link>
-							</Button>
-						)}
-					</NavigationMenuItem>
-				))}
+				{navItems.map((item) =>
+					item.items ? (
+						item.items.map((subItem) => (
+							<NavigationMenuItem key={subItem.name}>
+								<Button type='button' variant={'link'}>
+									<Link to={subItem.path}>
+										<NavigationMenuLink>{subItem.name}</NavigationMenuLink>
+									</Link>
+								</Button>
+							</NavigationMenuItem>
+						))
+					) : (
+						<Button type='button' variant={'link'}>
+							<Link to={item.path}>
+								<NavigationMenuLink>{item.name}</NavigationMenuLink>
+							</Link>
+						</Button>
+					)
+				)}
 				{isLoggedIn ? (
 					<>
 						<NavigationMenuItem>
@@ -129,4 +89,4 @@ function NavItems({ classNameValue }: NavItemsProps) {
 	);
 }
 
-export default NavItems;
+export default MobileNavItems;

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import NavItems from './NavItems';
+import MobileNavItems from './MobileNavItems';
 
 import { Button } from '../ui/button';
 
@@ -32,7 +33,7 @@ function NavBar() {
 						</Button>
 					</SheetTrigger>
 					<SheetContent side='right'>
-						<NavItems classNameValue={'flex-col gap-2'} />
+						<MobileNavItems classNameValue={'flex-col gap-2'} />
 					</SheetContent>
 				</Sheet>
 			) : (

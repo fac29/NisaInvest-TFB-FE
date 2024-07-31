@@ -8,7 +8,7 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ name, text }) => {
 	return (
-		<div className='bg-offWhite border-solid border-2 border-lilac rounded-xl max-w-[300px] p-4 h-full flex flex-col justify-between'>
+		<div className='bg-offWhite border-solid border-2 border-lilac rounded-xl max-w-full p-4 h-full flex flex-col justify-between'>
 			<div>
 				<p className='text-left text-base italic font-playfair'>{text}</p>
 			</div>

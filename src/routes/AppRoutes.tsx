@@ -20,7 +20,6 @@ function AppRoutes() {
 			<Route path='/faq' element={<FAQs />} />
 			<Route path='/corporate' element={<Corporate />} />
 			<Route path='/advisors' element={<Advisors />} />
-			<Route path='/corporate' element={<Corporate />} />
 			<Route path='/booking' element={<Booking />} />
 		</Routes>
 	);

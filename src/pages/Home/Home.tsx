@@ -17,7 +17,7 @@ function Home() {
 			></ProfileCard>
 			<WidgetHeader
 				category='expenses'
-				heading='Managing Expenses'
+				heading='Investing in the Future'
 			></WidgetHeader>
 			<Widget category='expenses' isCoreTask={false} />
 		</>

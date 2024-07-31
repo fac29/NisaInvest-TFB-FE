@@ -53,7 +53,7 @@ function Widget({ category, isCoreTask }: WidgetProps) {
 					''
 				)}
 			</div>
-			<div className='py-2 text-center'>
+			<div className='py-2 text-center font-semibold'>
 				I have at least 50% of one month's salary saved
 			</div>
 		</div>

@@ -44,8 +44,8 @@ const categoriesList: Category[] = [
 
 function WidgetHeader({ category, heading }: HeaderProps) {
 	return (
-		<div className='group grid max-w-64 mx-auto my-4 items-center rounded-2xl border p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
-			<div className='flex items-center'>
+		<div className='max-w-64 mx-auto my-4 rounded-2xl border p-3 shadow-lg bg-lilac text-offWhite font-bold'>
+			<div className='flex justify-evenly'>
 				<Badge variant='secondary'>
 					{categoriesList.map((item) =>
 						item.category == category ? <item.element /> : ''

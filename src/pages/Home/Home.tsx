@@ -1,3 +1,4 @@
+
 import Carousel from '@/components/CarouselQuote/CarouselQuote';
 import { quotes } from '@/components/CarouselQuote/data';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
@@ -13,6 +14,7 @@ function Home() {
 				imageUrl='placeholder'
 				bioPage='fahan'
 			></ProfileCard>
+
 		</>
 	);
 }

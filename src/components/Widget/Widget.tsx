@@ -11,6 +11,7 @@ import { string } from 'zod';
 
 interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
+	description: string;
 	isCoreTask: boolean;
 }
 
@@ -38,7 +39,7 @@ const categoriesList: Category[] = [
 	},
 ];
 
-function Widget({ category, isCoreTask }: WidgetProps) {
+function Widget({ category, description, isCoreTask }: WidgetProps) {
 	return (
 		<div className='group grid max-w-64 mx-auto my-4 items-center rounded-2xl border p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
 			<div className='flex justify-between items-center'>
@@ -53,9 +54,7 @@ function Widget({ category, isCoreTask }: WidgetProps) {
 					''
 				)}
 			</div>
-			<div className='py-2 text-center font-semibold'>
-				I have at least 50% of one month's salary saved
-			</div>
+			<div className='py-2 text-center font-semibold'>{description}</div>
 		</div>
 	);
 }

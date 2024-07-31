@@ -28,7 +28,11 @@ function Home() {
 				category='expenses'
 				heading='Investing in the Future'
 			></WidgetHeader>
-			<Widget category='expenses' isCoreTask={false} />
+			<Widget
+				category='expenses'
+				description="I have at least 50% of one month's salary saved"
+				isCoreTask={true}
+			/>
 		</>
 	);
 }

@@ -5,6 +5,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import About from '../pages/About/About';
 import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
+import Booking from '@/pages/Booking/Booking';
 
 function AppRoutes() {
 	return (
@@ -15,6 +16,7 @@ function AppRoutes() {
 			<Route path='/about' element={<About />} />
 			<Route path='/contact' element={<ContactUs />} />
 			<Route path='/faq' element={<FAQs />} />
+			<Route path='/booking' element={<Booking />} />
 		</Routes>
 	);
 }

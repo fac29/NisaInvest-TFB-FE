@@ -26,6 +26,8 @@
 		"autoprefixer": "^10.4.19",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"embla-carousel-autoplay": "^8.1.7",
+		"embla-carousel-react": "^8.1.7",
 		"lucide-react": "^0.416.0",
 		"postcss": "^8.4.40",
 		"react": "^18.3.1",
@@ -73,9 +75,6 @@
 		"@storybook/test": {
 			"@testing-library/jest-dom": "6.2.0"
 		}
-
 	},
 	"homepage": "https://fac29.github.io/NisaInvest-TFB-FE"
-  
 }
-

@@ -16,6 +16,7 @@ interface HeaderProps {
 		| 'Managing Expenses'
 		| 'Investing in the Future'
 		| 'Giving Back';
+	children: React.ReactNode;
 }
 
 interface Category {
@@ -42,12 +43,12 @@ const categoriesList: Category[] = [
 	},
 ];
 
-function WidgetHeader({ category, heading }: HeaderProps) {
+function WidgetHeader({ category, heading, children }: HeaderProps) {
 	return (
-		<div>
-			<div className='max-w-64 mx-auto my-4 rounded-2xl border p-3 shadow-lg bg-lilac text-offWhite font-bold'>
-				<div className='flex justify-around'>
-					<Badge variant='secondary'>
+		<div className='h-fit w-64 lg:w-96 rounded-2xl grid items-start bg-offWhite'>
+			<div className='max-w-64 lg:max-w-96 w-full mx-auto my-4 rounded-t-xl p-3 shadow-lg bg-lilac text-offWhite font-bold mt-0'>
+				<div className='flex justify-center gap-3'>
+					<Badge variant='secondary' className='text-md'>
 						{categoriesList.map((item) =>
 							item.category == category ? <item.element /> : ''
 						)}
@@ -55,16 +56,7 @@ function WidgetHeader({ category, heading }: HeaderProps) {
 					<h2>{heading}</h2>
 				</div>
 			</div>
-			<div className='max-w-64 mx-auto my-4 rounded-2xl border p-3 shadow-lg bg-lilac text-offWhite font-bold'>
-				<div className='flex justify-around'>
-					<Badge className='text-sm'>
-						{categoriesList.map((item) =>
-							item.category == category ? <item.element /> : ''
-						)}
-					</Badge>
-					<h2>{heading}</h2>
-				</div>
-			</div>
+			<div className='px-1'>{children}</div>
 		</div>
 	);
 }

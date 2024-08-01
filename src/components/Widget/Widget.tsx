@@ -41,20 +41,22 @@ const categoriesList: Category[] = [
 
 function Widget({ category, description, isCoreTask }: WidgetProps) {
 	return (
-		<div className='group grid max-w-64 mx-auto my-4 items-center rounded-2xl border p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
-			<div className='flex justify-between items-center'>
-				<Badge variant='secondary'>
-					{categoriesList.map((item) =>
-						item.category == category ? <item.element /> : ''
+		<div>
+			<div className='group grid max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
+				<div className='flex justify-between items-center'>
+					<Badge variant='secondary'>
+						{categoriesList.map((item) =>
+							item.category == category ? <item.element /> : ''
+						)}
+					</Badge>
+					{isCoreTask ? (
+						<FaStar className='text-lilac group-hover:text-offWhite' />
+					) : (
+						''
 					)}
-				</Badge>
-				{isCoreTask ? (
-					<FaStar className='text-lilac group-hover:text-offWhite' />
-				) : (
-					''
-				)}
+				</div>
+				<div className='py-2 text-center font-semibold'>{description}</div>
 			</div>
-			<div className='py-2 text-center font-semibold'>{description}</div>
 		</div>
 	);
 }

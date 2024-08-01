@@ -1,7 +1,16 @@
+import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+
 function Advisors() {
 	return (
 		<>
-			{/* Insert cards with advisors here that link to their individual biographies */}
+			<div className='min-h-screen h-fit flex flex-col items-center justify-around'>
+				<ProfileCard
+					name='Fahan Ibrahim-Hashi'
+					position='Financial Advisor'
+					imageUrl='./Fahan_Ibrahim-Hashi.jpeg'
+					bioPage='fahan'
+				></ProfileCard>
+			</div>
 		</>
 	);
 }

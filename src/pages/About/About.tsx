@@ -3,7 +3,7 @@ import { podcastEpisodes } from '@/components/SpotifyList/PodcastData';
 
 function About() {
 	return (
-		<div>
+		<div className='min-h-screen flex flex-col justify-center items-center'>
 			{/* conditional rendering expression to render Spotify Player with the latest episode if the data is present */}
 			{podcastEpisodes[0]?.uri && (
 				<SpotifyEmbedPlayer

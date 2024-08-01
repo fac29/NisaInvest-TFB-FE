@@ -5,8 +5,8 @@ import SignUp from '../pages/SignUp/SignUp';
 import About from '../pages/About/About';
 import ContactUs from '@/pages/ContactUs/ContactUs';
 import FAQs from '@/pages/FAQs/FAQs';
-import Advisors from '@/pages/Advisors/Advisors';
 import Corporate from '@/pages/Corporate/Corporate';
+import Advisors from '@/pages/Advisors/Advisors';
 import Booking from '@/pages/Booking/Booking';
 
 function AppRoutes() {
@@ -18,8 +18,8 @@ function AppRoutes() {
 			<Route path='/about' element={<About />} />
 			<Route path='/contact' element={<ContactUs />} />
 			<Route path='/faq' element={<FAQs />} />
-			<Route path='/advisors' element={<Advisors />} />
 			<Route path='/corporate' element={<Corporate />} />
+			<Route path='/advisors' element={<Advisors />} />
 			<Route path='/booking' element={<Booking />} />
 		</Routes>
 	);

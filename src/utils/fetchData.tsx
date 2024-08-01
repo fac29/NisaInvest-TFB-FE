@@ -1,11 +1,12 @@
 import {useState, useEffect} from 'react';
-import { User } from './dataTypes';
+import { User, Quote, Goal } from './dataTypes';
 
 //defines the state types for the custom useFetch hook.
 interface FetchDataState {
 isLoading: boolean;
 error: Error | null;
-data: User[]| null
+//I don't think this is the best way to do this, any suggestions? maybe expending classes? SOMETHING!
+data: User[]| User | Quote[] | Quote | Goal | Goal[] |null
 
 }
 

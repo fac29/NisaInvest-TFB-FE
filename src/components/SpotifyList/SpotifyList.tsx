@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '../ui/button';
-
-/* Refer to documentation for help:
- https://developer.spotify.com/documentation/embeds/tutorials/using-the-iframe-api */
 
 export interface EpisodeProp {
 	name: string;
@@ -10,7 +7,6 @@ export interface EpisodeProp {
 	date: string | Date;
 }
 
-// Extend the global Window interface to include onSpotifyIframeApiReady
 declare global {
 	interface Window {
 		onSpotifyIframeApiReady?: (IFrameAPI: any) => void;
@@ -24,39 +20,56 @@ function SpotifyList({ episodes }: { episodes: EpisodeProp[] }) {
 	);
 	const embedRef = useRef<HTMLDivElement>(null);
 	const [embedController, setEmbedController] = useState<any>(null);
+	const [isApiReady, setIsApiReady] = useState(false);
 
-	useEffect(() => {
-		if (!window.onSpotifyIframeApiReady) {
+	const initializeSpotifyApi = useCallback(() => {
+		if (!window.SpotifyIframeApi) {
 			window.onSpotifyIframeApiReady = (IFrameAPI) => {
 				window.SpotifyIframeApi = IFrameAPI;
-				if (embedRef.current) {
-					IFrameAPI.createController(
-						embedRef.current,
-						{ width: '100%', height: '200px' }, // Set width and height here
-						(controller: any) => {
-							setEmbedController(controller);
-							if (currentEpisode) {
-								controller.loadUri(currentEpisode.uri);
-							}
-						}
-					);
-				}
+				setIsApiReady(true);
 			};
 
 			const script = document.createElement('script');
 			script.src = 'https://open.spotify.com/embed-podcast/iframe-api/v1';
 			script.async = true;
 			document.body.appendChild(script);
-		} else if (embedController && currentEpisode) {
+
+			return () => {
+				document.body.removeChild(script);
+			};
+		} else {
+			setIsApiReady(true);
+		}
+	}, []);
+
+	useEffect(() => {
+		const cleanup = initializeSpotifyApi();
+		return cleanup;
+	}, [initializeSpotifyApi]);
+
+	useEffect(() => {
+		if (isApiReady && embedRef.current && !embedController) {
+			window.SpotifyIframeApi.createController(
+				embedRef.current,
+				{ width: '100%', height: '200px' },
+				(controller: any) => {
+					setEmbedController(controller);
+					if (currentEpisode) {
+						controller.loadUri(currentEpisode.uri);
+					}
+				}
+			);
+		}
+	}, [isApiReady, currentEpisode, embedController]);
+
+	useEffect(() => {
+		if (embedController && currentEpisode) {
 			embedController.loadUri(currentEpisode.uri);
 		}
 	}, [currentEpisode, embedController]);
 
 	const playEpisode = (episode: EpisodeProp) => {
 		setCurrentEpisode(episode);
-		if (embedController) {
-			embedController.loadUri(episode.uri);
-		}
 	};
 
 	return (

@@ -1,5 +1,7 @@
 import React from 'react';
 import { LoginForm } from '@/components/LoginForm/LoginForm';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 function Login() {
 	return (
@@ -15,6 +17,12 @@ function Login() {
 						</p>
 					</div>
 					<LoginForm />
+					<p className='text-center'>
+						I don't have an account yet.{' '}
+						<Button variant={'link'} className='px-0 text-base'>
+							<Link to={'/signup'}>Sign up</Link>
+						</Button>
+					</p>
 				</div>
 			</div>
 		</>

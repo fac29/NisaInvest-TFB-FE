@@ -1,4 +1,3 @@
-import SpotifyEmbedPlayer from '@/components/SpotifyEmbedPlayer/SpotifyEmbedPlayer';
 import { podcastEpisodes } from '@/components/SpotifyList/PodcastData';
 import SpotifyList from '@/components/SpotifyList/SpotifyList';
 

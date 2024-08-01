@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface SpotifyEmbedProps {
 	uri: string;
@@ -20,43 +20,53 @@ const SpotifyEmbedPlayer: React.FC<SpotifyEmbedProps> = ({
 	height = '350px',
 }) => {
 	const embedRef = useRef<HTMLDivElement>(null);
+	const [isApiReady, setIsApiReady] = useState(false);
 
-	useEffect(() => {
+	const initializeSpotifyApi = useCallback(() => {
 		if (window.SpotifyIframeApiReady) {
-			createEmbed();
+			setIsApiReady(true);
 		} else if (!window.onSpotifyIframeApiReady) {
 			window.onSpotifyIframeApiReady = (IFrameAPI) => {
 				window.SpotifyIframeApiReady = true;
 				window.SpotifyIframeApi = IFrameAPI;
-				createEmbed();
+				setIsApiReady(true);
 			};
 
 			const script = document.createElement('script');
 			script.src = 'https://open.spotify.com/embed-podcast/iframe-api/v1';
 			script.async = true;
 			document.body.appendChild(script);
-		}
 
-		function createEmbed() {
-			if (embedRef.current && window.SpotifyIframeApi) {
-				window.SpotifyIframeApi.createController(
-					embedRef.current,
-					{
-						uri,
-						width,
-						height,
-					},
-					(EmbedController: any) => {
-						console.log('Spotify Embed created successfully');
-					}
-				);
-			}
+			return () => {
+				document.body.removeChild(script);
+			};
 		}
+	}, []);
 
-		return () => {
-			// Cleanup if necessary
-		};
+	useEffect(() => {
+		const cleanup = initializeSpotifyApi();
+		return cleanup;
+	}, [initializeSpotifyApi]);
+
+	const createEmbed = useCallback(() => {
+		if (embedRef.current && window.SpotifyIframeApi) {
+			window.SpotifyIframeApi.createController(
+				embedRef.current,
+				{
+					uri,
+					width,
+					height,
+				},
+				(EmbedController: any) => {}
+			);
+		}
 	}, [uri, width, height]);
+
+	useEffect(() => {
+		if (isApiReady) {
+			createEmbed();
+		}
+	}, [isApiReady, createEmbed]);
 
 	return <div ref={embedRef} />;
 };

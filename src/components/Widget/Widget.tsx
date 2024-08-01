@@ -39,10 +39,18 @@ const categoriesList: Category[] = [
 	},
 ];
 
+const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+	event.preventDefault();
+	console.log('The widget was clicked.');
+};
+
 function Widget({ category, description, isCoreTask }: WidgetProps) {
 	return (
 		<div>
-			<div className='group grid max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite'>
+			<div
+				className='group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer'
+				onClick={handleClick}
+			>
 				<div className='flex justify-between items-center'>
 					<Badge variant='secondary'>
 						{categoriesList.map((item) =>

@@ -38,6 +38,4 @@ useEffect(()=> {
 return { isLoading, error, data };
 
 }
-export default useFetch
-
-useFetch('https://nisa-invest-tfb-be.vercel.app/users/all')
+export default useFetch;

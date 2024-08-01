@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
+import { SocialIcon } from 'react-social-icons';
 
 export function Footer() {
 	return (
@@ -11,22 +12,16 @@ export function Footer() {
 					<h2 className='font-playfair font-bold text-2xl'>Social Media</h2>
 					<Separator />
 					<div className='flex justify-center space-x-4'>
-						<a
-							href='https://www.instagram.com/nisainvest/'
+						<SocialIcon
+							url='https://www.instagram.com/nisainvest/'
 							target='blank'
-							aria-label='Instagram'
-							className='text-3xl hover:text-primary'
-						>
-							IG🌐 {/* Placeholder for Instagram Icon */}
-						</a>
-						<a
-							href='https://www.linkedin.com/company/nisainvest/'
-							target='_blank'
-							aria-label='LinkedIn'
-							className='text-3xl hover:text-primary'
-						>
-							LI🌐 {/* Placeholder for LinkedIn Icon */}
-						</a>
+							className='hover:opacity-80'
+						/>
+						<SocialIcon
+							url='https://www.linkedin.com/company/nisainvest/'
+							target='blank'
+							className='hover:opacity-80'
+						></SocialIcon>
 					</div>
 				</div>
 

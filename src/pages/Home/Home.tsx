@@ -22,10 +22,10 @@ function Home() {
 									Tailored personal finance by and for Muslim women
 								</p>
 							</div>
-							<div className='flex-shrink-0 w-[200px] h-[200px] bg-offWhite'>
+							<div className='flex-shrink-0 w-[200px] h-[200p]'>
 								<img
 									className='w-full h-full object-cover'
-									src='/api/placeholder/200/200'
+									src='./camel_logo.png'
 									alt='Picture of a cartoon camel'
 								/>
 							</div>
@@ -44,11 +44,6 @@ function Home() {
 				<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-around'>
 					{' '}
 					<CarouselQuote quotes={quotes} />
-					<div className='flex justify-center'>
-						<CarouselTestimonial
-							testimonials={testimonials}
-						></CarouselTestimonial>
-					</div>
 				</div>
 				{/* Section #3 */}
 				<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-around'>
@@ -58,6 +53,11 @@ function Home() {
 						imageUrl='/Fahan_Ibrahim-Hashi.jpeg'
 						bioPage='fahan'
 					></ProfileCard>
+					<div className='flex justify-center'>
+						<CarouselTestimonial
+							testimonials={testimonials}
+						></CarouselTestimonial>
+					</div>
 				</div>
 			</div>
 		</>

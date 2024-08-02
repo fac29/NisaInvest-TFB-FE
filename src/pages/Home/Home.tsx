@@ -3,6 +3,8 @@ import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import Widget from '@/components/Widget/Widget';
+import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 
 function Home() {
 	return (

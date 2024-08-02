@@ -37,7 +37,7 @@ const stepsList: Step[] = [
 function Advisors() {
 	return (
 		<div className='container pt-28 mx-auto my-4 min-h-screen h-fit flex items-center justify-center'>
-			<div className='w-full max-w-xl space-y-8 flex flex-col items-center'>
+			<div className='w-full max-w-xl space-y-16 flex flex-col items-center'>
 				<div className='text-center space-y-4'>
 					<h1 className='font-playfair text-3xl font-bold'>
 						Meet the Nisa Invest Planners
@@ -53,11 +53,13 @@ function Advisors() {
 					</Link>
 				</div>
 				<AdvisorTabs advisors={advisorsData} />
-				<div>
-					<h2 className='text-2xl font-playfair'>How it works</h2>
-					<p>Bismillah, we will begin with a conversation, sister to sister</p>
+				<div className='text-center space-y-2'>
+					<h2 className='text-3xl font-playfair font-bold'>How it works</h2>
+					<p className='text-xl'>
+						Bismillah, we will begin with a conversation, sister to sister
+					</p>
 				</div>
-				<div className='flex gap-3'>
+				<div className='flex flex-col md:flex-row gap-3'>
 					<StepsCard steps={stepsList} />
 				</div>
 			</div>

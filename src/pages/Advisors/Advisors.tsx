@@ -1,17 +1,18 @@
 import AdvisorTabs from '@/components/AdvisorTabs/AdvisorTabs';
-import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 function Advisors() {
 	return (
-		<div className='container pt-28 mx-auto min-h-screen h-fit flex items-center justify-center'>
-			<div className='w-full max-w-lg space-y-8'>
+		<div className='container pt-28 mx-auto my-4 min-h-screen h-fit flex items-center justify-center'>
+			<div className='w-full max-w-xl space-y-8 flex flex-col items-center'>
 				<div className='text-center space-y-4'>
-					<h1 className='font-playfair text-2xl font-bold'>
+					<h1 className='font-playfair text-3xl font-bold'>
 						Meet the Nisa Invest Planners
 					</h1>
-					<p>One-to-one financial guidance to support you at every stage</p>
+					<p className='text-xl'>
+						One-to-one financial guidance to support you at every stage
+					</p>
 					<Link
 						to='/booking'
 						className={buttonVariants({ variant: 'outline' })}
@@ -20,13 +21,8 @@ function Advisors() {
 					</Link>
 				</div>
 				<AdvisorTabs />
-				<div className='flex flex-col items-center justify-around'>
-					<ProfileCard
-						name='Fahan Ibrahim-Hashi'
-						position='Financial Advisor'
-						imageUrl='./Fahan_Ibrahim-Hashi_square.jpg'
-						bioPage='fahan'
-					></ProfileCard>
+				<div>
+					<h2 className='text-2xl font-playfair'>How it works</h2>
 				</div>
 			</div>
 		</div>

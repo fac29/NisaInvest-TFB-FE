@@ -22,7 +22,7 @@ module.exports = {
 				lilac: '#9392C7',
 				burntOrange: '#DC602E',
 				offWhite: '#F5F1ED',
-				grey: '#D7D9CE',
+				grey: '#D6D6D6',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

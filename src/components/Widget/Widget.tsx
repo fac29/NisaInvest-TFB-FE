@@ -44,16 +44,25 @@ const styles = {
 	default:
 		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer',
 	selected:
-		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-grey bg-grey text-primaryBlack p-3 shadow-lg hover:bg-offWhite hover:cursor-pointer',
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-grey bg-grey text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer',
+};
+
+const starStyles = {
+	default: 'text-lilac group-hover:text-offWhite',
+	selected: 'text-primaryBlack group-hover:text-offWhite',
 };
 
 function Widget({ category, description, isCoreTask }: WidgetProps) {
 	const [style, setStyle] = useState(styles.default);
+	const [starStyle, setStarStyle] = useState(starStyles.default);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
 		style == styles.default
 			? setStyle(styles.selected)
 			: setStyle(styles.default);
+		starStyle == starStyles.default
+			? setStarStyle(starStyles.selected)
+			: setStarStyle(starStyles.default);
 	};
 	return (
 		<div>
@@ -64,11 +73,7 @@ function Widget({ category, description, isCoreTask }: WidgetProps) {
 							item.category == category ? <item.element /> : ''
 						)}
 					</Badge>
-					{isCoreTask ? (
-						<FaStar className='text-lilac group-hover:text-offWhite' />
-					) : (
-						''
-					)}
+					{isCoreTask ? <FaStar className={starStyle} /> : ''}
 				</div>
 				<div className='py-2 text-center font-semibold'>{description}</div>
 			</div>

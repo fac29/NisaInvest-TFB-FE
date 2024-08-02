@@ -1,3 +1,4 @@
+import AdvisorTabs from '@/components/AdvisorTabs/AdvisorTabs';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -18,11 +19,12 @@ function Advisors() {
 						Book your session
 					</Link>
 				</div>
+				<AdvisorTabs />
 				<div className='flex flex-col items-center justify-around'>
 					<ProfileCard
 						name='Fahan Ibrahim-Hashi'
 						position='Financial Advisor'
-						imageUrl='./Fahan_Ibrahim-Hashi.jpeg'
+						imageUrl='./Fahan_Ibrahim-Hashi_square.jpg'
 						bioPage='fahan'
 					></ProfileCard>
 				</div>

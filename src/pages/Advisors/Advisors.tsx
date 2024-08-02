@@ -3,6 +3,36 @@ import StepsCard from '@/components/StepsCard/StepsCard';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { advisorsData } from '@/components/AdvisorTabs/advisorsData';
+import { Step } from '@/components/StepsCard/StepsCard';
+import {
+	FaCalendarCheck,
+	FaClipboardList,
+	FaDesktop,
+	FaSeedling,
+} from 'react-icons/fa6';
+
+const stepsList: Step[] = [
+	{
+		icon: FaCalendarCheck,
+		number: 1,
+		description: 'Book your free guidance session',
+	},
+	{
+		icon: FaDesktop,
+		number: 2,
+		description: 'Visit your interactive dashboard',
+	},
+	{
+		icon: FaClipboardList,
+		number: 3,
+		description: 'View your meeting notes',
+	},
+	{
+		icon: FaSeedling,
+		number: 4,
+		description: 'Give sadaqah jariyah together',
+	},
+];
 
 function Advisors() {
 	return (
@@ -27,8 +57,8 @@ function Advisors() {
 					<h2 className='text-2xl font-playfair'>How it works</h2>
 					<p>Bismillah, we will begin with a conversation, sister to sister</p>
 				</div>
-				<div>
-					<StepsCard />
+				<div className='flex gap-3'>
+					<StepsCard steps={stepsList} />
 				</div>
 			</div>
 		</div>

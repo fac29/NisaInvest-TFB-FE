@@ -8,7 +8,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { Button } from '../ui/button';
+import { buttonVariants } from '../ui/button';
 import { NavItemsProps, navItems } from './NavItems';
 
 /**
@@ -25,62 +25,63 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 					item.items ? (
 						item.items.map((subItem) => (
 							<NavigationMenuItem key={subItem.name}>
-								<Button type='button' variant={'link'}>
-									<Link to={subItem.path}>
-										<NavigationMenuLink>{subItem.name}</NavigationMenuLink>
-									</Link>
-								</Button>
+								<Link
+									to={subItem.path}
+									className={buttonVariants({ variant: 'link' })}
+								>
+									<NavigationMenuLink>{subItem.name}</NavigationMenuLink>
+								</Link>
 							</NavigationMenuItem>
 						))
 					) : (
-						<Button type='button' variant={'link'}>
-							<Link to={item.path}>
-								<NavigationMenuLink>{item.name}</NavigationMenuLink>
-							</Link>
-						</Button>
+						<Link
+							to={item.path}
+							className={buttonVariants({ variant: 'link' })}
+						>
+							<NavigationMenuLink>{item.name}</NavigationMenuLink>
+						</Link>
 					)
 				)}
 				{isLoggedIn ? (
 					<>
 						<NavigationMenuItem>
-							<Button type='button' variant={'outline'}>
-								<Link to='/account'>
-									<NavigationMenuLink>Account</NavigationMenuLink>
-								</Link>
-							</Button>
+							<Link
+								to='/account'
+								className={buttonVariants({ variant: 'link' })}
+							>
+								<NavigationMenuLink>Account</NavigationMenuLink>
+							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Button type='button' variant={'outline'}>
-								<Link to='/logout'>
-									<NavigationMenuLink>Log out</NavigationMenuLink>
-								</Link>
-							</Button>
+							<Link
+								to='/logout'
+								className={buttonVariants({ variant: 'link' })}
+							>
+								<NavigationMenuLink>Log out</NavigationMenuLink>
+							</Link>
 						</NavigationMenuItem>
 					</>
 				) : (
 					<>
 						<NavigationMenuItem>
-							<Button type='button' variant={'outline'}>
-								<Link to='/login'>
-									<NavigationMenuLink>Login</NavigationMenuLink>
-								</Link>
-							</Button>
+							<Link to='/login' className={buttonVariants({ variant: 'link' })}>
+								<NavigationMenuLink>Login</NavigationMenuLink>
+							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Button type='button' variant={'outline'}>
-								<Link to='/signup'>
-									<NavigationMenuLink>Sign up</NavigationMenuLink>
-								</Link>
-							</Button>
+							<Link
+								to='/signup'
+								className={buttonVariants({ variant: 'link' })}
+							>
+								<NavigationMenuLink>Sign up</NavigationMenuLink>
+							</Link>
 						</NavigationMenuItem>
 					</>
 				)}
 				<NavigationMenuItem>
-					<Button type='button' variant={'outline'}>
-						<Link to='/corporate'>
-							<NavigationMenuLink>Book a Demo</NavigationMenuLink>
-						</Link>
-					</Button>
+					<Link to='/corporate' className={buttonVariants({ variant: 'link' })}>
+						<NavigationMenuLink>Book a Demo</NavigationMenuLink>
+					</Link>
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>

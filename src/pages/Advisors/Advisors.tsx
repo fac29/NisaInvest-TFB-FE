@@ -1,5 +1,6 @@
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 function Advisors() {
 	return (
@@ -10,7 +11,12 @@ function Advisors() {
 						Meet the Nisa Invest Planners
 					</h1>
 					<h2>One-to-one financial guidance to support you at every stage</h2>
-					<Button variant={'outline'}>Book your session</Button>
+					<Link
+						to='/booking'
+						className={buttonVariants({ variant: 'outline' })}
+					>
+						Book your session
+					</Link>
 				</div>
 				<div className='flex flex-col items-center justify-around'>
 					<ProfileCard

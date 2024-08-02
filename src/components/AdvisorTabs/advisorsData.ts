@@ -1,4 +1,6 @@
-export const advisorsData = [
+import { Advisor } from '@/utils/dataTypes';
+
+export const advisorsData: Advisor[] = [
 	{
 		value: 'fahan',
 		name: 'Fahan Ibrahim-Hashi',

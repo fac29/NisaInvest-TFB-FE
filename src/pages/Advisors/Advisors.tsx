@@ -1,6 +1,8 @@
 import AdvisorTabs from '@/components/AdvisorTabs/AdvisorTabs';
+import StepsCard from '@/components/StepsCard/StepsCard';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { advisorsData } from '@/components/AdvisorTabs/advisorsData';
 
 function Advisors() {
 	return (
@@ -20,9 +22,13 @@ function Advisors() {
 						Book your session
 					</Link>
 				</div>
-				<AdvisorTabs />
+				<AdvisorTabs advisors={advisorsData} />
 				<div>
 					<h2 className='text-2xl font-playfair'>How it works</h2>
+					<p>Bismillah, we will begin with a conversation, sister to sister</p>
+				</div>
+				<div>
+					<StepsCard />
 				</div>
 			</div>
 		</div>

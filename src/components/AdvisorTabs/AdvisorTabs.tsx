@@ -11,17 +11,22 @@ import {
 import { Link } from 'react-router-dom';
 import { SocialIcon } from 'react-social-icons';
 import { Badge } from '@/components/ui/badge';
-import { advisorsData } from './advisorsData';
-import { Schema } from 'zod';
+import { Advisor } from '@/utils/dataTypes';
 
-function AdvisorTabs() {
+interface AdvisorsTabsProps {
+	advisors: Advisor[];
+}
+
+function AdvisorTabs({ advisors }: AdvisorsTabsProps) {
 	return (
-		<Tabs defaultValue={advisorsData[0]?.value} className='w-full max-w-lg'>
+		<Tabs defaultValue={advisors[0]?.value} className='w-full max-w-lg'>
 			<TabsList>
-				<TabsTrigger value='fahan'>Fahan Ibrahim-Hashi</TabsTrigger>
+				{advisors.map((advisor: Advisor) => (
+					<TabsTrigger value={advisor.value}>{advisor.name}</TabsTrigger>
+				))}
 				<TabsTrigger value='other'>Other Planners</TabsTrigger>
 			</TabsList>
-			{advisorsData.map((advisor) => (
+			{advisors.map((advisor: Advisor) => (
 				<TabsContent value={advisor.value}>
 					<Card>
 						<CardHeader className='grid grid-cols-2 border-b-2'>

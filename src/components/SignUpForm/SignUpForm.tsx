@@ -11,33 +11,6 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-
-/** */
-const Reasons = [
-	{
-		id: 'savings',
-		name: 'savings',
-		description: 'Grow my savings',
-	},
-	{
-		id: 'expenses',
-		name: 'expenses',
-		description: 'Learn how to manage my expenses',
-	},
-	{
-		id: 'investments',
-		name: 'investments',
-		description: 'Learn about investments',
-	},
-	{
-		id: 'community',
-		name: 'community',
-		description: 'Learn how to give back to my community',
-	},
-];
-
-// const defaultReason: string = Reasons[0]!.name!;
 
 const formSchema = z.object({
 	username: z.string().min(2, {
@@ -55,11 +28,8 @@ const formSchema = z.object({
 	password: z.string().min(8, {
 		message: 'Password must be at least 8 characters long.',
 	}),
-	reason: z.enum(['savings', 'expenses', 'investments', 'community']),
 });
 
-// I wanted reason to have the default value `defaultReason` but this caused a type error, so I've
-// hard-coded for now. Something to come back to if we have time!
 export function SignUpForm() {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -69,7 +39,6 @@ export function SignUpForm() {
 			firstName: '',
 			lastName: '',
 			password: '',
-			reason: 'savings',
 		},
 	});
 
@@ -162,38 +131,6 @@ export function SignUpForm() {
 											placeholder='Enter your password'
 											{...field}
 										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name='reason'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>
-										What do you hope to get out of Nisa Invest?
-									</FormLabel>
-									<FormControl>
-										<RadioGroup
-											onValueChange={field.onChange}
-											defaultValue={field.value}
-										>
-											{Reasons.map((reason) => (
-												<FormItem className='flex items-center space-x-3 space-y-0'>
-													<FormControl>
-														<RadioGroupItem
-															value={reason.name}
-															id={reason.id}
-														/>
-													</FormControl>
-													<FormLabel className='font-normal'>
-														{reason.description}
-													</FormLabel>
-												</FormItem>
-											))}
-										</RadioGroup>
 									</FormControl>
 									<FormMessage />
 								</FormItem>

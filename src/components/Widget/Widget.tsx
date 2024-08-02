@@ -8,6 +8,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { IconType } from 'react-icons/lib';
 import { string } from 'zod';
+import { useState } from 'react';
 
 interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
@@ -39,18 +40,24 @@ const categoriesList: Category[] = [
 	},
 ];
 
-const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-	event.preventDefault();
-	console.log('The widget was clicked.');
+const styles = {
+	default:
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer',
+	selected:
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-grey bg-grey text-primaryBlack p-3 shadow-lg hover:bg-offWhite hover:cursor-pointer',
 };
 
 function Widget({ category, description, isCoreTask }: WidgetProps) {
+	const [style, setStyle] = useState(styles.default);
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
+		style == styles.default
+			? setStyle(styles.selected)
+			: setStyle(styles.default);
+	};
 	return (
 		<div>
-			<div
-				className='group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer'
-				onClick={handleClick}
-			>
+			<div className={style} onClick={handleClick}>
 				<div className='flex justify-between items-center'>
 					<Badge variant='secondary'>
 						{categoriesList.map((item) =>

@@ -7,7 +7,6 @@ import {
 } from 'react-icons/fa6';
 import { Badge } from '@/components/ui/badge';
 import { IconType } from 'react-icons/lib';
-import { string } from 'zod';
 import { useState } from 'react';
 
 interface WidgetProps {

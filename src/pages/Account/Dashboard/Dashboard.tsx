@@ -1,19 +1,16 @@
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import Widget from '@/components/Widget/Widget';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
+import {
+	DashboardContainer,
+	DashboardSection,
+} from '@/components/Dashboard/Dashboard';
 
 function Dashboard() {
 	return (
-		<div className='container min-h-screen mx-auto p-4 space-y-8'>
-			{/* Section 1 */}
-			<div className='p-4 pt-28 rounded-lg'>
-				<div className='flex gap-4 items-center bg-lilac rounded-lg p-4 mb-4'>
-					<div>
-						<p className='text-xl font-bold'>1</p>
-					</div>
-					<h2 className='text-xl font-bold'>Alhambulillah I can say that:</h2>
-				</div>
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+		<div className='pt-28'>
+			<DashboardContainer>
+				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
 						<Widget
 							category='savings'
@@ -47,19 +44,8 @@ function Dashboard() {
 							isCoreTask={false}
 						/>
 					</WidgetHeader>
-				</div>
-			</div>
-			{/* Section 2 */}
-			<div className='p-4 rounded-lg'>
-				<div className='flex gap-4 items-center bg-lilac rounded-lg p-4 mb-4'>
-					<div>
-						<p className='text-xl font-bold'>2</p>
-					</div>
-					<h2 className='text-xl font-bold'>
-						My current focus is to inshAllah say that:
-					</h2>
-				</div>
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+				</DashboardSection>
+				<DashboardSection title='My current focus is to inshAllah say that:'>
 					<WidgetContainer category='savings'>
 						<Widget
 							category='savings'
@@ -93,19 +79,8 @@ function Dashboard() {
 							isCoreTask={false}
 						/>
 					</WidgetContainer>
-				</div>
-			</div>
-			{/* Section 3 */}
-			<div className='p-4 rounded-lg'>
-				<div className='flex gap-4 items-center bg-lilac rounded-lg p-4 mb-4'>
-					<div>
-						<p className='text-xl font-bold'>3</p>
-					</div>
-					<h2 className='text-xl font-bold'>
-						These are the items I can work through:
-					</h2>
-				</div>
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+				</DashboardSection>
+				<DashboardSection title='These are the items I can work through:'>
 					<WidgetContainer category='savings'>
 						<Widget
 							category='savings'
@@ -139,10 +114,11 @@ function Dashboard() {
 							isCoreTask={false}
 						/>
 					</WidgetContainer>
-				</div>
-			</div>
+				</DashboardSection>
+			</DashboardContainer>
 		</div>
 	);
-}
+};
+	
 
 export default Dashboard;

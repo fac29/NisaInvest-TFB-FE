@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
-import Widget from '@/components/Widget/Widget';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 
 interface DashboardProps {
@@ -12,14 +11,12 @@ interface DashboardSectionProps {
 	children: React.ReactNode;
 }
 
-type WidgetComponentType = typeof WidgetHeader | typeof WidgetContainer;
-
 interface WidgetProps {
 	category: string;
 	[key: string]: any;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ children }) => {
+export function DashboardContainer({ children }: DashboardProps) {
 	const sections = React.Children.toArray(children);
 
 	return (
@@ -44,14 +41,11 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
 			})}
 		</div>
 	);
-};
+}
 
-const DashboardSection: React.FC<DashboardSectionProps> = ({
-	title,
-	children,
-}) => {
+export function DashboardSection({ title, children }: DashboardSectionProps) {
 	return (
-		<>
+		<React.Fragment>
 			{React.Children.map(children, (child) => {
 				if (
 					React.isValidElement<WidgetProps>(child) &&
@@ -63,8 +57,6 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({
 				}
 				return child;
 			})}
-		</>
+		</React.Fragment>
 	);
-};
-
-export { Dashboard, DashboardSection };
+}

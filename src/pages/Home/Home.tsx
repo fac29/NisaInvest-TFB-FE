@@ -18,7 +18,7 @@ function Home() {
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'
 					position='Financial Advisor'
-					imageUrl='./fahan.jpeg'
+					imageUrl='./fahan.png'
 					bioPage='fahan'
 				></ProfileCard>
 			</div>

@@ -22,7 +22,7 @@ function NavBar() {
 	const [isLoggedIn, setLogIn] = useState(false);
 
 	return (
-		<div className='w-full flex items-center justify-between p-4'>
+		<div className='w-full flex items-center justify-between p-4 fixed top-0 bg-white z-10'>
 			<Link to='/' className='shrink-0'>
 				<img src='/logo.png' className='size-20' alt='Nisa Invest' />
 			</Link>

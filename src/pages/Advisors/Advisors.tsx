@@ -1,4 +1,4 @@
-import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import { ProfileCard } from '@/components/ProfileCard/ProfileCard'
 
 function Advisors() {
 	return (
@@ -7,12 +7,12 @@ function Advisors() {
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'
 					position='Financial Advisor'
-					imageUrl='./Fahan_Ibrahim-Hashi.jpeg'
+					imageUrl='../../../public/Fahan_Ibrahim-Hashi.jpeg'
 					bioPage='fahan'
 				></ProfileCard>
 			</div>
 		</>
-	);
+	)
 }
 
-export default Advisors;
+export default Advisors

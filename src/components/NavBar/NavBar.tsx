@@ -24,7 +24,7 @@ function NavBar() {
 	return (
 		<div className='w-full flex items-center justify-between p-4'>
 			<Link to='/' className='shrink-0'>
-				<img src='/logo.png' className='size-20' alt='Nisa Invest' />
+				<img src='./logo.png' className='size-20' alt='Nisa Invest' />
 			</Link>
 			{isMobile ? (
 				<Sheet>

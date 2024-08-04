@@ -7,7 +7,7 @@ function Advisors() {
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'
 					position='Financial Advisor'
-					imageUrl='./Fahan_Ibrahim-Hashi.jpeg'
+					imageUrl='./fahan.jpeg'
 					bioPage='fahan'
 				></ProfileCard>
 			</div>

@@ -74,7 +74,7 @@ function Dashboard() {
 	}
 
 	return (
-		<div className='pt-28'>
+		<div>
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>

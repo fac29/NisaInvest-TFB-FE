@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BE_BASE_URL } from '../../utils/dataTypes';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -110,7 +109,7 @@ export function SignUpForm() {
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-4'>
 						<FormField
 							control={form.control}
-							name='firstName'
+							name='first_name'
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>First Name</FormLabel>
@@ -127,7 +126,7 @@ export function SignUpForm() {
 						/>
 						<FormField
 							control={form.control}
-							name='lastName'
+							name='last_name'
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Last Name</FormLabel>

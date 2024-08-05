@@ -65,7 +65,9 @@ function AdvisorTabs({ advisors }: AdvisorsTabsProps) {
 								<h4 className='text-md font-bold pb-1'>Languages</h4>
 								<div className='flex gap-1'>
 									{advisor.languages.map((language) => (
-										<Badge variant={'default'}>{language}</Badge>
+										<Badge variant={'default'} className='px-2'>
+											{language}
+										</Badge>
 									))}
 								</div>
 							</section>
@@ -73,7 +75,9 @@ function AdvisorTabs({ advisors }: AdvisorsTabsProps) {
 								<h4 className='text-md font-bold pb-1'>Focus Areas</h4>
 								<div className='flex gap-1'>
 									{advisor.focus.map((foci) => (
-										<Badge variant={'default'}>{foci}</Badge>
+										<Badge variant={'default'} className='px-2'>
+											{foci}
+										</Badge>
 									))}
 								</div>
 							</section>

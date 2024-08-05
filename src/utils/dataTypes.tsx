@@ -1,3 +1,6 @@
+export const BE_BASE_URL: string = "https://nisa-invest-tfb-be.vercel.app/"
+
+
 export interface User {
 	id: number;
 	created_at: Date;
@@ -20,8 +23,22 @@ export interface Goal {
 
 export interface Quote {
 	id: number;
-	text: string,
-	author: string,
-	valid_from: Date,
-	valid_to: Date,
+	text: string;
+	author: string;
+	valid_from: Date;
+	valid_to: Date;
+}
+
+export interface Advisor {
+	value: string;
+	name: string;
+	image: string;
+	title: string;
+	location: string;
+	linkedInURL: string;
+	duration: string;
+	education: string[];
+	experience: string;
+	languages: string[];
+	focus: string[];
 }

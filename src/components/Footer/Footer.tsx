@@ -5,7 +5,7 @@ import { SocialIcon } from 'react-social-icons';
 
 export function Footer() {
 	return (
-		<div className='bg-lilac p-8 text-offWhite'>
+		<div className='bg-lilac p-8 text-offWhite mt-8'>
 			<div className='grid grid-cols-1 md:grid-cols-4 gap-6 '>
 				{/* Social Media Section */}
 				<div className='flex flex-col items-center gap-4'>

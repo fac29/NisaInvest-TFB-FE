@@ -55,7 +55,12 @@ function Dashboard() {
 		const matchingWidgets = data.categorizedGoals
 			.filter((categorizedGoal) => categorizedGoal.category === category)
 			.flatMap((categorizedGoal) => categorizedGoal.goals)
-			.filter((goal) => goal.status === status)
+			.filter((goal) => {
+				if (Array.isArray(status)) {
+					return status.includes(goal.status);
+				}
+				return goal.status === status;
+			})
 			.map((goal) => (
 				<Widget
 					key={goal.id}

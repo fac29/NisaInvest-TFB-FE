@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BE_BASE_URL } from '../../utils/dataTypes';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useForm as useFormspree } from '@formspree/react';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -13,6 +14,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
+import { Link } from 'react-router-dom';
 
 const formSchema = z.object({
 	first_name: z.string({
@@ -28,6 +30,10 @@ const formSchema = z.object({
 	text_field: z.string(),
 });
 
+const refreshPage = () => {
+	window.location.reload();
+};
+
 export function RequestDemoForm() {
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -41,10 +47,24 @@ export function RequestDemoForm() {
 		},
 	});
 
+	const [state, handleFormspreeSubmit] = useFormspree('xdkngvor');
+	if (state.succeeded) {
+		return (
+			<div className='flex flex-col space-y-4 items-center justify-center'>
+				<p className='text-md'>Thank you for your enquiry!</p>
+				<Button variant={'outline'} onClick={refreshPage}>
+					Send new enquiry
+				</Button>
+			</div>
+		);
+	}
+
 	// 2. Define a submit handler.
 	const apiUrl = import.meta.env.VITE_API_URL;
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
+			handleFormspreeSubmit(values);
+
 			const response = await fetch(`${apiUrl}contactnisa`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -52,7 +72,7 @@ export function RequestDemoForm() {
 			});
 			if (!response.ok) {
 				console.log(
-					`There is a error sendin the POST request ${response.status}`
+					`There is a error sending the POST request ${response.status}`
 				);
 			}
 		} catch (error) {
@@ -132,12 +152,14 @@ export function RequestDemoForm() {
 					name='text_field'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>What company do you come from?</FormLabel>
-							<FormDescription></FormDescription>
+							<FormLabel>How can we help?</FormLabel>
+							<FormDescription>
+								If you are writing on behalf of a company, please include the
+								name of your company.
+							</FormDescription>
 							<FormControl>
 								<Textarea
-									placeholder='This is where you can tell us what company you are contacting us from
-									and how we can help!'
+									placeholder='I would love to learn more about...'
 									{...field}
 								/>
 							</FormControl>
@@ -146,8 +168,8 @@ export function RequestDemoForm() {
 					)}
 				/>
 				<div className='flex justify-center'>
-					<Button type='submit' variant={'outline'}>
-						submit
+					<Button type='submit' variant={'outline'} disabled={state.submitting}>
+						Submit
 					</Button>
 				</div>
 			</form>

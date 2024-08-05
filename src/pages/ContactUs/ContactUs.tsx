@@ -1,4 +1,4 @@
-import { RequestDemoForm } from '@/components/RequestDemoForm/RequestDemoForm';
+import { RequestDemoForm } from '@/components/ContactUsForm/ContactUsForm';
 
 function ContactUs() {
 	return (

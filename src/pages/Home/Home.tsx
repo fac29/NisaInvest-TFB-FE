@@ -3,6 +3,7 @@ import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import image from '/fahan.png'
 
 function Home() {
 	return (
@@ -18,7 +19,7 @@ function Home() {
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'
 					position='Financial Advisor'
-					imageUrl='./fahan.png'
+					imageUrl={image}
 					bioPage='fahan'
 				></ProfileCard>
 			</div>

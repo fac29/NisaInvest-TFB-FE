@@ -9,12 +9,6 @@ import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 function App() {
 
 
-    // Testing if environment variables are being well resolved
-    useEffect(() => {
-        console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
-        console.log('Supabase Anon Key:', import.meta.env.VITE_SUPABASE_ANON_KEY);
-      }, []);
-
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
             if (event === 'SIGNED_IN') {

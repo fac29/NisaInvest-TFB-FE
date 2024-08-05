@@ -1,6 +1,6 @@
 import Carousel from '@/components/CarouselQuote/CarouselQuote';
 import { Button } from '@/components/ui/button';
-import { RequestDemoForm } from '@/components/RequestDemoForm/RequestDemoForm';
+import { RequestDemoForm } from '@/components/ContactUsForm/ContactUsForm';
 function Corporate() {
 	return (
 		<div className='container mx-auto flex items-center justify-center max-w-6xl text-center'>

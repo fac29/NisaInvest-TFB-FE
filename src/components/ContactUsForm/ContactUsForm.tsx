@@ -34,6 +34,7 @@ export function RequestDemoForm() {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
+		mode: 'onBlur',
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			first_name: '',
@@ -159,6 +160,7 @@ export function RequestDemoForm() {
 					</Button>
 					<Dialog
 						open={isDialogOpen}
+						//the value of open is linked to onOpenChange. When a button on the dialog is pressed, open switches to false. 
 						onOpenChange={setIsDialogOpen}
 						title='Form Submitted'
 						text='Your form was successfully submitted. Thank you!'

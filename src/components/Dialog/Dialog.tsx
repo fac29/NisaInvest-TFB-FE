@@ -10,6 +10,7 @@ import {
   
   interface DialogProps {
     open: boolean;
+    //onOpenChange lets parent know when dialog is closed
     onOpenChange: (open: boolean) => void;
     title: string;
     text: string;
@@ -26,6 +27,8 @@ import {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
+           {/* when user clicks on the button, the value of onOpenChange changes to false */}
+           
             <AlertDialogAction onClick={() => onOpenChange(false)}>
               Continue
             </AlertDialogAction>

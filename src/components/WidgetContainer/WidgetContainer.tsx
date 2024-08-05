@@ -10,7 +10,7 @@ import { IconType } from 'react-icons/lib';
 
 interface ContainerProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 interface Category {

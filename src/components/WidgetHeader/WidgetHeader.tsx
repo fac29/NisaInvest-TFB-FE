@@ -16,7 +16,7 @@ interface HeaderProps {
 		| 'Managing Expenses'
 		| 'Investing in the Future'
 		| 'Giving Back';
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 interface Category {

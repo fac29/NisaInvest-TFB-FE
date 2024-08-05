@@ -1,121 +1,120 @@
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import Widget from '@/components/Widget/Widget';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
+import useFetch from '@/utils/fetchData';
 import {
 	DashboardContainer,
 	DashboardSection,
 } from '@/components/Dashboard/Dashboard';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+// Define the types for the goals data structure
+interface Goal {
+	id: number;
+	title: string;
+	category: 'savings' | 'expenses' | 'investing' | 'charity';
+	created_at: string;
+	sort_order: number;
+	description: string;
+	is_recurrent: boolean;
+	recurrence_type: string | null;
+	recurrence_value: string | null;
+	status: 'completed' | 'focused' | 'not_done' | null;
+}
+
+interface CategorizedGoal {
+	category: 'savings' | 'expenses' | 'investing' | 'charity';
+	goals: Goal[];
+}
+
+interface GoalsData {
+	message: string;
+	categorizedGoals: CategorizedGoal[];
+}
+
 function Dashboard() {
+	const userId = 1; // this should be checked against the logged in user
+
+	const goalsData = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`)
+		.data as GoalsData;
+
+	/* 	function to filter through user goals based on status and category in order to populate the dashboard sections. 
+	Usage eg:
+	{addWidgets(goalsData, 'completed', 'savings')} 
+	*/
+	function addWidgets(
+		data: GoalsData,
+		status?:
+			| ('completed' | 'focused' | 'not_done' | null)[]
+			| ('completed' | 'focused' | 'not_done' | null),
+		category?: 'savings' | 'expenses' | 'investing' | 'charity'
+	) {
+		if (!data || !data.categorizedGoals) return null;
+		console.log(data);
+		const matchingWidgets = data.categorizedGoals
+			.filter((categorizedGoal) => categorizedGoal.category === category)
+			.flatMap((categorizedGoal) => categorizedGoal.goals)
+			.filter((goal) => goal.status === status)
+			.map((goal) => (
+				<Widget
+					key={goal.id}
+					category={goal.category}
+					description={goal.description}
+					isCoreTask={goal.is_recurrent}
+				/>
+			));
+
+		return matchingWidgets;
+	}
+
 	return (
 		<div className='pt-28'>
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
-						<Widget
-							category='savings'
-							description="I have at least 50% of one month's salary saved"
-							isCoreTask={true}
-						/>
+						{addWidgets(goalsData, 'completed', 'savings')}
 					</WidgetHeader>
 					<WidgetHeader category='expenses' heading='Managing Expenses'>
-						<Widget
-							category='expenses'
-							description='I can login online to all my utility providers'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'completed', 'expenses')}
 					</WidgetHeader>
 					<WidgetHeader category='investing' heading='Investing in the Future'>
-						<Widget
-							category='investing'
-							description='I have a list of any outstanding debts'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'completed', 'investing')}
 					</WidgetHeader>
 					<WidgetHeader category='charity' heading='Giving Back'>
-						<Widget
-							category='charity'
-							description='I purify any interest I receive in my bank accounts'
-							isCoreTask={true}
-						/>
-						<Widget
-							category='charity'
-							description='I give back in person'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'completed', 'charity')}
 					</WidgetHeader>
 				</DashboardSection>
 				<DashboardSection title='My current focus is to inshAllah say that:'>
 					<WidgetContainer category='savings'>
-						<Widget
-							category='savings'
-							description="I have at least 50% of one month's salary saved"
-							isCoreTask={true}
-						/>
+						{addWidgets(goalsData, 'focused', 'savings')}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						<Widget
-							category='expenses'
-							description='I can login online to all my utility providers'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'focused', 'expenses')}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						<Widget
-							category='investing'
-							description='I have a list of any outstanding debts'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'focused', 'investing')}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						<Widget
-							category='charity'
-							description='I purify any interest I receive in my bank accounts'
-							isCoreTask={true}
-						/>
-						<Widget
-							category='charity'
-							description='I give back in person'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, 'focused', 'charity')}
 					</WidgetContainer>
 				</DashboardSection>
 				<DashboardSection title='These are the items I can work through:'>
 					<WidgetContainer category='savings'>
-						<Widget
-							category='savings'
-							description="I have at least 50% of one month's salary saved"
-							isCoreTask={true}
-						/>
+						{addWidgets(goalsData, ['not_done', null], 'savings')}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						<Widget
-							category='expenses'
-							description='I can login online to all my utility providers'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, ['not_done', null], 'expenses')}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						<Widget
-							category='investing'
-							description='I have a list of any outstanding debts'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, ['not_done', null], 'investing')}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						<Widget
-							category='charity'
-							description='I purify any interest I receive in my bank accounts'
-							isCoreTask={true}
-						/>
-						<Widget
-							category='charity'
-							description='I give back in person'
-							isCoreTask={false}
-						/>
+						{addWidgets(goalsData, ['not_done', null], 'charity')}
 					</WidgetContainer>
 				</DashboardSection>
 			</DashboardContainer>
+			``
 		</div>
 	);
 };

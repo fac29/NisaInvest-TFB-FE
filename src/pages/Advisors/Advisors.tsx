@@ -36,7 +36,7 @@ const stepsList: Step[] = [
 
 function Advisors() {
 	return (
-		<div className='container pt-28 mx-auto my-4 min-h-screen h-fit flex items-center justify-center'>
+		<div className='container mx-auto pt-8 min-h-screen h-fit flex items-center justify-center'>
 			<div className='w-full max-w-xl space-y-16 flex flex-col items-center'>
 				<div className='text-center space-y-4'>
 					<h1 className='font-playfair text-3xl font-bold'>

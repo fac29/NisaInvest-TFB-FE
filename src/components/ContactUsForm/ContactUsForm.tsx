@@ -15,18 +15,17 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
-	firstName: z.string({
+	first_name: z.string({
 		required_error: 'Name is required',
 		invalid_type_error: 'Name must be a string',
 	}),
-	lastName: z.string({
+	last_name: z.string({
 		required_error: 'Last name is required',
 		invalid_type_error: 'Name must be a string',
 	}),
 	email: z.string().email(),
-	companyName: z.string(),
-	socialMediaLink: z.string(),
-	furtherInfo: z.string(),
+	social_media: z.string(),
+	text_field: z.string(),
 });
 
 export function RequestDemoForm() {
@@ -34,18 +33,31 @@ export function RequestDemoForm() {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			firstName: '',
-			lastName: '',
+			first_name: '',
+			last_name: '',
 			email: '',
-			companyName: '',
-			socialMediaLink: '',
-			furtherInfo: '',
+			social_media: '',
+			text_field: '',
 		},
 	});
 
 	// 2. Define a submit handler.
-	function onSubmit(data: z.infer<typeof formSchema>) {
-		console.log(data);
+	const apiUrl = import.meta.env.VITE_API_URL;
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		try {
+			const response = await fetch(`${apiUrl}contactnisa`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(values),
+			});
+			if (!response.ok) {
+				console.log(
+					`There is a error sendin the POST request ${response.status}`
+				);
+			}
+		} catch (error) {
+			console.error('Error:', error);
+		}
 	}
 
 	return (
@@ -53,7 +65,7 @@ export function RequestDemoForm() {
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 				<FormField
 					control={form.control}
-					name='firstName'
+					name='first_name'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Your First Name</FormLabel>
@@ -70,7 +82,7 @@ export function RequestDemoForm() {
 				/>
 				<FormField
 					control={form.control}
-					name='lastName'
+					name='last_name'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Your Last Name</FormLabel>
@@ -104,7 +116,7 @@ export function RequestDemoForm() {
 				/>
 				<FormField
 					control={form.control}
-					name='socialMediaLink'
+					name='social_media'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>LinkedIn / Website / Social Media links</FormLabel>
@@ -121,13 +133,14 @@ export function RequestDemoForm() {
 				/>
 				<FormField
 					control={form.control}
-					name='furtherInfo'
+					name='text_field'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>How can Nisa Invest Help?</FormLabel>
+							<FormLabel>What company do you come from?</FormLabel>
 							<FormControl>
 								<Textarea
-									placeholder='This is where you can tell us how we can help or any info you want to get!'
+									placeholder='This is where you can tell us what company you are contacting us from
+									and how we can help!'
 									{...field}
 								/>
 							</FormControl>

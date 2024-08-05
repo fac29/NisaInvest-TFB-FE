@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - deploy # branch  to deploy from
+      - deploy # branch  to deploy from.
 
 jobs:
   build:

@@ -7,6 +7,7 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
+	FormDescription,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
@@ -69,11 +70,7 @@ export function RequestDemoForm() {
 						<FormItem>
 							<FormLabel>Your First Name</FormLabel>
 							<FormControl>
-								<Input
-									type='text'
-									placeholder='How should we call you? :)'
-									{...field}
-								/>
+								<Input type='text' placeholder='Fahan' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -86,11 +83,7 @@ export function RequestDemoForm() {
 						<FormItem>
 							<FormLabel>Your Last Name</FormLabel>
 							<FormControl>
-								<Input
-									type='text'
-									placeholder='Please enter your last name'
-									{...field}
-								/>
+								<Input type='text' placeholder='Ibrahim-Hashi' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -105,7 +98,7 @@ export function RequestDemoForm() {
 							<FormControl>
 								<Input
 									type='email'
-									placeholder='Enter your email so we can get in contact with you'
+									placeholder='fahan@example.com'
 									{...field}
 								/>
 							</FormControl>
@@ -119,10 +112,14 @@ export function RequestDemoForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>LinkedIn / Website / Social Media links</FormLabel>
+							<FormDescription>
+								Feel free to share your social media so we can get to know you
+								better!
+							</FormDescription>
 							<FormControl>
 								<Input
 									type='text'
-									placeholder='Feel free to share your social media so we can get to know you more!'
+									placeholder='www.linkedin.com/company/nisainvest'
 									{...field}
 								/>
 							</FormControl>
@@ -136,6 +133,7 @@ export function RequestDemoForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>What company do you come from?</FormLabel>
+							<FormDescription></FormDescription>
 							<FormControl>
 								<Textarea
 									placeholder='This is where you can tell us what company you are contacting us from

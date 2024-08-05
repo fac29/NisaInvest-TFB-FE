@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
+import { Dialog } from '../Dialog/Dialog';
+import { useState } from 'react';
 
 const formSchema = z.object({
 	first_name: z.string({
@@ -29,6 +31,7 @@ const formSchema = z.object({
 });
 
 export function RequestDemoForm() {
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -50,10 +53,12 @@ export function RequestDemoForm() {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(values),
 			});
-			if (!response.ok) {
-				console.log(
-					`There is a error sendin the POST request ${response.status}`
-				);
+			if (response.ok) {
+				console.log(`successful form submission ${response.body}`);
+				setIsDialogOpen(true);
+				form.reset();
+			} else {
+				console.log(`error in submittting the form ${response.status}`);
 			}
 		} catch (error) {
 			console.error('Error:', error);
@@ -150,8 +155,14 @@ export function RequestDemoForm() {
 				/>
 				<div className='flex justify-center'>
 					<Button type='submit' variant={'outline'}>
-						submit
+						click here
 					</Button>
+					<Dialog
+						open={isDialogOpen}
+						onOpenChange={setIsDialogOpen}
+						title='Form Submitted'
+						text='Your form was successfully submitted. Thank you!'
+					/>
 				</div>
 			</form>
 		</Form>

@@ -7,7 +7,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<div className='grid min-h-[100dvh] grid-rows-[auto_1fr_auto]'>
+				<div className='grid min-h-[100dvh] grid-rows-[auto_1fr_auto] grid-cols-1'>
 					<NavBar />
 					<AppRoutes />
 					<Footer></Footer>

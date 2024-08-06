@@ -17,7 +17,15 @@ import { NavItemsProps, navItems } from './NavItems';
  * The buttons are currently hardcoded but as these are unlikely to change, hopefully
  * this isn't an issue.
  */
-function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
+
+// In MobileNavItems.tsx
+interface MobileNavItemsProps {
+	classNameValue: string;
+	isLoggedIn: boolean; 
+  }
+
+
+function MobileNavItems({ classNameValue, isLoggedIn }: MobileNavItemsProps) {
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>

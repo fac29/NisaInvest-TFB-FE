@@ -8,6 +8,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Button, buttonVariants } from '../ui/button';
+import { useAuth } from '@/AuthContext';
 import { signOut } from '@/lib/auth';
 
 export interface NavItemsProps {
@@ -41,103 +42,76 @@ export const navItems = [
   },
 ];
 
-function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      // Optionally, you can redirect the user or update the UI here
-     // window.location.href = '/'; // Redirect to home page after logout
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
-  };
-
-  return (
-    <NavigationMenu>
-      <NavigationMenuList className={classNameValue}>
-        {navItems.map((item) => (
-          <NavigationMenuItem key={item.name}>
-            {item.items ? (
-              <>
-                <NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul>
-                    {item.items.map((subItem) => (
-                      <li key={subItem.name}>
-                        <Link
-                          to={subItem.path}
-                          className={buttonVariants({ variant: 'link' })}
-                        >
-                          <NavigationMenuLink>{subItem.name}</NavigationMenuLink>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </>
-            ) : (
-              <Link
-                to={item.path}
-                className={buttonVariants({ variant: 'link' })}
-              >
-                <NavigationMenuLink>{item.name}</NavigationMenuLink>
-              </Link>
-            )}
-          </NavigationMenuItem>
-        ))}
-        
-        {isLoggedIn ? (
-          <>
-            <NavigationMenuItem>
-              <Link
-                to='/account'
-                className={buttonVariants({ variant: 'outline' })}
-              >
-                <NavigationMenuLink>Account</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Button
-                onClick={handleLogout}
-                className={buttonVariants({ variant: 'outline' })}
-				
-              >
-                Log out
-              </Button>
-            </NavigationMenuItem>
-          </>
-        ) : (
-          <>
-            <NavigationMenuItem>
-              <Link
-                to='/login'
-                className={buttonVariants({ variant: 'outline' })}
-              >
-                <NavigationMenuLink>Login</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link
-                to='/signup'
-                className={buttonVariants({ variant: 'outline' })}
-              >
-                <NavigationMenuLink>Sign up</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </>
-        )}
-        
-        <NavigationMenuItem>
-          <Link
-            to='/corporate'
-            className={buttonVariants({ variant: 'outline' })}
-          >
-            <NavigationMenuLink>Book a Demo</NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
-  );
-}
-
-export default NavItems;
+function NavItems({ classNameValue }: NavItemsProps) {
+	const { isLoggedIn, setIsLoggedIn } = useAuth();
+  
+	const handleLogout = async () => {
+	  try {
+		await signOut();
+		setIsLoggedIn(false);
+		// Optionally, you can redirect the user or update the UI here
+		window.location.href = '/'; // Redirect to home page after logout
+	  } catch (error) {
+		console.error('Logout failed:', error);
+	  }
+	};
+  
+	return (
+	  <NavigationMenu>
+		<NavigationMenuList className={classNameValue}>
+		  {/* ... keep the existing navItems mapping */}
+		  
+		  {isLoggedIn ? (
+			<>
+			  <NavigationMenuItem>
+				<Link
+				  to='/account'
+				  className={buttonVariants({ variant: 'outline' })}
+				>
+				  <NavigationMenuLink>Account</NavigationMenuLink>
+				</Link>
+			  </NavigationMenuItem>
+			  <NavigationMenuItem>
+				<Button
+				  onClick={handleLogout}
+				  className={buttonVariants({ variant: 'outline' })}
+				>
+				  Log out
+				</Button>
+			  </NavigationMenuItem>
+			</>
+		  ) : (
+			<>
+			  <NavigationMenuItem>
+				<Link
+				  to='/login'
+				  className={buttonVariants({ variant: 'outline' })}
+				>
+				  <NavigationMenuLink>Login</NavigationMenuLink>
+				</Link>
+			  </NavigationMenuItem>
+			  <NavigationMenuItem>
+				<Link
+				  to='/signup'
+				  className={buttonVariants({ variant: 'outline' })}
+				>
+				  <NavigationMenuLink>Sign up</NavigationMenuLink>
+				</Link>
+			  </NavigationMenuItem>
+			</>
+		  )}
+		  
+		  <NavigationMenuItem>
+			<Link
+			  to='/corporate'
+			  className={buttonVariants({ variant: 'outline' })}
+			>
+			  <NavigationMenuLink>Book a Demo</NavigationMenuLink>
+			</Link>
+		  </NavigationMenuItem>
+		</NavigationMenuList>
+	  </NavigationMenu>
+	);
+  }
+  
+  export default NavItems;

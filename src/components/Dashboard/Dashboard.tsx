@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 import useFetch from '@/utils/fetchData';
@@ -131,13 +131,31 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 }
 
 export function DashboardLayout({ userId }: DashboardProps) {
-	const goalsData = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`)
-		.data as GoalsData;
+	const [isLoading, setIsLoading] = useState(true);
+	const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
 
-	if (!goalsData) {
+	const goalsData = fetchGoals.data as GoalsData;
+
+	useEffect(() => {
+		if (fetchGoals.data || fetchGoals.error) {
+			setIsLoading(false);
+		}
+	}, [goalsData, fetchGoals.error]);
+
+	if (isLoading) {
 		return (
 			<div className='flex items-center justify-center min-h-screen'>
 				<Loader2 className='w-12 h-12 animate-spin text-lilac' />
+			</div>
+		);
+	}
+
+	if (fetchGoals.error) {
+		return (
+			<div className='flex items-center justify-center min-h-screen'>
+				<p className='text-red-500'>
+					Error loading dashboard data. Please try again later.
+				</p>
 			</div>
 		);
 	}

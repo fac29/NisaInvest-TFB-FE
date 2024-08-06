@@ -63,7 +63,7 @@ function addWidgets(
 	category?: 'savings' | 'expenses' | 'investing' | 'charity'
 ) {
 	if (!data || !data.categorizedGoals) return null;
-	console.log(data);
+
 	const matchingWidgets = data.categorizedGoals
 		.filter((categorizedGoal) => categorizedGoal.category === category)
 		.flatMap((categorizedGoal) => categorizedGoal.goals)

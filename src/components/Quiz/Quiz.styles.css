@@ -51,7 +51,7 @@
 	background-color: #f5f1ed;
 }
 
-.answer-button:hover{
+.answer-button:active{
     background-color: #DC602E;
 }
 .score-section {

@@ -38,6 +38,7 @@ export function QuestionSlide() {
 	const isMultiSelect = currentQuestion === 1; // Index 1 is the second question
 
 	const handleStoreAnswers = (answerId: number) => {
+		
 		setStoreAnswers([...storeAnswers, answerId]);
 		setClicks(clicks + 1);
 	};
@@ -82,8 +83,9 @@ export function QuestionSlide() {
 						{currentQuestion === 3 && (
 							<textarea name='postContent' rows={4} cols={40} />
 						)}
+						<br/>
+					<button type='submit' onClick={submitQuestion} className='bg-burntOrange  hover:bg-transparent  border-burntOrange border-2 rounded-full font-bold py-2 px-4 '> continue </button>
 					</div>
-					<button onClick={submitQuestion}> continue </button>
 				</div>
 			</div>
 		</>

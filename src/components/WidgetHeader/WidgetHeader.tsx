@@ -46,7 +46,7 @@ const categoriesList: Category[] = [
 function WidgetHeader({ category, heading, children }: HeaderProps) {
 	return (
 		<div className='h-fit w-full lg:max-w-96 rounded-2xl grid items-start bg-offWhite'>
-			<div className='max-w-64 lg:max-w-96 w-full mx-auto rounded-t-xl p-3 shadow-lg bg-lilac text-offWhite font-bold mt-0'>
+			<div className='lg:max-w-96 w-full mx-auto rounded-t-xl p-3 shadow-lg bg-lilac text-offWhite font-bold mt-0'>
 				<div className='flex justify-center gap-3'>
 					<Badge variant='secondary' className='text-md'>
 						{categoriesList.map((item) =>

@@ -7,6 +7,7 @@ import {
 	DashboardContainer,
 	DashboardSection,
 } from '@/components/Dashboard/Dashboard';
+import { DashboardLayout } from '@/components/Dashboard/Dashboard';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -44,6 +45,7 @@ function Dashboard() {
 	Usage eg:
 	{addWidgets(goalsData, 'completed', 'savings')} 
 	*/
+
 	function addWidgets(
 		data: GoalsData,
 		status?:
@@ -82,56 +84,7 @@ function Dashboard() {
 				<TabsTrigger value='notes'>Notes</TabsTrigger>
 			</TabsList>
 			<TabsContent value='dashboard'>
-				<div>
-					<DashboardContainer>
-						<DashboardSection title='Alhambulillah I can say that:'>
-							<WidgetHeader category='savings' heading='Emergency Savings'>
-								{addWidgets(goalsData, 'completed', 'savings')}
-							</WidgetHeader>
-							<WidgetHeader category='expenses' heading='Managing Expenses'>
-								{addWidgets(goalsData, 'completed', 'expenses')}
-							</WidgetHeader>
-							<WidgetHeader
-								category='investing'
-								heading='Investing in the Future'
-							>
-								{addWidgets(goalsData, 'completed', 'investing')}
-							</WidgetHeader>
-							<WidgetHeader category='charity' heading='Giving Back'>
-								{addWidgets(goalsData, 'completed', 'charity')}
-							</WidgetHeader>
-						</DashboardSection>
-						<DashboardSection title='My current focus is to inshAllah say that:'>
-							<WidgetContainer category='savings'>
-								{addWidgets(goalsData, 'focused', 'savings')}
-							</WidgetContainer>
-							<WidgetContainer category='expenses'>
-								{addWidgets(goalsData, 'focused', 'expenses')}
-							</WidgetContainer>
-							<WidgetContainer category='investing'>
-								{addWidgets(goalsData, 'focused', 'investing')}
-							</WidgetContainer>
-							<WidgetContainer category='charity'>
-								{addWidgets(goalsData, 'focused', 'charity')}
-							</WidgetContainer>
-						</DashboardSection>
-						<DashboardSection title='These are the items I can work through:'>
-							<WidgetContainer category='savings'>
-								{addWidgets(goalsData, ['not_done', null], 'savings')}
-							</WidgetContainer>
-							<WidgetContainer category='expenses'>
-								{addWidgets(goalsData, ['not_done', null], 'expenses')}
-							</WidgetContainer>
-							<WidgetContainer category='investing'>
-								{addWidgets(goalsData, ['not_done', null], 'investing')}
-							</WidgetContainer>
-							<WidgetContainer category='charity'>
-								{addWidgets(goalsData, ['not_done', null], 'charity')}
-							</WidgetContainer>
-						</DashboardSection>
-					</DashboardContainer>
-					``
-				</div>
+				<DashboardLayout userId={userId} />
 			</TabsContent>
 			<TabsContent value='notes'>
 				<div className='min-h-screen'>

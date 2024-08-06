@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    environment: production
+    environment: github-pages
     runs-on: ubuntu-latest
 
     steps:

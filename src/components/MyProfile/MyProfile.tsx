@@ -32,88 +32,88 @@ interface UserObject {
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export function MyProfile({ userId }: MyProfileProps) {
-    const { data, isLoading, error } = useFetch<UserObject>(
-			`${baseUrl}/users/id/${userId}`
+	const { data, isLoading, error } = useFetch<UserObject>(
+		`${baseUrl}/users/id/${userId}`
+	);
+
+	const [userData, setUserData] = useState<UserObject | null>(null);
+	const [message, setMessage] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (data && !Array.isArray(data)) {
+			setUserData(data);
+		}
+	}, [data]);
+
+	if (isLoading) {
+		return (
+			<div className='flex items-center justify-center min-h-screen'>
+				<Loader2 className='w-12 h-12 animate-spin text-lilac' />
+			</div>
 		);
+	}
 
-    const [userData, setUserData] = useState<UserObject | null>(null);
-		const [message, setMessage] = useState<string | null>(null);
-
-    useEffect(() => {
-			if (data && !Array.isArray(data)) {
-				setUserData(data);
-			}
-		}, [data]);
-
-    if (isLoading) {
-			return (
-				<div className='flex items-center justify-center min-h-screen'>
-					<Loader2 className='w-12 h-12 animate-spin text-lilac' />
-				</div>
-			);
-		}
-
-    if (error) {
-			return (
-				<div className='p-4 text-red-500'>
-					Error loading profile. Please try again later.
-				</div>
-			);
-		}
-
-    if (!userData) {
-			return <div className='p-4'>No profile data available.</div>;
-		}
-
-    const userFirstName = userData.first_name;
-		const userLastName = userData.last_name;
-		const userEmail = userData.email;
-
-    const handleUpdateUserData = (updatedData: UserObject) => {
-			setUserData(updatedData);
-			setMessage('Profile updated successfully');
-			setTimeout(() => setMessage(null), 2000);
-		};
-
-    return (
-			<Card className='w-fit lg:min-w-[500px] mt-8'>
-				<CardHeader className='border-b-2'>
-					<CardTitle>
-						<h2 className='text-center text-3xl font-bold font-playfair'>
-							My Profile
-						</h2>
-					</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<div className='grid gap-4 pt-2 font-source-sans'>
-						<div className='flex justify-between'>
-							<p className='font-semibold'>First Name:</p>
-							<p>{userFirstName}</p>
-						</div>
-						<Separator />
-						<div className='flex justify-between'>
-							<p className='font-semibold'>Last Name:</p>
-							<p>{userLastName}</p>
-						</div>
-						<Separator />
-						<div className='flex justify-between'>
-							<p className='font-semibold'>Email:</p>
-							<p>{userEmail}</p>
-						</div>
-					</div>
-					<div className='text-center mt-8'>
-						<DialogEditProfile
-							userData={userData}
-							userId={userId}
-							onUpdateUserData={handleUpdateUserData}
-						></DialogEditProfile>
-					</div>
-					{message && (
-						<div className='text-center mt-4 text-green-500'>{message}</div>
-					)}
-				</CardContent>
-			</Card>
+	if (error) {
+		return (
+			<div className='p-4 text-red-500'>
+				Error loading profile. Please try again later.
+			</div>
 		);
+	}
+
+	if (!userData) {
+		return <div className='p-4'>No profile data available.</div>;
+	}
+
+	const userFirstName = userData.first_name;
+	const userLastName = userData.last_name;
+	const userEmail = userData.email;
+
+	const handleUpdateUserData = (updatedData: UserObject) => {
+		setUserData(updatedData);
+		setMessage('Profile updated successfully');
+		setTimeout(() => setMessage(null), 2000);
+	};
+
+	return (
+		<Card className='w-fit lg:min-w-[500px] mt-8'>
+			<CardHeader className='border-b-2'>
+				<CardTitle>
+					<h2 className='text-center text-3xl font-bold font-playfair'>
+						My Profile
+					</h2>
+				</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className='grid gap-4 pt-2 font-source-sans'>
+					<div className='flex justify-between'>
+						<p className='font-semibold'>First Name:</p>
+						<p>{userFirstName}</p>
+					</div>
+					<Separator />
+					<div className='flex justify-between'>
+						<p className='font-semibold'>Last Name:</p>
+						<p>{userLastName}</p>
+					</div>
+					<Separator />
+					<div className='flex justify-between'>
+						<p className='font-semibold'>Email:</p>
+						<p>{userEmail}</p>
+					</div>
+				</div>
+				<div className='text-center mt-8'>
+					<DialogEditProfile
+						userData={userData}
+						userId={userId}
+						onUpdateUserData={handleUpdateUserData}
+					></DialogEditProfile>
+				</div>
+				{message && (
+					<div className='text-center mt-4 text-green-500'>{message}</div>
+				)}
+			</CardContent>
+		</Card>
+	);
 }
 
 interface DialogEditProfileProps {
@@ -133,6 +133,7 @@ export function DialogEditProfile({
 	const [isSaving, setIsSaving] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
 	const [initialFirstName, setInitialFirstName] = useState(userData.first_name);
 	const [initialLastName, setInitialLastName] = useState(userData.last_name);
 	const [initialEmail, setInitialEmail] = useState(userData.email);
@@ -185,8 +186,28 @@ export function DialogEditProfile({
 		lastName !== initialLastName ||
 		email !== initialEmail;
 
+	const handleClose = () => {
+		setIsOpen(false);
+		// Reset to initial values when closing
+		setFirstName(initialFirstName);
+		setLastName(initialLastName);
+		setEmail(initialEmail);
+	};
+
 	return (
-		<Dialog open={isOpen} onOpenChange={setIsOpen}>
+		<Dialog
+			open={isOpen}
+			onOpenChange={(open) => {
+				if (!open) {
+					handleClose();
+				} else {
+					setInitialFirstName(userData.first_name);
+					setInitialLastName(userData.last_name);
+					setInitialEmail(userData.email);
+				}
+				setIsOpen(open);
+			}}
+		>
 			<DialogTrigger asChild>
 				<Button variant='outline'>Edit Profile</Button>
 			</DialogTrigger>

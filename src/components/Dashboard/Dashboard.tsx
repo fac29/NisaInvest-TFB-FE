@@ -20,7 +20,7 @@ interface WidgetProps {
 	[key: string]: any;
 }
 
-interface DahsboardProps {
+interface DashboardProps {
 	userId: number;
 }
 
@@ -130,7 +130,7 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 	);
 }
 
-export function DashboardLayout({ userId }: DahsboardProps) {
+export function DashboardLayout({ userId }: DashboardProps) {
 	const goalsData = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`)
 		.data as GoalsData;
 

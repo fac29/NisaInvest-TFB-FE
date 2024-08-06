@@ -95,7 +95,7 @@ export function DashboardContainer({ children }: DashboardContainerProps) {
 					return (
 						<div key={index} className='p-4 rounded-lg'>
 							<div className='flex gap-4 items-center bg-lilac rounded-lg p-4 mb-4'>
-								<div>
+								<div className='flex items-center justify-center w-10 h-10 bg-offWhite rounded-full'>
 									<p className='text-xl font-bold'>{index + 1}</p>
 								</div>
 								<h2 className='text-xl font-bold'>{section.props.title}</h2>

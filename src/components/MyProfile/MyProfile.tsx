@@ -76,43 +76,45 @@ export function MyProfile({ userId }: MyProfileProps) {
 	};
 
 	return (
-		<Card className='w-fit lg:min-w-[500px] mt-8'>
-			<CardHeader className='border-b-2'>
-				<CardTitle>
-					<h2 className='text-center text-3xl font-bold font-playfair'>
-						My Profile
-					</h2>
-				</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<div className='grid gap-4 pt-2 font-source-sans'>
-					<div className='flex justify-between'>
-						<p className='font-semibold'>First Name:</p>
-						<p>{userFirstName}</p>
+		<div>
+			<Card className='w-fit lg:min-w-[500px] mt-8'>
+				<CardHeader className='border-b-2'>
+					<CardTitle>
+						<h2 className='text-center text-3xl font-bold font-playfair'>
+							My Profile
+						</h2>
+					</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<div className='grid gap-4 pt-2 font-source-sans'>
+						<div className='flex justify-between'>
+							<p className='font-semibold'>First Name:</p>
+							<p>{userFirstName}</p>
+						</div>
+						<Separator />
+						<div className='flex justify-between'>
+							<p className='font-semibold'>Last Name:</p>
+							<p>{userLastName}</p>
+						</div>
+						<Separator />
+						<div className='flex justify-between'>
+							<p className='font-semibold'>Email:</p>
+							<p>{userEmail}</p>
+						</div>
 					</div>
-					<Separator />
-					<div className='flex justify-between'>
-						<p className='font-semibold'>Last Name:</p>
-						<p>{userLastName}</p>
+					<div className='text-center mt-8'>
+						<DialogEditProfile
+							userData={userData}
+							userId={userId}
+							onUpdateUserData={handleUpdateUserData}
+						></DialogEditProfile>
 					</div>
-					<Separator />
-					<div className='flex justify-between'>
-						<p className='font-semibold'>Email:</p>
-						<p>{userEmail}</p>
-					</div>
-				</div>
-				<div className='text-center mt-8'>
-					<DialogEditProfile
-						userData={userData}
-						userId={userId}
-						onUpdateUserData={handleUpdateUserData}
-					></DialogEditProfile>
-				</div>
-				{message && (
-					<div className='text-center mt-4 text-green-500'>{message}</div>
-				)}
-			</CardContent>
-		</Card>
+				</CardContent>
+			</Card>
+			{message && (
+				<div className='text-center mt-4 text-green-500'>{message}</div>
+			)}
+		</div>
 	);
 }
 

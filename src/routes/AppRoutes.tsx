@@ -9,6 +9,7 @@ import Corporate from '@/pages/Corporate/Corporate';
 import Advisors from '@/pages/Advisors/Advisors';
 import Booking from '@/pages/Booking/Booking';
 import Podcast from '@/pages/Podcast/Podcast';
+import Quiz from '@/pages/Quiz/Quiz';
 function AppRoutes() {
 	return (
 		<Routes>
@@ -22,6 +23,7 @@ function AppRoutes() {
 			<Route path='/advisors' element={<Advisors />} />
 			<Route path='/booking' element={<Booking />} />
 			<Route path='/podcast' element={<Podcast />} />
+			<Route path='/quiz' element={< Quiz />} />
 		</Routes>
 	);
 }

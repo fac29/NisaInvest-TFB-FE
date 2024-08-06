@@ -21,7 +21,7 @@ function useFetch<T>(url: string): FetchDataState<T> {
 				if (!res.ok) throw new Error(res.statusText);
 
 				const jsonData = await res.json();
-				console.log(jsonData);
+				// console.log(jsonData);
 				//    setData(jsonData?.data ? jsonData : [])
 				setData(jsonData ?? []);
 			} catch (error: any) {

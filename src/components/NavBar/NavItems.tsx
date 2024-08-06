@@ -59,7 +59,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 								<NavigationMenuContent>
 									<ul>
 										{item.items.map((subItem) => (
-											<li>
+											<li key={subItem.name}>
 												<Link
 													to={subItem.path}
 													className={buttonVariants({ variant: 'link' })}

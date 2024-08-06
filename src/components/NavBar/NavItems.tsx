@@ -101,7 +101,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 						<NavigationMenuItem>
 							<Button
 								onClick={handleLogout}
-								className={buttonVariants({ variant: 'ghost' })}
+								className={buttonVariants({ variant: 'default' })}
 							>
 								Log out
 							</Button>

@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 import useFetch from '@/utils/fetchData';

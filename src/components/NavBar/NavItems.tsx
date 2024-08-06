@@ -99,8 +99,8 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
             <NavigationMenuItem>
               <Button
                 onClick={handleLogout}
-                // className={buttonVariants({ variant: 'outline' })}
-				className="bg-white text-black border border-gray-300 hover:bg-gray-100 px-4 py-2 rounded"
+                className={buttonVariants({ variant: 'outline' })}
+				
               >
                 Log out
               </Button>

@@ -16,6 +16,11 @@ export interface NavItemsProps {
 	isLoggedIn: boolean
 }
 
+/**
+ * Here you can determine the navigation links you want to include.
+ * If navigation links come under a header, store them in an array of items.
+ * Otherwise, store them as an object with the name and path keys.
+ */
 export const navItems = [
 	{ name: 'Home', path: '/' },
 	{
@@ -36,7 +41,12 @@ export const navItems = [
 		],
 	},
 ]
-
+/**
+ * This iterates over the navItems array to render the navigation menu items automatically.
+ * This means if the links change, you don't have to hardcode them but this should reflect those changes.
+ * The buttons are currently hardcoded but as these are unlikely to change, hopefully
+ * this isn't an issue.
+ */
 function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 	const { setIsLoggedIn } = useAuth()
 

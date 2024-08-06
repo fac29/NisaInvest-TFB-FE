@@ -18,7 +18,6 @@ import { NavItemsProps, navItems } from './NavItems';
  * this isn't an issue.
  */
 
-// In MobileNavItems.tsx
 interface MobileNavItemsProps {
 	classNameValue: string;
 	isLoggedIn: boolean; 

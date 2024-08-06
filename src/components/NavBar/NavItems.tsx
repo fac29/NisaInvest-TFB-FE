@@ -42,7 +42,6 @@ export const navItems = [
 ];
 
 function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
-  // Added handleLogout function
   const handleLogout = async () => {
     try {
       await signOut();
@@ -86,6 +85,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
             )}
           </NavigationMenuItem>
         ))}
+        
         {isLoggedIn ? (
           <>
             <NavigationMenuItem>
@@ -97,7 +97,6 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              {/* Changed to button and added onClick handler */}
               <Button
                 onClick={handleLogout}
                 className={buttonVariants({ variant: 'outline' })}
@@ -126,6 +125,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
             </NavigationMenuItem>
           </>
         )}
+        
         <NavigationMenuItem>
           <Link
             to='/corporate'

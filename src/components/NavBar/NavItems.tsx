@@ -47,7 +47,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
     try {
       await signOut();
       // Optionally, you can redirect the user or update the UI here
-      window.location.href = '/'; // Redirect to home page after logout
+     // window.location.href = '/'; // Redirect to home page after logout
     } catch (error) {
       console.error('Logout failed:', error);
     }

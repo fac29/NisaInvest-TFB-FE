@@ -42,11 +42,11 @@ and include the following line:
 
 - development:
 ```env
-VITE_BASE_URL = "http://localhost:3000"
+VITE_BASE_URL = "https://nisa-invest-tfb-be.vercel.app"
 ```
 - production:
 ```env
-VITE_BASE_URL = "DEPLOYED_APP_URL"
+VITE_BASE_URL = "https://nisa-invest-tfb-be.vercel.app"
 ```
 
 5. Enter the following script to run the server in the development mode:

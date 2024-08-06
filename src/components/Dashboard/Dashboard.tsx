@@ -151,6 +151,7 @@ export function DashboardLayout({ userId }: DashboardProps) {
 	}
 
 	if (fetchGoals.error) {
+		console.log(fetchGoals.error);
 		return (
 			<div className='flex items-center justify-center min-h-screen'>
 				<p className='text-red-500'>

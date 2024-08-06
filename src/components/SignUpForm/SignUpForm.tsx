@@ -59,7 +59,7 @@ export function SignUpForm() {
 			const data = await response.json();
 			console.log('Success:', data);
 		} catch (error) {
-			console.error('Error DIANAAAAAA:', error);
+			console.error('Error on sign up:', error);
 		}
 	}
 

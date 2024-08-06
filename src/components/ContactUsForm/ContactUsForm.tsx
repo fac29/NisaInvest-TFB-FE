@@ -81,7 +81,7 @@ export function RequestDemoForm() {
 						<FormItem>
 							<FormLabel>First Name</FormLabel>
 							<FormControl>
-								<Input type='text' placeholder='Fahan' {...field} />
+								<Input type='text' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -94,7 +94,7 @@ export function RequestDemoForm() {
 						<FormItem>
 							<FormLabel>Last Name</FormLabel>
 							<FormControl>
-								<Input type='text' placeholder='Ibrahim-Hashi' {...field} />
+								<Input type='text' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -107,11 +107,7 @@ export function RequestDemoForm() {
 						<FormItem>
 							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<Input
-									type='email'
-									placeholder='fahan@example.com'
-									{...field}
-								/>
+								<Input type='email' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -128,11 +124,7 @@ export function RequestDemoForm() {
 								better!
 							</FormDescription>
 							<FormControl>
-								<Input
-									type='text'
-									placeholder='www.linkedin.com/company/nisainvest'
-									{...field}
-								/>
+								<Input type='text' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -149,10 +141,7 @@ export function RequestDemoForm() {
 								name of your company.
 							</FormDescription>
 							<FormControl>
-								<Textarea
-									placeholder='I would love to learn more about...'
-									{...field}
-								/>
+								<Textarea placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>

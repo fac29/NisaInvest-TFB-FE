@@ -14,7 +14,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '../ui/textarea';
-import { Link } from 'react-router-dom';
+import { Dialog } from '../Dialog/Dialog';
+import { useState } from 'react';
 
 const formSchema = z.object({
 	first_name: z.string({
@@ -30,13 +31,11 @@ const formSchema = z.object({
 	text_field: z.string(),
 });
 
-const refreshPage = () => {
-	window.location.reload();
-};
-
 export function RequestDemoForm() {
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
+		mode: 'onBlur',
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			first_name: '',
@@ -48,16 +47,6 @@ export function RequestDemoForm() {
 	});
 
 	const [state, handleFormspreeSubmit] = useFormspree('xdkngvor');
-	if (state.succeeded) {
-		return (
-			<div className='flex flex-col space-y-4 items-center justify-center'>
-				<p className='text-md'>Thank you for your enquiry!</p>
-				<Button variant={'outline'} onClick={refreshPage}>
-					Send new enquiry
-				</Button>
-			</div>
-		);
-	}
 
 	// 2. Define a submit handler.
 	const apiUrl = import.meta.env.VITE_API_URL;
@@ -70,10 +59,12 @@ export function RequestDemoForm() {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(values),
 			});
-			if (!response.ok) {
-				console.log(
-					`There is a error sending the POST request ${response.status}`
-				);
+			if (response.ok) {
+				console.log(`successful form submission ${response.body}`);
+				setIsDialogOpen(true);
+				form.reset();
+			} else {
+				console.log(`error in submittting the form ${response.status}`);
 			}
 		} catch (error) {
 			console.error('Error:', error);
@@ -88,7 +79,7 @@ export function RequestDemoForm() {
 					name='first_name'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your First Name</FormLabel>
+							<FormLabel>First Name</FormLabel>
 							<FormControl>
 								<Input type='text' placeholder='Fahan' {...field} />
 							</FormControl>
@@ -101,7 +92,7 @@ export function RequestDemoForm() {
 					name='last_name'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Last Name</FormLabel>
+							<FormLabel>Last Name</FormLabel>
 							<FormControl>
 								<Input type='text' placeholder='Ibrahim-Hashi' {...field} />
 							</FormControl>
@@ -114,7 +105,7 @@ export function RequestDemoForm() {
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Email</FormLabel>
+							<FormLabel>Email</FormLabel>
 							<FormControl>
 								<Input
 									type='email'
@@ -171,6 +162,13 @@ export function RequestDemoForm() {
 					<Button type='submit' variant={'outline'} disabled={state.submitting}>
 						Submit
 					</Button>
+					<Dialog
+						open={isDialogOpen}
+						//the value of open is linked to onOpenChange. When a button on the dialog is pressed, open switches to false.
+						onOpenChange={setIsDialogOpen}
+						title='Form Submitted'
+						text='Your form was successfully submitted. Thank you!'
+					/>
 				</div>
 			</form>
 		</Form>

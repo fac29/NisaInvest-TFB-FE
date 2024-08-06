@@ -44,6 +44,7 @@ export function MyProfile({ userId }: MyProfileProps) {
 	);
 
 	const [userData, setUserData] = useState<UserObject | null>(null);
+	const [message, setMessage] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (data && !Array.isArray(data)) {
@@ -77,6 +78,8 @@ export function MyProfile({ userId }: MyProfileProps) {
 
 	const handleUpdateUserData = (updatedData: UserObject) => {
 		setUserData(updatedData);
+		setMessage('Profile updated successfully');
+		setTimeout(() => setMessage(null), 2000);
 	};
 
 	return (
@@ -112,6 +115,11 @@ export function MyProfile({ userId }: MyProfileProps) {
 						onUpdateUserData={handleUpdateUserData}
 					></DialogEditProfile>
 				</div>
+				{message && (
+					<div className='text-center mt-4 text-black opacity-70 font-source-sans'>
+						{message}
+					</div>
+				)}
 			</CardContent>
 		</Card>
 	);
@@ -133,6 +141,7 @@ export function DialogEditProfile({
 	const [email, setEmail] = useState(userData.email);
 	const [isSaving, setIsSaving] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	const handleSave = async () => {
 		setIsSaving(true);
@@ -155,7 +164,6 @@ export function DialogEditProfile({
 
 			const updatedUser = await response.json();
 
-			alert('Profile updated successfully');
 			setIsOpen(false);
 			onUpdateUserData(updatedUser);
 		} catch (error) {
@@ -163,7 +171,8 @@ export function DialogEditProfile({
 			if (error instanceof Error) {
 				errorMessage = error.message;
 			}
-			alert(errorMessage);
+			setErrorMessage(errorMessage);
+			setTimeout(() => setErrorMessage(null), 2000);
 		} finally {
 			setIsSaving(false);
 		}
@@ -221,6 +230,9 @@ export function DialogEditProfile({
 						{isSaving ? 'Saving...' : 'Save changes'}
 					</Button>
 				</DialogFooter>
+				{errorMessage && (
+					<div className='text-center mt-4 text-red-500'>{errorMessage}</div>
+				)}
 			</DialogContent>
 		</Dialog>
 	);

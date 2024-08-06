@@ -3,7 +3,7 @@ import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
-import image from '/fahan.png'
+import image from '/fahan_profile.png'
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 

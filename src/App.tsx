@@ -31,7 +31,7 @@ function App() {
 	return (
 		<>
 			<AuthProvider>
-				{' '}
+			
 				{/* Wrap the entire app with AuthProvider */}
 				<BrowserRouter>
 					<div className='grid min-h-[100dvh] grid-rows-[auto_1fr_auto]'>

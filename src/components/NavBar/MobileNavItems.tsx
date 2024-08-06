@@ -18,13 +18,7 @@ import { NavItemsProps, navItems } from './NavItems';
  * this isn't an issue.
  */
 
-interface MobileNavItemsProps {
-	classNameValue: string;
-	isLoggedIn: boolean; 
-  }
-
-
-function MobileNavItems({ classNameValue, isLoggedIn }: MobileNavItemsProps) {
+function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>

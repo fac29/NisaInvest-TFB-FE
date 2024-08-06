@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
-	FormDescription,
+	//FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { useNavigate } from 'react-router-dom'
 import { signIn } from '@/lib/auth'
 import { useState } from 'react'
+import { useAuth } from '@/AuthContext'
 
 const formSchema = z.object({
 	email: z.string().email({
@@ -25,10 +26,15 @@ const formSchema = z.object({
 	}),
 })
 
-export function LoginForm() {
+interface LoginFormProps {
+    onLoginSuccess: () => void;
+}
+
+export function LoginForm({ onLoginSuccess }: LoginFormProps) {
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const navigate = useNavigate()
+	const { setIsLoggedIn } = useAuth()
 
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -45,6 +51,8 @@ export function LoginForm() {
 		setError(null)
 		try {
 			await signIn(values.email, values.password)
+			setIsLoggedIn(true)
+            onLoginSuccess()
 			navigate('/dashboard')
 		} catch (error) {
 			setError('Failed to sign in. Please check your credentials.')
@@ -57,7 +65,7 @@ export function LoginForm() {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-				{error && <div className='text-red-500 text-center'>{error}</div>}
+				{error && <div className='text-sm font-medium text-destructive text-center'>{error}</div>}
 				<FormField
 					control={form.control}
 					name='email'

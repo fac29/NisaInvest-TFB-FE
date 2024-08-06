@@ -69,7 +69,7 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 							<>
 								<NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'>
+									<ul>
 										{item.items.map((subItem) => (
 											<li key={subItem.name}>
 												<NavigationMenuLink asChild>

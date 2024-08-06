@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'
 import NavItems from './NavItems';
 import MobileNavItems from './MobileNavItems';
 import { Button } from '../ui/button';
@@ -12,18 +12,18 @@ function NavBar() {
     const { isLoggedIn } = useAuth(); // Use the isLoggedIn state from AuthContext
 
     return (
-        <header className='w-full flex items-center justify-between p-4 sticky top-0 bg-white z-10 shadow-md'>
-            <Link to='/' className='shrink-0'>
-                <img src='./logo.png' className='size-20' alt='Nisa Invest' />
+        <header className="w-full flex items-center justify-between p-4 sticky top-0 bg-white z-10 shadow-md">
+            <Link to="/" className="shrink-0">
+                <img src="./logo.png" className="size-20" alt="Nisa Invest" />
             </Link>
             {isMobile ? (
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button variant='outline' size='icon'>
-                            <FaBars className='h-6 w-6' />
+                        <Button variant="outline" size="icon">
+                            <FaBars className="h-6 w-6" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side='right'>
+                    <SheetContent side="right">
                         <MobileNavItems
                             classNameValue={'flex-col gap-2'}
                             isLoggedIn={isLoggedIn}
@@ -31,7 +31,7 @@ function NavBar() {
                     </SheetContent>
                 </Sheet>
             ) : (
-                <NavItems classNameValue='' isLoggedIn={isLoggedIn} />
+                <NavItems classNameValue="" isLoggedIn={isLoggedIn} />
             )}
         </header>
     );

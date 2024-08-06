@@ -119,91 +119,93 @@ export function DialogEditProfile({
 	const [lastName, setLastName] = useState(userData.last_name);
 	const [email, setEmail] = useState(userData.email);
 	const [isSaving, setIsSaving] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-	const handleSave = async () => {
-		setIsSaving(true);
-		try {
-			const response = await fetch(`${baseUrl}/users/${userId}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					first_name: firstName,
-					last_name: lastName,
-					email: email,
-				}),
-			});
+		const handleSave = async () => {
+			setIsSaving(true);
+			try {
+				const response = await fetch(`${baseUrl}/users/${userId}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						first_name: firstName,
+						last_name: lastName,
+						email: email,
+					}),
+				});
 
-			if (!response.ok) {
-				throw new Error('Failed to update profile');
+				if (!response.ok) {
+					throw new Error('Failed to update profile');
+				}
+
+				alert('Profile updated successfully');
+				setIsOpen(false);
+			} catch (error) {
+				let errorMessage = 'An unexpected error occurred';
+				if (error instanceof Error) {
+					errorMessage = error.message;
+				}
+				alert(errorMessage);
+			} finally {
+				setIsSaving(false);
 			}
+		};
 
-			alert('Profile updated successfully');
-		} catch (error) {
-			let errorMessage = 'An unexpected error occurred';
-			if (error instanceof Error) {
-				errorMessage = error.message;
-			}
-			alert(errorMessage);
-		} finally {
-			setIsSaving(false);
-		}
-	};
-
-	return (
-		<Dialog>
-			<DialogTrigger asChild>
-				<Button variant='outline'>Edit Profile</Button>
-			</DialogTrigger>
-			<DialogContent className='sm:max-w-[425px]'>
-				<DialogHeader>
-					<DialogTitle>Edit profile</DialogTitle>
-					<DialogDescription>
-						Make changes to your profile here. Click save when you're done.
-					</DialogDescription>
-				</DialogHeader>
-				<div className='grid gap-4 py-4'>
-					<div className='grid grid-cols-4 items-center gap-4'>
-						<Label htmlFor='first_name' className='text-right'>
-							First Name
-						</Label>
-						<Input
-							id='first_name'
-							value={firstName}
-							onChange={(e) => setFirstName(e.target.value)}
-							className='col-span-3'
-						/>
+		return (
+			<Dialog open={isOpen} onOpenChange={setIsOpen}>
+				<DialogTrigger asChild>
+					<Button variant='outline'>Edit Profile</Button>
+				</DialogTrigger>
+				<DialogContent className='sm:max-w-[425px]'>
+					<DialogHeader>
+						<DialogTitle>Edit profile</DialogTitle>
+						<DialogDescription>
+							Make changes to your profile here. Click save when you're done.
+						</DialogDescription>
+					</DialogHeader>
+					<div className='grid gap-4 py-4'>
+						<div className='grid grid-cols-4 items-center gap-4'>
+							<Label htmlFor='first_name' className='text-right'>
+								First Name
+							</Label>
+							<Input
+								id='first_name'
+								value={firstName}
+								onChange={(e) => setFirstName(e.target.value)}
+								className='col-span-3'
+							/>
+						</div>
+						<div className='grid grid-cols-4 items-center gap-4'>
+							<Label htmlFor='last_name' className='text-right'>
+								Last Name
+							</Label>
+							<Input
+								id='last_name'
+								value={lastName}
+								onChange={(e) => setLastName(e.target.value)}
+								className='col-span-3'
+							/>
+						</div>
+						<div className='grid grid-cols-4 items-center gap-4'>
+							<Label htmlFor='email' className='text-right'>
+								Email
+							</Label>
+							<Input
+								id='email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								className='col-span-3'
+							/>
+						</div>
 					</div>
-					<div className='grid grid-cols-4 items-center gap-4'>
-						<Label htmlFor='last_name' className='text-right'>
-							Last Name
-						</Label>
-						<Input
-							id='last_name'
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
-							className='col-span-3'
-						/>
-					</div>
-					<div className='grid grid-cols-4 items-center gap-4'>
-						<Label htmlFor='email' className='text-right'>
-							Email
-						</Label>
-						<Input
-							id='email'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							className='col-span-3'
-						/>
-					</div>
-				</div>
-				<DialogFooter>
-					<Button onClick={handleSave} disabled={isSaving}>
-						{isSaving ? 'Saving...' : 'Save changes'}
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
-	);
+					<DialogFooter>
+						<Button onClick={handleSave} disabled={isSaving}>
+							{isSaving ? 'Saving...' : 'Save changes'}
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		);
 }

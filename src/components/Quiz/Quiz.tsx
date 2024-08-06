@@ -2,6 +2,8 @@ import React from 'react';
 import useFetch from '../../utils/fetchData';
 import { useState } from 'react';
 
+import './Quiz.styles.css';
+
 interface jsonQuestion {
 	id: number;
 	question: string;
@@ -18,25 +20,38 @@ interface jsonAnswers {
 }
 
 export function QuestionSlide() {
-	const [score, setScore] = useState<number[]>([]);
-	const [showScore, setShowScore] = useState(false);
+	const [storeAnswer, setStoreAnswer] = useState<number[][]>([]);
 	const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-
-	const handleAnswerOptionClick = (answerID: number) => {
-	setCurrentQuestion(currentQuestion + 1)
-	setScore([...score, answerID])	
-	};
+	const [clicks, setClicks] = useState<number>(0)
 
 	const { data } = useFetch<jsonQuestion[]>(
-		'https://nisa-invest-tfb-be.vercel.app/quiz/questions-with-answers'
+		'https://nisa-invest-tfb-be.vercel.app/quiz/questions-with-answers',
+		[]
 	);
 
-	// console.log(`LOOK HERE DIANA ${JSON.stringify(data)}`)
+	console.log(`Here is the selected answer ids ${storeAnswer}`)
+
 	if (!data || data.length === 0) return <div>Quiz Loading...</div>;
+
+	const handleAnswerOptionClick = (answerID: number) => {
+		// if (isMultiSelect) {
+		// 	setClicks(clicks + 1)
+		// 	if (clicks == 2) {
+		// 		setCurrentQuestion(currentQuestion + 1)
+		// 	}
+		// } else {
+		setCurrentQuestion(currentQuestion + 1);
+		setStoreAnswer([...storeAnswer, [answerID]]);
+	};
+
+
+
+
 
 	return (
 		<>
-			<h1>My financial quiz</h1>
+			<div className='flex flex-col justify-center items-center'>
+				<h1 className='pb-8 font-playfair text-3xl'>My Financial Wellness Quiz</h1>
 				<div className='quiz-app'>
 					<div className='question-section'>
 						<div className='question-count'>
@@ -45,21 +60,24 @@ export function QuestionSlide() {
 							</span>
 						</div>
 						<div className='question-text'>
-							{data as jsonQuestion[currentQuestion].question}
+							{data && data[currentQuestion]?.question}
 						</div>
 					</div>
 					<div className='answer-section'>
-						{data as jsonQuestion [currentQuestion].answers.map((option) => (
-							<button
-								className='answer-button'
-								key={option.id}
-								onClick={() => handleAnswerOptionClick(option.id)}
-							>
-								{option.answer_text}
-							</button>
+						{data[currentQuestion]?.answers.map((option) => (
+									// Render button for other questions
+									<button
+										className='answer-button'
+										onClick={() => handleAnswerOptionClick(option.id)}
+									>
+										{option.answer_text}
+									</button>
+
 						))}
 					</div>
 				</div>
+			</div>
 		</>
 	);
 }
+

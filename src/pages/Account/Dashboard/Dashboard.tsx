@@ -33,7 +33,7 @@ function Dashboard() {
 			<TabsContent value='dashboard'>
 				<DashboardLayout userId={userId} />
 			</TabsContent>
-			<TabsContent value='my_profile'>
+			<TabsContent value='profile'>
 				<div className='min-h-screen'>
 					<MyProfile userId={userId}></MyProfile>
 				</div>

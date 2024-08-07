@@ -49,12 +49,12 @@ export function RequestDemoForm() {
 	const [state, handleFormspreeSubmit] = useFormspree('xdkngvor');
 
 	// 2. Define a submit handler.
-	const apiUrl = import.meta.env.VITE_API_URL;
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
 			handleFormspreeSubmit(values);
 
-			const response = await fetch(`${apiUrl}contactnisa`, {
+			const response = await fetch(`${baseUrl}/contactnisa`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(values),

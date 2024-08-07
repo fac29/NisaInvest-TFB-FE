@@ -1,13 +1,13 @@
-import { QuestionSlide } from "@/components/Quiz/Quiz"
+// import { QuestionSlide } from "@/components/Quiz/Quiz"
 
-export function Quiz() {
-  return (
-    <div>
+// export function Quiz() {
+//   return (
+//     <div>
 
-        <QuestionSlide />
+//         <QuestionSlide />
             
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Quiz
+// export default Quiz

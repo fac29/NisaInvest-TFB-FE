@@ -55,7 +55,7 @@ function Home() {
 				</blockquote>
 			</div>
 			{/* Section #3 */}
-			<div className='h-screen w-full bg-offWhite flex items-center justify-around px-8'>
+			<div className='min-h-screen w-full bg-offWhite flex items-center justify-around px-8'>
 				<div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl pt-8 mx-auto items-center'>
 					<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
 						<p>
@@ -72,7 +72,7 @@ function Home() {
 				</div>
 			</div>
 			{/* Section #4 */}
-			<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-center space-y-16 px-8'>
+			<div className='min-h-screen w-full bg-offWhite flex flex-col items-center justify-center space-y-16 px-8'>
 				<div className='text-center space-y-2'>
 					<h2 className='text-3xl font-playfair font-bold'>How it works</h2>
 					<p className='text-xl'>

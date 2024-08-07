@@ -7,7 +7,6 @@ import { Loader2 } from 'lucide-react';
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
@@ -24,7 +23,6 @@ import {
 	FaSeedling,
 } from 'react-icons/fa6';
 import { Badge } from '../ui/badge';
-import { cn } from '@/lib/utils';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

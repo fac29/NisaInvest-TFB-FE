@@ -1,4 +1,3 @@
-import CarouselQuote from '@/components/CarouselQuote/CarouselQuote';
 import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
@@ -57,7 +56,7 @@ function Home() {
 			</div>
 			{/* Section #3 */}
 			<div className='h-screen w-full bg-offWhite flex items-center justify-around px-8'>
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl pt-8 mx-auto'>
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl pt-8 mx-auto items-center'>
 					<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
 						<p>
 							“Salaam, I'm Fahan, founder of Nisa Invest. As we navigate life's

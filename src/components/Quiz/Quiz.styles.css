@@ -51,9 +51,20 @@
 	background-color: #f5f1ed;
 }
 
-.answer-button:focus{
+/* .answer-button:focus{
     background-color: #DC602E;
+	color: white;
+} */
+
+.answer-button:active, button:focus{
+	background-color: #DC602E;
+	color: white;
 }
+/* 
+.answer-button.selected {
+    background-color: #DC602E;
+    color: white;
+} */
 
 .score-section {
 	text-align: center;

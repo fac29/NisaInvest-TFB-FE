@@ -46,7 +46,6 @@ interface MyHomeCardProps {
 }
 
 interface MyHomeProps extends DashboardProps {
-	tab: string;
 	setTab: (tab: string) => void;
 }
 
@@ -77,7 +76,7 @@ const homeCards: MyHomeCardProps[] = [
 	},
 ];
 
-export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
+export default function MyHome({ userId, setTab }: MyHomeProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const fetchUser = useFetch<UserData>(`${baseUrl}/users/id/${userId}`);
 	const userData = fetchUser.data as UserData;

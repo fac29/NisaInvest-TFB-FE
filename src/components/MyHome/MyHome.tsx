@@ -24,18 +24,9 @@ import {
 } from 'react-icons/fa6';
 import { Badge } from '../ui/badge';
 import { cn } from '@/lib/utils';
+import { UserObject } from '../MyProfile/MyProfile';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
-
-interface UserData {
-	id: number;
-	created_at: string;
-	email: string;
-	first_name: string;
-	last_name: string;
-	auth_id: string | null;
-	password: string;
-}
 
 interface MyHomeCardProps {
 	title: string;
@@ -77,15 +68,17 @@ const homeCards: MyHomeCardProps[] = [
 ];
 
 export default function MyHome({ userId, setTab }: MyHomeProps) {
-	const [isLoading, setIsLoading] = useState(true);
-	const fetchUser = useFetch<UserData>(`${baseUrl}/users/id/${userId}`);
-	const userData = fetchUser.data as UserData;
+	const { data, isLoading, error } = useFetch<UserObject>(
+		`${baseUrl}/users/id/${userId}`
+	);
+
+	const [userData, setUserData] = useState<UserObject | null>(null);
 
 	useEffect(() => {
-		if (fetchUser.data || fetchUser.error) {
-			setIsLoading(false);
+		if (data && !Array.isArray(data)) {
+			setUserData(data);
 		}
-	}, [userData, fetchUser.error]);
+	}, [data]);
 
 	if (isLoading) {
 		return (
@@ -95,8 +88,8 @@ export default function MyHome({ userId, setTab }: MyHomeProps) {
 		);
 	}
 
-	if (fetchUser.error) {
-		console.log(fetchUser.error);
+	if (error) {
+		console.log(error);
 		return (
 			<div className='flex items-center justify-center min-h-screen'>
 				<p className='text-destructive font-semibold'>
@@ -106,10 +99,16 @@ export default function MyHome({ userId, setTab }: MyHomeProps) {
 		);
 	}
 
+	if (!userData) {
+		return <div className='p-4'>No user data available.</div>;
+	}
+
+	const first_name = userData.first_name;
+
 	return (
 		<div className='container min-h-screen p-4 space-y-8 max-w-3xl'>
 			<h1 className='font-playfair italic text-3xl font-semibold text-center'>
-				Salaam {userData.first_name}, welcome to Nisa Invest!
+				Salaam {first_name}, welcome to Nisa Invest!
 			</h1>
 			<h2 className='font-playfair text-2xl font-semibold'>Getting Started</h2>
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
@@ -119,7 +118,7 @@ export default function MyHome({ userId, setTab }: MyHomeProps) {
 						<div className='size-24 md:size-36 bg-lilac rounded-full'></div>
 						{/* <img className='rounded-full size-36' /> */}
 						<div className='flex flex-col space-y-8 items-center justify-center'>
-							<CardTitle>{userData.first_name}</CardTitle>
+							<CardTitle>{first_name}</CardTitle>
 							<Button onClick={() => setTab('profile')} variant={'outline'}>
 								View Profile
 							</Button>

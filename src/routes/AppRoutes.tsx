@@ -10,6 +10,8 @@ import Advisors from '@/pages/Advisors/Advisors';
 import Booking from '@/pages/Booking/Booking';
 import Podcast from '@/pages/Podcast/Podcast';
 import Quiz from '@/pages/Quiz/Quiz';
+import Dashboard from '@/pages/Account/Dashboard/Dashboard';
+
 function AppRoutes() {
 	return (
 		<Routes>
@@ -24,6 +26,7 @@ function AppRoutes() {
 			<Route path='/booking' element={<Booking />} />
 			<Route path='/podcast' element={<Podcast />} />
 			<Route path='/quiz' element={< Quiz />} />
+			<Route path='/dashboard' element={<Dashboard />} />
 		</Routes>
 	);
 }

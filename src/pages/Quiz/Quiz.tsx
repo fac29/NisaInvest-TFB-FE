@@ -1,11 +1,13 @@
-import { QuestionSlide } from '@/components/Quiz/Quiz';
+import { QuestionSlide } from "@/components/Quiz/Quiz"
 
-function Quiz() {
-	return (
-		<>
-			<QuestionSlide />
-		</>
-	);
+export function Quiz() {
+  return (
+    <div>
+
+        <QuestionSlide />
+            
+    </div>
+  )
 }
 
-export default Quiz;
+export default Quiz

@@ -44,11 +44,6 @@ function Home() {
             {/* Section #2 */}
             <div className="h-screen w-full bg-offWhite flex flex-col items-center justify-around">
                 <CarouselQuote quotes={quotes} />
-                <div className="flex justify-center">
-                    <CarouselTestimonial
-                        testimonials={testimonials}
-                    ></CarouselTestimonial>
-                </div>
             </div>
             {/* Section #3 */}
             <div className="h-screen w-full bg-offWhite flex flex-col items-center justify-around">
@@ -58,6 +53,11 @@ function Home() {
                     imageUrl={fahanImage}
                     bioPage="fahan"
                 ></ProfileCard>
+                <div className="flex justify-center">
+                    <CarouselTestimonial
+                        testimonials={testimonials}
+                    ></CarouselTestimonial>
+                </div>
             </div>
         </main>
     );

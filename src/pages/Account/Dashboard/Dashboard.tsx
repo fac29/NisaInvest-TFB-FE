@@ -26,7 +26,7 @@ function Dashboard() {
 				<TabsTrigger value='support'>Support</TabsTrigger>
 			</TabsList>
 			<TabsContent value='home'>
-				<MyHome userId={1} tab={tab} setTab={setTab} />
+				<MyHome userId={1} setTab={setTab} />
 			</TabsContent>
 			<TabsContent value='dashboard'>
 				<DashboardLayout userId={userId} />

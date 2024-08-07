@@ -17,7 +17,12 @@ import { Button, buttonVariants } from '../ui/button';
 import { SocialIcon } from 'react-social-icons';
 import fahanImage from '/fahan_square.jpg';
 import { IconType } from 'react-icons/lib';
-import { FaClipboard, FaDesktop, FaSeedling } from 'react-icons/fa6';
+import {
+	FaCalendar,
+	FaClipboard,
+	FaDesktop,
+	FaSeedling,
+} from 'react-icons/fa6';
 import { Badge } from '../ui/badge';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -75,7 +80,7 @@ function UserProfileCard({ user }: UserProfileProps) {
 	return (
 		<Card>
 			<CardHeader className='grid grid-cols-2'>
-				<div className='size-36 bg-lilac rounded-full'></div>
+				<div className='size-24 md:size-36 bg-lilac rounded-full'></div>
 				{/* <img className='rounded-full size-36' /> */}
 				<div className='flex flex-col space-y-8 items-center justify-center'>
 					<CardTitle>{user.first_name}</CardTitle>
@@ -91,23 +96,25 @@ function UserProfileCard({ user }: UserProfileProps) {
 function DashboardAdvisorCard({}) {
 	return (
 		<Card>
-			<CardHeader>
+			<CardHeader className='flex-row gap-4'>
+				<Badge className='size-8 items-center justify-center text-lg'>
+					<FaCalendar />
+				</Badge>
 				<CardTitle>Book your free guidance session</CardTitle>
-				<CardDescription></CardDescription>
 			</CardHeader>
-			<CardContent className='grid grid-cols-2'>
-				<img src={fahanImage} className='rounded-full h-36 w-36' />
+			<CardContent className='grid sm:grid-cols-2'>
+				<img src={fahanImage} className='rounded-full size-24 sm:size-36' />
 				<div>
 					<h3 className='text-xl font-bold'>Fahan Ibrahim-Hashi</h3>
-					<h4 className='text-lg font-semibold'>Financial Planner</h4>
-					<p className='flex items-center'>
+					<h4 className='text-md font-semibold'>
+						Financial Planner
 						<SocialIcon
 							url='https://www.linkedin.com/company/nisainvest/'
 							target='blank'
 							className='hover:opacity-80 ml-2'
-							style={{ height: 25, width: 25 }}
+							style={{ height: 24, width: 24 }}
 						></SocialIcon>
-					</p>
+					</h4>
 					<Link
 						to='/booking'
 						className={buttonVariants({ variant: 'outline' })}
@@ -130,7 +137,7 @@ function DashboardHomeCard({
 	const Icon = icon;
 	return (
 		<Card>
-			<CardHeader className='flex-row gap-4 align-middle'>
+			<CardHeader className='flex-row gap-4'>
 				<Badge className='size-8 items-center justify-center text-lg'>
 					<Icon />
 				</Badge>
@@ -179,13 +186,10 @@ export default function DashboardHome({ userId }: DashboardProps) {
 			<h1 className='font-playfair italic text-3xl font-semibold text-center'>
 				Salaam {userData.first_name}, welcome to Nisa Invest!
 			</h1>
-			<div className='flex justify-center'>
-				<CarouselQuote quotes={quotes} />
-			</div>
 			<h2 className='font-playfair text-2xl font-semibold'>Getting Started</h2>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+			<div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
 				<UserProfileCard user={userData} />
-				<div></div>
+				<CarouselQuote quotes={quotes} />
 				<DashboardAdvisorCard />
 				{dashboardCards.map((card) => (
 					<DashboardHomeCard {...card} />

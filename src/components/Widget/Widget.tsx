@@ -100,15 +100,15 @@ function Widget({ category, description, isCoreTask }: WidgetProps) {
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
 								<DropdownMenuItem onClick={() => console.log('Complete')}>
-									<SquareCheckBig className='mr-2 h-4 w-4' />
+									<SquareCheckBig className='mr-2 h-5 w-5' />
 									<span>Complete</span>
 								</DropdownMenuItem>
 								<DropdownMenuItem onClick={() => console.log('Focused')}>
-									<Goal className='mr-2 h-4 w-4' />
+									<Goal className='mr-2 h-5 w-5' />
 									<span>Focused</span>
 								</DropdownMenuItem>
 								<DropdownMenuItem onClick={() => console.log('To-do')}>
-									<StickyNote className='mr-2 h-4 w-4' />
+									<StickyNote className='mr-2 h-5 w-5' />
 									<span>To-do</span>
 								</DropdownMenuItem>
 							</DropdownMenuGroup>

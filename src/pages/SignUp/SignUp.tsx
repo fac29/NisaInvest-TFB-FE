@@ -62,7 +62,7 @@ function SignUp() {
           <Button type="submit" className="w-full">Sign Up</Button>
         </form> */}
 				<p className='text-center'>
-					I already have an account.{' '}
+					I already have an account.
 					<Button variant={'link'} className='px-0 text-base'>
 						<Link to={'/login'}>Log in</Link>
 					</Button>

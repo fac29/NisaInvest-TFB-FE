@@ -4,20 +4,21 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 function Login() {
-  const handleLoginSuccess = () => {
-    // You can add any additional logic here that needs to run after successful login
-    console.log('Login successful');
-  };
+	const handleLoginSuccess = () => {
+		// You can add any additional logic here that needs to run after successful login
+		console.log('Login successful');
+	};
 	return (
 		<>
 			<div className='container mx-auto min-h-screen flex items-center justify-center'>
 				<div className='w-full max-w-md space-y-8'>
 					<div className='text-center'>
-						<h1 className='text-3xl font-bold'>
-							Access Your Nisa Invest Account
+						<h1 className='font-playfair text-center text-3xl font-bold'>
+							Log In
 						</h1>
 						<p className='mt-2 text-sm text-gray-600'>
-							Please enter your credentials below to log in
+							Please enter your credentials below to access your Nisa Invest
+							account.
 						</p>
 					</div>
 					<LoginForm onLoginSuccess={handleLoginSuccess} />

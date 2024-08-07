@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -74,16 +75,38 @@ export function SignUpForm() {
 				>
 					<FormField
 						control={form.control}
+						name='first_name'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>First Name</FormLabel>
+								<FormControl>
+									<Input type='text' placeholder='' {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name='last_name'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Last Name</FormLabel>
+								<FormControl>
+									<Input type='text' placeholder='' {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
 						name='email'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Your Email</FormLabel>
 								<FormControl>
-									<Input
-										type='email'
-										placeholder='Enter your email'
-										{...field}
-									/>
+									<Input type='email' placeholder='' {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -95,53 +118,14 @@ export function SignUpForm() {
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Your Password</FormLabel>
+								<FormDescription>Must be at least 8 characters</FormDescription>
 								<FormControl>
-									<Input
-										type='password'
-										placeholder='Enter your password'
-										{...field}
-									/>
+									<Input type='password' placeholder='' {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-4'>
-						<FormField
-							control={form.control}
-							name='first_name'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>First Name</FormLabel>
-									<FormControl>
-										<Input
-											type='text'
-											placeholder='Enter your first name'
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name='last_name'
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Last Name</FormLabel>
-									<FormControl>
-										<Input
-											type='text'
-											placeholder='Enter your last name'
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-					</div>
 					<div className='flex justify-center'>
 						<Button type='submit' variant={'outline'}>
 							Sign up

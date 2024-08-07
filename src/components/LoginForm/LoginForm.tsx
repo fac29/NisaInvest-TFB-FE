@@ -1,21 +1,21 @@
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button'
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
-	//FormDescription,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { useNavigate } from 'react-router-dom'
-import { signIn } from '@/lib/auth'
-import { useState } from 'react'
-import { useAuth } from '@/AuthContext'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from '@/lib/auth';
+import { useState } from 'react';
+import { useAuth } from '@/AuthContext';
 
 const formSchema = z.object({
 	email: z.string().email({
@@ -24,17 +24,17 @@ const formSchema = z.object({
 	password: z.string().min(8, {
 		message: 'Password must be at least 8 characters long.',
 	}),
-})
+});
 
 interface LoginFormProps {
-    onLoginSuccess: () => void;
+	onLoginSuccess: () => void;
 }
 
 export function LoginForm({ onLoginSuccess }: LoginFormProps) {
-	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState<string | null>(null)
-	const navigate = useNavigate()
-	const { setIsLoggedIn } = useAuth()
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate();
+	const { setIsLoggedIn } = useAuth();
 
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -43,37 +43,41 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
 			email: '',
 			password: '',
 		},
-	})
+	});
 
 	// 2. Define a submit handler.
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		setIsLoading(true)
-		setError(null)
+		setIsLoading(true);
+		setError(null);
 		try {
-			await signIn(values.email, values.password)
-			setIsLoggedIn(true)
-            onLoginSuccess()
-			navigate('/dashboard')
+			await signIn(values.email, values.password);
+			setIsLoggedIn(true);
+			onLoginSuccess();
+			navigate('/dashboard');
 		} catch (error) {
-			setError('Failed to sign in. Please check your credentials.')
-			console.error('Login error:', error)
+			setError('Failed to sign in. Please check your credentials.');
+			console.error('Login error:', error);
 		} finally {
-			setIsLoading(false)
+			setIsLoading(false);
 		}
 	}
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-				{error && <div className='text-sm font-medium text-destructive text-center'>{error}</div>}
+				{error && (
+					<div className='text-sm font-medium text-destructive text-center'>
+						{error}
+					</div>
+				)}
 				<FormField
 					control={form.control}
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Email</FormLabel>
+							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<Input type='email' placeholder='Enter your email' {...field} />
+								<Input type='email' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -84,13 +88,10 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
 					name='password'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Password</FormLabel>
+							<FormLabel>Password</FormLabel>
+							<FormDescription>Must have at least 8 characters</FormDescription>
 							<FormControl>
-								<Input
-									type='password'
-									placeholder='Enter your password'
-									{...field}
-								/>
+								<Input type='password' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -103,5 +104,5 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
 				</div>
 			</form>
 		</Form>
-	)
+	);
 }

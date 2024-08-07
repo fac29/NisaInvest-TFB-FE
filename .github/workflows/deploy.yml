@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
     push:
         branches:
-            - 20240807 # branch to deploy from. Force redeploy.
+            - 20240807 # branch to deploy from. Force redeploy
 
 jobs:
     build:

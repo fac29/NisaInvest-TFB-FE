@@ -26,6 +26,7 @@ interface WidgetProps {
 	isCoreTask: boolean;
 	userId: number;
 	goalId: number;
+	status: string | null;
 }
 
 interface Category {
@@ -70,6 +71,7 @@ function Widget({
 	isCoreTask,
 	userId,
 	goalId,
+	status,
 }: WidgetProps) {
 	const [style, setStyle] = useState(styles.default);
 	const [starStyle, setStarStyle] = useState(starStyles.default);
@@ -144,11 +146,17 @@ function Widget({
 							<DropdownMenuLabel>Mark goal as</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
-								<DropdownMenuItem onClick={handleSetComplete}>
+								<DropdownMenuItem
+									onClick={handleSetComplete}
+									disabled={status === 'completed'}
+								>
 									<SquareCheckBig className='mr-2 h-5 w-5' />
 									<span>Complete</span>
 								</DropdownMenuItem>
-								<DropdownMenuItem onClick={handleSetFocus}>
+								<DropdownMenuItem
+									onClick={handleSetFocus}
+									disabled={status === 'focused'}
+								>
 									<Goal className='mr-2 h-5 w-5' />
 									<span>Focused</span>
 								</DropdownMenuItem>

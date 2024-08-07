@@ -82,6 +82,7 @@ function addWidgets(
 				isCoreTask={goal.is_recurrent}
 				goalId={goal.id}
 				userId={userId}
+				status={goal.status}
 			/>
 		));
 

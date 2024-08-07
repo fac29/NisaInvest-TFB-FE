@@ -136,104 +136,137 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 }
 
 export function DashboardLayout({ userId }: DashboardProps) {
-	const [isLoading, setIsLoading] = useState(true);
-	const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
-	const [goalsData, setGoalsData] = useState<GoalsData | null>(null);
-	// const goalsData = fetchGoals.data as GoalsData;
+    const [isLoading, setIsLoading] = useState(true);
+		const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
+		const [goalsData, setGoalsData] = useState<GoalsData | null>(null);
 
-	useEffect(() => {
-		if (fetchGoals.data) {
-		  setGoalsData(fetchGoals.data as GoalsData);
-		  setIsLoading(false);
-		} else if (fetchGoals.error) {
-		  setIsLoading(false);
+		useEffect(() => {
+			if (fetchGoals.data) {
+				setGoalsData(fetchGoals.data as GoalsData);
+				setIsLoading(false);
+			} else if (fetchGoals.error) {
+				setIsLoading(false);
+			}
+		}, [fetchGoals.data, fetchGoals.error]);
+
+		const onDragEnd = (result: DropResult) => {
+			if (!result.destination || !goalsData) {
+				return;
+			}
+			const newGoalsData = { ...goalsData };
+
+			const sourceCategoryIndex = newGoalsData.categorizedGoals.findIndex(
+				(category) => category.category === result.source.droppableId
+			);
+			const destCategoryIndex = newGoalsData.categorizedGoals.findIndex(
+				(category) => category.category === result.destination!.droppableId
+			);
+
+			if (
+				newGoalsData &&
+				newGoalsData.categorizedGoals &&
+				newGoalsData.categorizedGoals[sourceCategoryIndex] &&
+				newGoalsData.categorizedGoals[sourceCategoryIndex].goals &&
+				newGoalsData.categorizedGoals[destCategoryIndex] &&
+				newGoalsData.categorizedGoals[destCategoryIndex].goals
+			) {
+				const [reorderedItem] = newGoalsData.categorizedGoals[
+					sourceCategoryIndex
+				].goals.splice(result.source.index, 1);
+				newGoalsData.categorizedGoals[destCategoryIndex].goals.splice(
+					result.destination.index,
+					0,
+					reorderedItem as Goal
+				);
+			}
+
+			setGoalsData(newGoalsData);
+		};
+
+		if (isLoading) {
+			return (
+				<div className='flex items-center justify-center min-h-screen'>
+					<Loader2 className='w-12 h-12 animate-spin text-lilac' />
+				</div>
+			);
 		}
-	  }, [fetchGoals.data, fetchGoals.error]);
-	
-	  const onDragEnd = (result: DropResult) => {
-		if (!result.destination || !goalsData) {
-		  return;
+
+		if (fetchGoals.error) {
+			console.log(fetchGoals.error);
+			return (
+				<div className='flex items-center justify-center min-h-screen'>
+					<p className='text-red-500'>
+						Error loading dashboard data. Please try again later.
+					</p>
+				</div>
+			);
 		}
-		const newGoalsData = { ...goalsData };
 
-		const sourceCategoryIndex = newGoalsData.categorizedGoals.findIndex(
-			(category) => category.category === result.source.droppableId
-		  );
-		  const destCategoryIndex = newGoalsData.categorizedGoals.findIndex(
-			(category) => category.category === result.destination!.droppableId
-		  );
-	  
-		  const [reorderedItem] = newGoalsData as .categorizedGoals[sourceCategoryIndex].goals.splice(result.source.index, 1);
-		  newGoalsData.categorizedGoals[destCategoryIndex].goals.splice(result.destination.index, 0, reorderedItem);
-
-		  setGoalsData(newGoalsData);
-	  
-	if (isLoading) {
 		return (
-			<div className='flex items-center justify-center min-h-screen'>
-				<Loader2 className='w-12 h-12 animate-spin text-lilac' />
+			<div>
+				<DashboardContainer>
+					<DashboardSection title='Alhamdulillah I can say that:'>
+						<WidgetHeader category='savings' heading='Emergency Savings'>
+							{addWidgets(goalsData as GoalsData, 'completed', 'savings')}
+						</WidgetHeader>
+						<WidgetHeader category='expenses' heading='Managing Expenses'>
+							{addWidgets(goalsData as GoalsData, 'completed', 'expenses')}
+						</WidgetHeader>
+						<WidgetHeader
+							category='investing'
+							heading='Investing in the Future'
+						>
+							{addWidgets(goalsData as GoalsData, 'completed', 'investing')}
+						</WidgetHeader>
+						<WidgetHeader category='charity' heading='Giving Back'>
+							{addWidgets(goalsData as GoalsData, 'completed', 'charity')}
+						</WidgetHeader>
+					</DashboardSection>
+					<DashboardSection title='My current focus is to Inshallah say that:'>
+						<WidgetContainer category='savings'>
+							{addWidgets(goalsData as GoalsData, 'focused', 'savings')}
+						</WidgetContainer>
+						<WidgetContainer category='expenses'>
+							{addWidgets(goalsData as GoalsData, 'focused', 'expenses')}
+						</WidgetContainer>
+						<WidgetContainer category='investing'>
+							{addWidgets(goalsData as GoalsData, 'focused', 'investing')}
+						</WidgetContainer>
+						<WidgetContainer category='charity'>
+							{addWidgets(goalsData as GoalsData, 'focused', 'charity')}
+						</WidgetContainer>
+					</DashboardSection>
+					<DashboardSection title='These are the items I can work through:'>
+						<WidgetContainer category='savings'>
+							{addWidgets(
+								goalsData as GoalsData,
+								['not_done', null],
+								'savings'
+							)}
+						</WidgetContainer>
+						<WidgetContainer category='expenses'>
+							{addWidgets(
+								goalsData as GoalsData,
+								['not_done', null],
+								'expenses'
+							)}
+						</WidgetContainer>
+						<WidgetContainer category='investing'>
+							{addWidgets(
+								goalsData as GoalsData,
+								['not_done', null],
+								'investing'
+							)}
+						</WidgetContainer>
+						<WidgetContainer category='charity'>
+							{addWidgets(
+								goalsData as GoalsData,
+								['not_done', null],
+								'charity'
+							)}
+						</WidgetContainer>
+					</DashboardSection>
+				</DashboardContainer>
 			</div>
 		);
-	}
-
-	if (fetchGoals.error) {
-		console.log(fetchGoals.error);
-		return (
-			<div className='flex items-center justify-center min-h-screen'>
-				<p className='text-red-500'>
-					Error loading dashboard data. Please try again later.
-				</p>
-			</div>
-		);
-	}
-
-	return (
-		<div>
-			<DashboardContainer onDragEnd={onDragEnd}></DashboardContainer>
-			<DashboardContainer>
-				<DashboardSection title='Alhambulillah I can say that:'>
-					<WidgetHeader category='savings' heading='Emergency Savings'>
-						{addWidgets(goalsData, 'completed', 'savings')}
-					</WidgetHeader>
-					<WidgetHeader category='expenses' heading='Managing Expenses'>
-						{addWidgets(goalsData, 'completed', 'expenses')}
-					</WidgetHeader>
-					<WidgetHeader category='investing' heading='Investing in the Future'>
-						{addWidgets(goalsData, 'completed', 'investing')}
-					</WidgetHeader>
-					<WidgetHeader category='charity' heading='Giving Back'>
-						{addWidgets(goalsData, 'completed', 'charity')}
-					</WidgetHeader>
-				</DashboardSection>
-				<DashboardSection title='My current focus is to inshAllah say that:'>
-					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, 'focused', 'savings')}
-					</WidgetContainer>
-					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, 'focused', 'expenses')}
-					</WidgetContainer>
-					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, 'focused', 'investing')}
-					</WidgetContainer>
-					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, 'focused', 'charity')}
-					</WidgetContainer>
-				</DashboardSection>
-				<DashboardSection title='These are the items I can work through:'>
-					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, ['not_done', null], 'savings')}
-					</WidgetContainer>
-					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, ['not_done', null], 'expenses')}
-					</WidgetContainer>
-					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, ['not_done', null], 'investing')}
-					</WidgetContainer>
-					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, ['not_done', null], 'charity')}
-					</WidgetContainer>
-				</DashboardSection>
-			</DashboardContainer>
-		</div>
-	);
 }

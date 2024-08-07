@@ -20,13 +20,19 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
 	description: string;
 	isCoreTask: boolean;
-	userId: number;
 	goalId: number;
-	status: string | null;
+	userId: number;
+	status: 'completed' | 'focused' | 'not_done' | null;
+	updateGoalStatus: (
+		goalId: number,
+		newStatus: 'completed' | 'focused' | 'not_done' | null
+	) => void;
 }
 
 interface Category {
@@ -72,6 +78,7 @@ function Widget({
 	userId,
 	goalId,
 	status,
+	updateGoalStatus,
 }: WidgetProps) {
 	const [style, setStyle] = useState(styles.default);
 	const [starStyle, setStarStyle] = useState(starStyles.default);
@@ -87,9 +94,8 @@ function Widget({
 
 	const handleSetFocus = async () => {
 		try {
-			console.log('Trying to set to focused');
 			const response = await fetch(
-				`https://nisa-invest-tfb-be.vercel.app/goals/user-goal/focus/${userId}/${goalId}`,
+				`${baseUrl}/goals/user-goal/focus/${userId}/${goalId}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -100,17 +106,16 @@ function Widget({
 			if (!response.ok) {
 				throw new Error('Failed to set goal to focus');
 			}
-			console.log('Goal set to focus');
+			updateGoalStatus(goalId, 'focused');
 		} catch (error) {
 			console.error('Error setting goal to focus', error);
 		}
 	};
 
 	const handleSetComplete = async () => {
-		console.log('Trying to set to completed');
 		try {
 			const response = await fetch(
-				`https://nisa-invest-tfb-be.vercel.app/goals/user-goal/complete/${userId}/${goalId}`,
+				`${baseUrl}/goals/user-goal/complete/${userId}/${goalId}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -121,7 +126,7 @@ function Widget({
 			if (!response.ok) {
 				throw new Error('Failed to set goal to complete');
 			}
-			console.log('Goal set to complete');
+			updateGoalStatus(goalId, 'completed');
 		} catch (error) {
 			console.error('Error setting goal to complete', error);
 		}

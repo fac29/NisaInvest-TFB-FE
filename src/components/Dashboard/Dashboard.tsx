@@ -1,9 +1,11 @@
 import { Loader2 } from 'lucide-react';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState, useCallback } from 'react';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 import useFetch from '@/utils/fetchData';
 import Widget from '@/components/Widget/Widget';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // Define the types for the component props
 interface DashboardContainerProps {
@@ -23,9 +25,6 @@ interface WidgetProps {
 export interface DashboardProps {
 	userId: number;
 }
-
-// Import
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // Define the types for the goals data structure
 interface Goal {
@@ -56,8 +55,12 @@ interface GoalsData {
 	{addWidgets(goalsData, 'completed', 'savings')} 
 	*/
 function addWidgets(
-	data: GoalsData,
+	data: GoalsData | null,
 	userId: number,
+	updateGoalStatus: (
+		goalId: number,
+		newStatus: 'completed' | 'focused' | 'not_done' | null
+	) => void,
 	status?:
 		| ('completed' | 'focused' | 'not_done' | null)[]
 		| ('completed' | 'focused' | 'not_done' | null),
@@ -83,6 +86,7 @@ function addWidgets(
 				goalId={goal.id}
 				userId={userId}
 				status={goal.status}
+				updateGoalStatus={updateGoalStatus}
 			/>
 		));
 
@@ -137,14 +141,38 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 export function DashboardLayout({ userId }: DashboardProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
-
-	const goalsData = fetchGoals.data as GoalsData;
+	const [goalsData, setGoalsData] = useState<GoalsData | null>(null);
 
 	useEffect(() => {
-		if (fetchGoals.data || fetchGoals.error) {
+		if (fetchGoals.data) {
+			setGoalsData(fetchGoals.data as GoalsData);
+			setIsLoading(false);
+		} else if (fetchGoals.error) {
 			setIsLoading(false);
 		}
-	}, [goalsData, fetchGoals.error]);
+	}, [fetchGoals.data, fetchGoals.error]);
+
+	const updateGoalStatus = useCallback(
+		(
+			goalId: number,
+			newStatus: 'completed' | 'focused' | 'not_done' | null
+		) => {
+			if (!goalsData) return;
+
+			const updatedGoalsData = {
+				...goalsData,
+				categorizedGoals: goalsData.categorizedGoals.map((categorizedGoal) => ({
+					...categorizedGoal,
+					goals: categorizedGoal.goals.map((goal) =>
+						goal.id === goalId ? { ...goal, status: newStatus } : goal
+					),
+				})),
+			};
+
+			setGoalsData(updatedGoalsData);
+		},
+		[goalsData]
+	);
 
 	if (isLoading) {
 		return (
@@ -170,44 +198,116 @@ export function DashboardLayout({ userId }: DashboardProps) {
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
-						{addWidgets(goalsData, userId, 'completed', 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'savings'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='expenses' heading='Managing Expenses'>
-						{addWidgets(goalsData, userId, 'completed', 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'expenses'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='investing' heading='Investing in the Future'>
-						{addWidgets(goalsData, userId, 'completed', 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'investing'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='charity' heading='Giving Back'>
-						{addWidgets(goalsData, userId, 'completed', 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'charity'
+						)}
 					</WidgetHeader>
 				</DashboardSection>
 				<DashboardSection title='My current focus is to inshAllah say that:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, userId, 'focused', 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'savings'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, userId, 'focused', 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'expenses'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, userId, 'focused', 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'investing'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, userId, 'focused', 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'charity'
+						)}
 					</WidgetContainer>
 				</DashboardSection>
 				<DashboardSection title='These are the items I can work through:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, userId, ['not_done', null], 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'savings'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, userId, ['not_done', null], 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'expenses'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, userId, ['not_done', null], 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'investing'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, userId, ['not_done', null], 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'charity'
+						)}
 					</WidgetContainer>
 				</DashboardSection>
 			</DashboardContainer>

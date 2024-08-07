@@ -6,25 +6,19 @@ import {
 	FaStar,
 	FaEllipsis,
 } from 'react-icons/fa6';
-import { Badge } from '@/components/ui/badge';
+import { SquareCheckBig, Goal } from 'lucide-react';
 import { IconType } from 'react-icons/lib';
+import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
-	DropdownMenuPortal,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuSub,
-	DropdownMenuSubContent,
-	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { SquareCheckBig, Goal, StickyNote } from 'lucide-react';
 
 interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
@@ -157,10 +151,6 @@ function Widget({
 								<DropdownMenuItem onClick={handleSetFocus}>
 									<Goal className='mr-2 h-5 w-5' />
 									<span>Focused</span>
-								</DropdownMenuItem>
-								<DropdownMenuItem onClick={() => console.log('To-do')}>
-									<StickyNote className='mr-2 h-5 w-5' />
-									<span>To-do</span>
 								</DropdownMenuItem>
 							</DropdownMenuGroup>
 						</DropdownMenuContent>

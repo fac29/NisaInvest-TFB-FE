@@ -43,7 +43,6 @@ function Home() {
             </div>
             {/* Section #2 */}
             <div className="h-screen w-full bg-offWhite flex flex-col items-center justify-around">
-                {' '}
                 <CarouselQuote quotes={quotes} />
                 <div className="flex justify-center">
                     <CarouselTestimonial

@@ -24,6 +24,7 @@ import {
 	FaSeedling,
 } from 'react-icons/fa6';
 import { Badge } from '../ui/badge';
+import { cn } from '@/lib/utils';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -142,7 +143,7 @@ export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
 						</Badge>
 						<CardTitle>Book your free guidance session</CardTitle>
 					</CardHeader>
-					<CardContent className='grid sm:grid-cols-2'>
+					<CardContent className='grid grid-cols-2'>
 						<img src={fahanImage} className='rounded-full size-24 sm:size-36' />
 						<div>
 							<h3 className='text-xl font-bold'>Fahan Ibrahim-Hashi</h3>
@@ -155,14 +156,16 @@ export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
 									style={{ height: 24, width: 24 }}
 								></SocialIcon>
 							</h4>
-							<Link
-								to='/booking'
-								className={buttonVariants({ variant: 'outline' })}
-							>
-								Confirm my session
-							</Link>
 						</div>
 					</CardContent>
+					<CardFooter className=''>
+						<Link
+							to='/booking'
+							className={buttonVariants({ variant: 'outline' })}
+						>
+							Confirm my session
+						</Link>
+					</CardFooter>
 				</Card>
 
 				{/* Home Cards displaying all of the steps individuals can take */}

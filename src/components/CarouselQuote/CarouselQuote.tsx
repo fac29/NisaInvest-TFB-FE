@@ -25,7 +25,8 @@ function CarouselQuote({ quotes }: { quotes: QuoteProp[] }) {
 		setCurrent(current === quotes.length - 1 ? 0 : current + 1);
 	};
 	return (
-		<div className='box-content bg-lilac border-4 rounded-full shadow-lg p-4 h-64 w-full max-w-lg relative'>
+		// rounded-lg border bg-card text-card-foreground shadow-sm
+		<div className='box-content bg-lilac border rounded-lg shadow-sm p-4 min-h-44 h-auto w-auto max-w-md relative'>
 			<ul className='text-wrap'>
 				{quotes.map((quote: QuoteProp, index: number) => (
 					<li
@@ -34,10 +35,12 @@ function CarouselQuote({ quotes }: { quotes: QuoteProp[] }) {
                 ${index === current ? 'opacity-100' : 'opacity-0'} ${index === current ? 'pointer-events-auto' : 'pointer-events-none'}`}
 					>
 						<blockquote className='flex flex-col justify-center items-center h-full text-center px-7'>
-							<p className='font-source-sans font-semibold mb-4 text-offWhite'>
+							<p className='font-source-sans font-medium mb-4 text-offWhite'>
 								{quote.text}
 							</p>
-							<footer className='source-sans italic'>— {quote.author}</footer>
+							<footer className='font-playfair font-semibold italic'>
+								{quote.author}
+							</footer>
 						</blockquote>
 					</li>
 				))}

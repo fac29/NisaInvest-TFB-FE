@@ -20,7 +20,7 @@ interface MyProfileProps {
 	userId: number; //change to number once correct endpoint set up
 }
 
-interface UserObject {
+export interface UserObject {
 	id: number;
 	created_at: string;
 	email: string;

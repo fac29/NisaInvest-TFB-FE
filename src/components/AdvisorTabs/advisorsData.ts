@@ -4,7 +4,7 @@ export const advisorsData: Advisor[] = [
 	{
 		value: 'fahan',
 		name: 'Fahan Ibrahim-Hashi',
-		image: 'Fahan_Ibrahim-Hashi_square.jpg',
+		image: 'fahan_square.jpg',
 		title: 'Financial Planner',
 		location: 'London, UK',
 		linkedInURL: '',

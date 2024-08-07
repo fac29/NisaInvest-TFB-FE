@@ -12,6 +12,10 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from '@/lib/auth';
+import { useState } from 'react';
+import { useAuth } from '@/AuthContext';
 
 const formSchema = z.object({
 	email: z.string().email({
@@ -22,7 +26,16 @@ const formSchema = z.object({
 	}),
 });
 
-export function LoginForm() {
+interface LoginFormProps {
+	onLoginSuccess: () => void;
+}
+
+export function LoginForm({ onLoginSuccess }: LoginFormProps) {
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate();
+	const { setIsLoggedIn } = useAuth();
+
 	// 1. Define your form.
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -33,13 +46,30 @@ export function LoginForm() {
 	});
 
 	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setIsLoading(true);
+		setError(null);
+		try {
+			await signIn(values.email, values.password);
+			setIsLoggedIn(true);
+			onLoginSuccess();
+			navigate('/dashboard');
+		} catch (error) {
+			setError('Failed to sign in. Please check your credentials.');
+			console.error('Login error:', error);
+		} finally {
+			setIsLoading(false);
+		}
 	}
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+				{error && (
+					<div className='text-sm font-medium text-destructive text-center'>
+						{error}
+					</div>
+				)}
 				<FormField
 					control={form.control}
 					name='email'
@@ -68,8 +98,8 @@ export function LoginForm() {
 					)}
 				/>
 				<div className='flex justify-center'>
-					<Button type='submit' variant={'outline'}>
-						Log in
+					<Button type='submit' variant={'outline'} disabled={isLoading}>
+						{isLoading ? 'Logging in...' : 'Log in'}
 					</Button>
 				</div>
 			</form>

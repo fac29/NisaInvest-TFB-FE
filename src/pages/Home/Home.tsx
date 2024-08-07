@@ -6,6 +6,9 @@ import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
 import fahanImage from '/fahan_square.jpg';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import CarouselStages from '@/components/CarouselStages/CarouselStages';
+import StepsCard from '@/components/StepsCard/StepsCard';
+import { stepsList } from '../Advisors/Advisors';
 
 function Home() {
 	return (
@@ -53,7 +56,7 @@ function Home() {
 				</blockquote>
 			</div>
 			{/* Section #3 */}
-			<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-around px-8'>
+			<div className='h-screen w-full bg-offWhite grid grid-cols-2 gap-4 items-center justify-around px-8'>
 				<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
 					<p>
 						“Salaam, I'm Fahan, founder of Nisa Invest. As we navigate life's
@@ -65,8 +68,29 @@ function Home() {
 						help you.”
 					</p>
 				</blockquote>
+				<CarouselStages />
 			</div>
 			{/* Section #4 */}
+			<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-center space-y-16 px-8'>
+				<div className='text-center space-y-2'>
+					<h2 className='text-3xl font-playfair font-bold'>How it works</h2>
+					<p className='text-xl'>
+						Bismillah, we will begin with a conversation, sister to sister
+					</p>
+				</div>
+				<div className='flex flex-col md:flex-row gap-3 justify-center'>
+					<StepsCard steps={stepsList} />
+				</div>
+				<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
+					<p>
+						“With every Nisa Invest financial guidance session, a mangrove tree
+						is planted in our names. The tree planting operations provide
+						crucial income to local communities. May Allah accept it from us and
+						put barakah on our efforts, Ameen.”
+					</p>
+				</blockquote>
+			</div>
+			{/* Section #5 */}
 			<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-around px-8'>
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'

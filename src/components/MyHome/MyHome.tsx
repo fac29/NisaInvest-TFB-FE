@@ -37,11 +37,7 @@ interface UserData {
 	password: string;
 }
 
-interface UserProfileProps {
-	user: UserData;
-}
-
-interface DashboardHomeCardProps {
+interface MyHomeCardProps {
 	title: string;
 	icon: IconType;
 	description: string;
@@ -49,7 +45,12 @@ interface DashboardHomeCardProps {
 	buttonText: string;
 }
 
-const dashboardCards = [
+interface MyHomeProps extends DashboardProps {
+	tab: string;
+	setTab: (tab: string) => void;
+}
+
+const homeCards = [
 	{
 		title: 'Interact with your dashboard',
 		icon: FaDesktop,
@@ -75,23 +76,6 @@ const dashboardCards = [
 		buttonText: 'Learn more',
 	},
 ];
-
-function UserProfileCard({ user }: UserProfileProps) {
-	return (
-		<Card>
-			<CardHeader className='grid grid-cols-2'>
-				<div className='size-24 md:size-36 bg-lilac rounded-full'></div>
-				{/* <img className='rounded-full size-36' /> */}
-				<div className='flex flex-col space-y-8 items-center justify-center'>
-					<CardTitle>{user.first_name}</CardTitle>
-					<Link to='/' className={buttonVariants({ variant: 'outline' })}>
-						View Profile
-					</Link>
-				</div>
-			</CardHeader>
-		</Card>
-	);
-}
 
 function DashboardAdvisorCard({}) {
 	return (
@@ -127,13 +111,13 @@ function DashboardAdvisorCard({}) {
 	);
 }
 
-function DashboardHomeCard({
+function MyHomeCard({
 	title,
 	icon,
 	description,
 	path,
 	buttonText,
-}: DashboardHomeCardProps) {
+}: MyHomeCardProps) {
 	const Icon = icon;
 	return (
 		<Card>
@@ -151,7 +135,7 @@ function DashboardHomeCard({
 	);
 }
 
-export default function DashboardHome({ userId }: DashboardProps) {
+export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const fetchUser = useFetch<UserData>(`${baseUrl}/users/id/${userId}`);
 	const userData = fetchUser.data as UserData;
@@ -188,11 +172,26 @@ export default function DashboardHome({ userId }: DashboardProps) {
 			</h1>
 			<h2 className='font-playfair text-2xl font-semibold'>Getting Started</h2>
 			<div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
-				<UserProfileCard user={userData} />
+				{/* UserProfile card */}
+				<Card>
+					<CardHeader className='grid grid-cols-2'>
+						<div className='size-24 md:size-36 bg-lilac rounded-full'></div>
+						{/* <img className='rounded-full size-36' /> */}
+						<div className='flex flex-col space-y-8 items-center justify-center'>
+							<CardTitle>{userData.first_name}</CardTitle>
+							<Button onClick={() => setTab('profile')} variant={'outline'}>
+								View Profile
+							</Button>
+							{/* <Link to='/' className={buttonVariants({ variant: 'outline' })}>
+						View Profile
+					</Link> */}
+						</div>
+					</CardHeader>
+				</Card>
 				<CarouselQuote quotes={quotes} />
 				<DashboardAdvisorCard />
-				{dashboardCards.map((card) => (
-					<DashboardHomeCard {...card} />
+				{homeCards.map((card) => (
+					<MyHomeCard {...card} />
 				))}
 			</div>
 		</div>

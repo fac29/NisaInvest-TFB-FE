@@ -41,7 +41,7 @@ interface MyHomeCardProps {
 	title: string;
 	icon: IconType;
 	description: string;
-	path: string;
+	value: string;
 	buttonText: string;
 }
 
@@ -50,13 +50,13 @@ interface MyHomeProps extends DashboardProps {
 	setTab: (tab: string) => void;
 }
 
-const homeCards = [
+const homeCards: MyHomeCardProps[] = [
 	{
 		title: 'Interact with your dashboard',
 		icon: FaDesktop,
 		description:
 			'Our interactive planning tool will help identify any areas for improvement and plan effectively inshallah',
-		path: '/dashboard',
+		value: 'dashboard',
 		buttonText: 'Go to my dashboard',
 	},
 	{
@@ -64,7 +64,7 @@ const homeCards = [
 		icon: FaClipboard,
 		description:
 			'You can access notes from your session here, ordered by priorities, as discussed with your planner',
-		path: '/notes',
+		value: 'notes',
 		buttonText: 'Go to my notes',
 	},
 	{
@@ -72,68 +72,10 @@ const homeCards = [
 		icon: FaSeedling,
 		description:
 			'With every guidance session we are planting a mangrove tree, may Allah accept it from all of us',
-		path: '/charity',
+		value: 'charity',
 		buttonText: 'Learn more',
 	},
 ];
-
-function DashboardAdvisorCard({}) {
-	return (
-		<Card>
-			<CardHeader className='flex-row gap-4'>
-				<Badge className='size-8 items-center justify-center text-lg'>
-					<FaCalendar />
-				</Badge>
-				<CardTitle>Book your free guidance session</CardTitle>
-			</CardHeader>
-			<CardContent className='grid sm:grid-cols-2'>
-				<img src={fahanImage} className='rounded-full size-24 sm:size-36' />
-				<div>
-					<h3 className='text-xl font-bold'>Fahan Ibrahim-Hashi</h3>
-					<h4 className='text-md font-semibold'>
-						Financial Planner
-						<SocialIcon
-							url='https://www.linkedin.com/company/nisainvest/'
-							target='blank'
-							className='hover:opacity-80 ml-2'
-							style={{ height: 24, width: 24 }}
-						></SocialIcon>
-					</h4>
-					<Link
-						to='/booking'
-						className={buttonVariants({ variant: 'outline' })}
-					>
-						Confirm my session
-					</Link>
-				</div>
-			</CardContent>
-		</Card>
-	);
-}
-
-function MyHomeCard({
-	title,
-	icon,
-	description,
-	path,
-	buttonText,
-}: MyHomeCardProps) {
-	const Icon = icon;
-	return (
-		<Card>
-			<CardHeader className='flex-row gap-4'>
-				<Badge className='size-8 items-center justify-center text-lg'>
-					<Icon />
-				</Badge>
-				<CardTitle>{title}</CardTitle>
-			</CardHeader>
-			<CardContent>{description}</CardContent>
-			<CardFooter>
-				<Button variant={'outline'}>{buttonText}</Button>
-			</CardFooter>
-		</Card>
-	);
-}
 
 export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
 	const [isLoading, setIsLoading] = useState(true);
@@ -188,10 +130,57 @@ export default function MyHome({ userId, tab, setTab }: MyHomeProps) {
 						</div>
 					</CardHeader>
 				</Card>
+
+				{/* Carousel Quote */}
 				<CarouselQuote quotes={quotes} />
-				<DashboardAdvisorCard />
+
+				{/* Advisor Card */}
+				<Card>
+					<CardHeader className='flex-row gap-4'>
+						<Badge className='size-8 items-center justify-center text-lg'>
+							<FaCalendar />
+						</Badge>
+						<CardTitle>Book your free guidance session</CardTitle>
+					</CardHeader>
+					<CardContent className='grid sm:grid-cols-2'>
+						<img src={fahanImage} className='rounded-full size-24 sm:size-36' />
+						<div>
+							<h3 className='text-xl font-bold'>Fahan Ibrahim-Hashi</h3>
+							<h4 className='text-md font-semibold'>
+								Financial Planner
+								<SocialIcon
+									url='https://www.linkedin.com/company/nisainvest/'
+									target='blank'
+									className='hover:opacity-80 ml-2'
+									style={{ height: 24, width: 24 }}
+								></SocialIcon>
+							</h4>
+							<Link
+								to='/booking'
+								className={buttonVariants({ variant: 'outline' })}
+							>
+								Confirm my session
+							</Link>
+						</div>
+					</CardContent>
+				</Card>
+
+				{/* Home Cards displaying all of the steps individuals can take */}
 				{homeCards.map((card) => (
-					<MyHomeCard {...card} />
+					<Card>
+						<CardHeader className='flex-row gap-4'>
+							<Badge className='size-8 items-center justify-center text-lg'>
+								<card.icon />
+							</Badge>
+							<CardTitle>{card.title}</CardTitle>
+						</CardHeader>
+						<CardContent>{card.description}</CardContent>
+						<CardFooter>
+							<Button onClick={() => setTab(card.value)} variant={'outline'}>
+								{card.buttonText}
+							</Button>
+						</CardFooter>
+					</Card>
 				))}
 			</div>
 		</div>

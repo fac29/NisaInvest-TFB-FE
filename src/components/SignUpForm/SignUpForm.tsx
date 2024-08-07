@@ -5,13 +5,16 @@ import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
+	FormDescription,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signUp } from '@/lib/auth';
 
 const formSchema = z.object({
 	email: z.string().email({
@@ -28,9 +31,16 @@ const formSchema = z.object({
 	}),
 });
 
-const apiUrl = import.meta.env.VITE_API_URL;
+//const apiUrl = import.meta.env.VITE_API_URL;
+interface SignUpFormProps {
+	onSignUpSuccess: () => void;
+}
 
-export function SignUpForm() {
+export function SignUpForm({ onSignUpSuccess }: SignUpFormProps) {
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate();
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -43,24 +53,17 @@ export function SignUpForm() {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log('Request Data:', values);
+		setIsLoading(true);
+		setError(null);
 		try {
-			const response = await fetch(`${apiUrl}users`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					accept: 'application/json',
-				},
-				body: JSON.stringify(values),
-			});
-
-			if (!response.ok) {
-				throw Error(`HTTP error ${response.status}`);
-			}
-			// Parse the response data if needed
-			const data = await response.json();
-			console.log('Success:', data);
-		} catch (error) {
-			console.error('Error on sign up:', error);
+			await signUp(values.email, values.password);
+			onSignUpSuccess();
+			navigate('/login');
+		} catch (err) {
+			setError('Sign-up failed. Please try again.');
+			console.error('Sign-up error:', err);
+		} finally {
+			setIsLoading(false);
 		}
 	}
 

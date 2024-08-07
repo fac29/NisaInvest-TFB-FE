@@ -46,10 +46,10 @@ export function RequestDemoForm() {
 	});
 
 	// 2. Define a submit handler.
-	const apiUrl = import.meta.env.VITE_API_URL;
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			const response = await fetch(`${apiUrl}contactnisa`, {
+			const response = await fetch(`${baseUrl}/contactnisa`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(values),
@@ -160,7 +160,7 @@ export function RequestDemoForm() {
 					</Button>
 					<Dialog
 						open={isDialogOpen}
-						//the value of open is linked to onOpenChange. When a button on the dialog is pressed, open switches to false. 
+						//the value of open is linked to onOpenChange. When a button on the dialog is pressed, open switches to false.
 						onOpenChange={setIsDialogOpen}
 						title='Form Submitted'
 						text='Your form was successfully submitted. Thank you!'

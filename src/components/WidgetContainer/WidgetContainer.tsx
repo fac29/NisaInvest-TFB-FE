@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa6';
 import { Badge } from '@/components/ui/badge';
 import { IconType } from 'react-icons/lib';
-
+import { DragDropContext } from 'react-beautiful-dnd';
 interface ContainerProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
 	children?: React.ReactNode;

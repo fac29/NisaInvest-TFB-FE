@@ -4,7 +4,12 @@ import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 import useFetch from '@/utils/fetchData';
 import Widget from '@/components/Widget/Widget';
-
+import {
+    DragDropContext,
+    Droppable,
+    Draggable,
+    DropResult,
+} from 'react-beautiful-dnd';
 // Define the types for the component props
 interface DashboardContainerProps {
 	children: React.ReactNode;
@@ -133,15 +138,36 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 export function DashboardLayout({ userId }: DashboardProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
-
-	const goalsData = fetchGoals.data as GoalsData;
+	const [goalsData, setGoalsData] = useState<GoalsData | null>(null);
+	// const goalsData = fetchGoals.data as GoalsData;
 
 	useEffect(() => {
-		if (fetchGoals.data || fetchGoals.error) {
-			setIsLoading(false);
+		if (fetchGoals.data) {
+		  setGoalsData(fetchGoals.data as GoalsData);
+		  setIsLoading(false);
+		} else if (fetchGoals.error) {
+		  setIsLoading(false);
 		}
-	}, [goalsData, fetchGoals.error]);
+	  }, [fetchGoals.data, fetchGoals.error]);
+	
+	  const onDragEnd = (result: DropResult) => {
+		if (!result.destination || !goalsData) {
+		  return;
+		}
+		const newGoalsData = { ...goalsData };
 
+		const sourceCategoryIndex = newGoalsData.categorizedGoals.findIndex(
+			(category) => category.category === result.source.droppableId
+		  );
+		  const destCategoryIndex = newGoalsData.categorizedGoals.findIndex(
+			(category) => category.category === result.destination!.droppableId
+		  );
+	  
+		  const [reorderedItem] = newGoalsData as .categorizedGoals[sourceCategoryIndex].goals.splice(result.source.index, 1);
+		  newGoalsData.categorizedGoals[destCategoryIndex].goals.splice(result.destination.index, 0, reorderedItem);
+
+		  setGoalsData(newGoalsData);
+	  
 	if (isLoading) {
 		return (
 			<div className='flex items-center justify-center min-h-screen'>
@@ -163,6 +189,7 @@ export function DashboardLayout({ userId }: DashboardProps) {
 
 	return (
 		<div>
+			<DashboardContainer onDragEnd={onDragEnd}></DashboardContainer>
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>

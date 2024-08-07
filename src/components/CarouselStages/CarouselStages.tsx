@@ -1,15 +1,29 @@
 import { useState, useEffect } from 'react';
 
-export interface QuoteProp {
-	id?: number;
-	text?: string;
-	author?: string;
-	valid_from?: Date | null;
-	valid_to?: Date | null;
-	created_at?: string | Date; // Change the type to string
-}
+const stages = [
+	{
+		path: '',
+		caption: 'Graduating university',
+	},
+	{
+		path: '',
+		caption: 'Beginning a career',
+	},
+	{
+		path: '',
+		caption: 'Giving back',
+	},
+	{
+		path: '',
+		caption: 'Exploring the world',
+	},
+	{
+		path: '',
+		caption: 'Starting a business',
+	},
+];
 
-function CarouselQuote({ quotes }: { quotes: QuoteProp[] }) {
+function CarouselStages() {
 	const [current, setCurrent] = useState(0);
 	//const [autoPlay, setAutoPlay] = useState(true);
 	//let timeOut = null;
@@ -46,4 +60,4 @@ function CarouselQuote({ quotes }: { quotes: QuoteProp[] }) {
 	);
 }
 
-export default CarouselQuote;
+export default CarouselStages;

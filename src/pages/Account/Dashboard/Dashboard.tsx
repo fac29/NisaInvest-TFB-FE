@@ -1,12 +1,22 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DashboardLayout } from '@/components/Dashboard/Dashboard';
 import MyHome from '@/components/MyHome/MyHome';
+import { useState } from 'react';
 
 function Dashboard() {
+	const [tab, setTab] = useState('home');
+	const onTabChange = (value: string) => {
+		setTab(value);
+	};
+
 	const userId = 1; // this should be checked against the logged in user
 
 	return (
-		<Tabs defaultValue='home' className='flex flex-col items-center'>
+		<Tabs
+			value={tab}
+			onValueChange={onTabChange}
+			className='flex flex-col items-center'
+		>
 			<TabsList className='grid w-[500px] grid-cols-6'>
 				<TabsTrigger value='home'>Home</TabsTrigger>
 				<TabsTrigger value='profile'>My Profile</TabsTrigger>
@@ -16,7 +26,7 @@ function Dashboard() {
 				<TabsTrigger value='support'>Support</TabsTrigger>
 			</TabsList>
 			<TabsContent value='home'>
-				<MyHome userId={1} />
+				<MyHome userId={1} tab={tab} setTab={setTab} />
 			</TabsContent>
 			<TabsContent value='dashboard'>
 				<DashboardLayout userId={userId} />

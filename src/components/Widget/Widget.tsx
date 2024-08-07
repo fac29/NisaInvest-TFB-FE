@@ -4,10 +4,27 @@ import {
 	FaHourglassHalf,
 	FaSeedling,
 	FaStar,
+	FaEllipsis,
 } from 'react-icons/fa6';
 import { Badge } from '@/components/ui/badge';
 import { IconType } from 'react-icons/lib';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuPortal,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { SquareCheckBig, Goal, StickyNote } from 'lucide-react';
 
 interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
@@ -66,13 +83,38 @@ function Widget({ category, description, isCoreTask }: WidgetProps) {
 	return (
 		<div>
 			<div className={style} onClick={handleClick}>
-				<div className='flex justify-between items-center'>
+				<div className='relative flex justify-between items-center'>
 					<Badge variant='secondary'>
 						{categoriesList.map((item) =>
-							item.category == category ? <item.element /> : ''
+							item.category === category ? (
+								<item.element key={item.category} />
+							) : null
 						)}
 					</Badge>
-					{isCoreTask ? <FaStar className={starStyle} /> : ''}
+					<DropdownMenu>
+						<DropdownMenuTrigger className='p-2 hover:scale-125'>
+							<FaEllipsis />
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className='bg-offWhite w-40'>
+							<DropdownMenuLabel>Mark goal as</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuGroup>
+								<DropdownMenuItem onClick={() => console.log('Complete')}>
+									<SquareCheckBig className='mr-2 h-4 w-4' />
+									<span>Complete</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => console.log('Focused')}>
+									<Goal className='mr-2 h-4 w-4' />
+									<span>Focused</span>
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => console.log('To-do')}>
+									<StickyNote className='mr-2 h-4 w-4' />
+									<span>To-do</span>
+								</DropdownMenuItem>
+							</DropdownMenuGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
+					{isCoreTask ? <FaStar className={starStyle} /> : null}
 				</div>
 				<div className='py-2 text-center font-semibold'>{description}</div>
 			</div>

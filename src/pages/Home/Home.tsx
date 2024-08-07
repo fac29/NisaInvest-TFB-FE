@@ -56,19 +56,21 @@ function Home() {
 				</blockquote>
 			</div>
 			{/* Section #3 */}
-			<div className='h-screen w-full bg-offWhite grid grid-cols-2 gap-4 items-center justify-around px-8'>
-				<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
-					<p>
-						“Salaam, I'm Fahan, founder of Nisa Invest. As we navigate life's
-						incredible milestones, managing our finances is a challenge we all
-						face. As a Muslim woman working in finance, I sought knowledge and
-						guidance from various sources to ensure my actions align with my
-						values. I realised this process needs to be simpler. It should feel
-						like having a conversation with someone who is genuinely ready to
-						help you.”
-					</p>
-				</blockquote>
-				<CarouselStages />
+			<div className='h-screen w-full bg-offWhite flex items-center justify-around px-8'>
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl pt-8 mx-auto'>
+					<blockquote className='border-lilac border-l-8 pl-4 max-w-xl'>
+						<p>
+							“Salaam, I'm Fahan, founder of Nisa Invest. As we navigate life's
+							incredible milestones, managing our finances is a challenge we all
+							face. As a Muslim woman working in finance, I sought knowledge and
+							guidance from various sources to ensure my actions align with my
+							values. I realised this process needs to be simpler. It should
+							feel like having a conversation with someone who is genuinely
+							ready to help you.”
+						</p>
+					</blockquote>
+					<CarouselStages />
+				</div>
 			</div>
 			{/* Section #4 */}
 			<div className='h-screen w-full bg-offWhite flex flex-col items-center justify-center space-y-16 px-8'>

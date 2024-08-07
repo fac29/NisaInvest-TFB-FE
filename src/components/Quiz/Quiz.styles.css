@@ -51,9 +51,10 @@
 	background-color: #f5f1ed;
 }
 
-.answer-button:active{
+.answer-button:focus{
     background-color: #DC602E;
 }
+
 .score-section {
 	text-align: center;
 }
@@ -62,3 +63,4 @@ h4 {
 	font-weight: bold;
 	margin-top: 20px;
 }
+

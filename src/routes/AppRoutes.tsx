@@ -10,6 +10,7 @@ import Corporate from '@/pages/Corporate/Corporate'
 import Advisors from '@/pages/Advisors/Advisors'
 import Booking from '@/pages/Booking/Booking'
 import Podcast from '@/pages/Podcast/Podcast'
+import Dashboard from '@/pages/Account/Dashboard/Dashboard';
 
 function AppRoutes() {
 	return (
@@ -31,6 +32,7 @@ function AppRoutes() {
 				}
 			/>
 			<Route path='/podcast' element={<Podcast />} />
+			<Route path='/dashboard' element={<Dashboard />} />
 		</Routes>
 	)
 }

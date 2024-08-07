@@ -7,11 +7,12 @@ function SignUp() {
 		<div className='container mx-auto min-h-screen flex items-center justify-center'>
 			<div className='w-full max-w-md space-y-8'>
 				<div className='text-center'>
-					<h1 className='text-3xl font-bold'>
-						Thanks for your interest in Nisa Invest
+					<h1 className='font-playfair text-center text-3xl font-bold'>
+						Sign Up
 					</h1>
 					<p className='mt-2 text-sm text-gray-600'>
-						Please fill out the details below to create an account
+						Thank you for your interest in Nisa Invest. Please fill out the
+						details below to create an account.
 					</p>
 				</div>
 				<SignUpForm />

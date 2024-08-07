@@ -45,9 +45,9 @@ export function LoginForm() {
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Email</FormLabel>
+							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<Input type='email' placeholder='Enter your email' {...field} />
+								<Input type='email' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -58,13 +58,10 @@ export function LoginForm() {
 					name='password'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Your Password</FormLabel>
+							<FormLabel>Password</FormLabel>
+							<FormDescription>Must have at least 8 characters</FormDescription>
 							<FormControl>
-								<Input
-									type='password'
-									placeholder='Enter your password'
-									{...field}
-								/>
+								<Input type='password' placeholder='' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>

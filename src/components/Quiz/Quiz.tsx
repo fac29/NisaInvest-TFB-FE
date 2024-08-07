@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../utils/fetchData';
+import useFetch from '../../utils/fetchDataV2';
 import { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';

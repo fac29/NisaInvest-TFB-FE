@@ -37,7 +37,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
 				</div>
 			</div>
 			<Button className='mt-4' variant='outline'>
-				<Link to={`/advisors/${bioPage}`}>Book My Session</Link>
+				<Link to={`/booking`}>Book My Session</Link>
 			</Button>
 		</div>
 	);

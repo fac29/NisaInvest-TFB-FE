@@ -1,38 +1,34 @@
 name: Deploy to GitHub Pages
 
 on:
-    push:
-        branches:
-            - deploy # branch to deploy from. Force redeploy
+  push:
+    branches:
+      - deploy # branch to deploy from
 
 jobs:
-    build:
-        environment: github-pages
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                  node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # or the version your project uses
 
-            - name: Install dependencies
-              run: npm install
+      - name: Install dependencies
+        run: npm install
 
-            - name: Edit Stripe TypeScript definition file
-              run: echo '// @ts-nocheck' | cat - node_modules/@stripe/react-stripe-js/dist/react-stripe.d.ts > temp && mv temp node_modules/@stripe/react-stripe-js/dist/react-stripe.d.ts
+      - name: Fix Stripe Types
+        run: node fix-stripe-types.cjs
 
-            - name: Build the project
-              env:
-                  VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-                  VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-              run: npm run build
+      - name: Build the project
+        run: npm run build
 
-            - name: Deploy to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

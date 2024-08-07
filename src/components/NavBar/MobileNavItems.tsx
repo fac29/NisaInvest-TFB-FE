@@ -49,7 +49,7 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 					<>
 						<NavigationMenuItem key='account'>
 							<Link
-								to='/account'
+								to='/dashboard'
 								className={buttonVariants({ variant: 'link' })}
 							>
 								<NavigationMenuLink>Account</NavigationMenuLink>

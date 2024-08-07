@@ -20,7 +20,7 @@ interface WidgetProps {
 	[key: string]: any;
 }
 
-interface DashboardProps {
+export interface DashboardProps {
 	userId: number;
 }
 

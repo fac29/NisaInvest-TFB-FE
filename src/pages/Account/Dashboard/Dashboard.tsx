@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DashboardLayout } from '@/components/Dashboard/Dashboard';
+import { MyProfile } from '@/components/MyProfile/MyProfile';
 import MyHome from '@/components/MyHome/MyHome';
 import { useState } from 'react';
 
@@ -30,6 +31,11 @@ function Dashboard() {
 			</TabsContent>
 			<TabsContent value='dashboard'>
 				<DashboardLayout userId={userId} />
+			</TabsContent>
+			<TabsContent value='my_profile'>
+				<div className='min-h-screen'>
+					<MyProfile userId={userId}></MyProfile>
+				</div>
 			</TabsContent>
 			<TabsContent value='notes'>
 				<div className='min-h-screen'>

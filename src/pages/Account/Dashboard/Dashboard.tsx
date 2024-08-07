@@ -44,8 +44,8 @@ function Dashboard() {
 				</div>
 			</TabsContent>
 			<TabsContent value='faqs'>
-				<div className='min-h-screen flex flex-col items-center justify-center space-y-8 max-w-md'>
-					<h2 className='font-playfair font-bold text-2xl'>
+				<div className='min-h-screen flex flex-col items-center space-y-8 max-w-md'>
+					<h2 className='font-playfair font-bold text-2xl mt-8'>
 						Frequently Asked Questions
 					</h2>
 					<FAQsAccordion />

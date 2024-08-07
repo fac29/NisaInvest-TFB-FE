@@ -29,14 +29,14 @@ function About() {
 				</blockquote>
 				<p>
 					My passion led me to start a small blog, Fahan Finance, where I shared
-					my discoveries. And when my friend Sumaya started a sister’s circle at
+					my discoveries. And when my friend Sumaya started a sisters' circle at
 					our mosque, I was invited to run a session on personal finance.
 				</p>
 				<figure className='space-y-1'>
 					<img src={about2} className='w-full' />
 					<figcaption className='text-sm'>
 						In February 2023, I ran a session on personal finance at my mosque’s
-						sisters circle
+						sisters' circle
 					</figcaption>
 				</figure>
 				<p>
@@ -67,7 +67,7 @@ function About() {
 					Listen to the Podcast
 				</h2>
 				<p>
-					Join me as I answer sisters’ questions on personal finance topics such
+					Join me as I answer sisters' questions on personal finance topics such
 					as Shariah-compliant investing, budgeting, pensions, and general life
 					admin.
 				</p>

@@ -61,9 +61,13 @@ const categoriesList: Category[] = [
 
 const styles = {
 	default:
-		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer',
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-offWhite text-primaryBlack p-3 shadow-lg',
+	completed:
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-lilac bg-grey text-primaryBlack p-3 shadow-lg',
+	focused:
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-burntOrange bg-offWhite text-primaryBlack p-3 shadow-lg',
 	selected:
-		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-grey bg-grey text-primaryBlack p-3 shadow-lg hover:bg-lilac hover:text-offWhite hover:cursor-pointer',
+		'group grid w-full max-w-64 lg:max-w-96 mx-auto my-4 items-center rounded-2xl border-2 border-grey bg-grey text-primaryBlack p-3 shadow-lg',
 };
 
 const starStyles = {
@@ -80,16 +84,23 @@ function Widget({
 	status,
 	updateGoalStatus,
 }: WidgetProps) {
-	const [style, setStyle] = useState(styles.default);
+	// const [style, setStyle] = useState(styles.default); // This is used for handleClick function
 	const [starStyle, setStarStyle] = useState(starStyles.default);
-	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		event.preventDefault();
-		style == styles.default
-			? setStyle(styles.selected)
-			: setStyle(styles.default);
-		starStyle == starStyles.default
-			? setStarStyle(starStyles.selected)
-			: setStarStyle(starStyles.default);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+	// This function is not used
+	// const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+	// 	event.preventDefault();
+	// 	style == styles.default
+	// 		? setStyle(styles.selected)
+	// 		: setStyle(styles.default);
+	// 	starStyle == starStyles.default
+	// 		? setStarStyle(starStyles.selected)
+	// 		: setStarStyle(starStyles.default);
+	// };
+
+	const handleDropdownToggle = () => {
+		setIsDropdownOpen((prev) => !prev);
 	};
 
 	const handleSetFocus = async () => {
@@ -132,9 +143,16 @@ function Widget({
 		}
 	};
 
+	const currentStyle =
+		status === 'completed'
+			? styles.completed
+			: status === 'focused'
+				? styles.focused
+				: styles.default;
+
 	return (
 		<div>
-			<div className={style} onClick={handleClick}>
+			<div className={isDropdownOpen ? styles.selected : currentStyle}>
 				<div className='relative flex justify-between items-center'>
 					<Badge variant='secondary'>
 						{categoriesList.map((item) =>
@@ -143,8 +161,17 @@ function Widget({
 							) : null
 						)}
 					</Badge>
-					<DropdownMenu>
-						<DropdownMenuTrigger className='p-2 hover:scale-125'>
+					<DropdownMenu
+						open={isDropdownOpen}
+						onOpenChange={handleDropdownToggle}
+					>
+						<DropdownMenuTrigger
+							className={
+								isDropdownOpen
+									? 'p-2 scale-125 text-burntOrange'
+									: 'p-2 hover:scale-125 hover:text-burntOrange'
+							}
+						>
 							<FaEllipsis />
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className='bg-offWhite w-40'>

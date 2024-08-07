@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import SignUp from '../pages/SignUp/SignUp';
@@ -12,21 +13,28 @@ import Podcast from '@/pages/Podcast/Podcast';
 import Dashboard from '@/pages/Account/Dashboard/Dashboard';
 
 function AppRoutes() {
-	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-			<Route path='/login' element={<Login />} />
-			<Route path='/signup' element={<SignUp />} />
-			<Route path='/about' element={<About />} />
-			<Route path='/contact' element={<ContactUs />} />
-			<Route path='/faq' element={<FAQs />} />
-			<Route path='/corporate' element={<Corporate />} />
-			<Route path='/advisors' element={<Advisors />} />
-			<Route path='/booking' element={<Booking />} />
-			<Route path='/podcast' element={<Podcast />} />
-			<Route path='/dashboard' element={<Dashboard />} />
-		</Routes>
-	);
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/faq" element={<FAQs />} />
+            <Route path="/corporate" element={<Corporate />} />
+            <Route path="/advisors" element={<Advisors />} />
+            <Route
+                path="/booking"
+                element={
+                    <ProtectedRoute>
+                        <Booking />
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="/podcast" element={<Podcast />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+    );
 }
 
 export default AppRoutes;

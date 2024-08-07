@@ -3,6 +3,7 @@ import { quotes } from '@/components/CarouselQuote/data';
 import { CarouselTestimonial } from '@/components/CarouselTestimonial/CarouselTestimonial';
 import { testimonials } from '@/components/CarouselTestimonial/Testimonials';
 import { ProfileCard } from '@/components/ProfileCard/ProfileCard';
+import fahanImage from '/fahan_square.jpg';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -48,7 +49,7 @@ function Home() {
 				<ProfileCard
 					name='Fahan Ibrahim-Hashi'
 					position='Financial Advisor'
-					imageUrl='/Fahan_Ibrahim-Hashi_square.jpg'
+					imageUrl={fahanImage}
 					bioPage='fahan'
 				></ProfileCard>
 				<div className='flex justify-center'>

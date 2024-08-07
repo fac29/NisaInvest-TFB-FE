@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [userId, setUserId] = useState(null);
+	const [userId, setUserId] = useState(0);
 
 	useEffect(() => {
 		const checkLoginStatus = async () => {

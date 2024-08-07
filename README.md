@@ -1,6 +1,6 @@
 # NISA Invest
 
-NISA Invest is a personal finance platform for Muslim women.
+NISA Invest is a personal finance platform for Muslim women
 
 ## Tech Stack
 

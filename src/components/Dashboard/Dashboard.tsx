@@ -57,6 +57,7 @@ interface GoalsData {
 	*/
 function addWidgets(
 	data: GoalsData,
+	userId: number,
 	status?:
 		| ('completed' | 'focused' | 'not_done' | null)[]
 		| ('completed' | 'focused' | 'not_done' | null),
@@ -79,6 +80,8 @@ function addWidgets(
 				category={goal.category}
 				description={goal.description}
 				isCoreTask={goal.is_recurrent}
+				goalId={goal.id}
+				userId={userId}
 			/>
 		));
 
@@ -166,44 +169,44 @@ export function DashboardLayout({ userId }: DashboardProps) {
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
-						{addWidgets(goalsData, 'completed', 'savings')}
+						{addWidgets(goalsData, userId, 'completed', 'savings')}
 					</WidgetHeader>
 					<WidgetHeader category='expenses' heading='Managing Expenses'>
-						{addWidgets(goalsData, 'completed', 'expenses')}
+						{addWidgets(goalsData, userId, 'completed', 'expenses')}
 					</WidgetHeader>
 					<WidgetHeader category='investing' heading='Investing in the Future'>
-						{addWidgets(goalsData, 'completed', 'investing')}
+						{addWidgets(goalsData, userId, 'completed', 'investing')}
 					</WidgetHeader>
 					<WidgetHeader category='charity' heading='Giving Back'>
-						{addWidgets(goalsData, 'completed', 'charity')}
+						{addWidgets(goalsData, userId, 'completed', 'charity')}
 					</WidgetHeader>
 				</DashboardSection>
 				<DashboardSection title='My current focus is to inshAllah say that:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, 'focused', 'savings')}
+						{addWidgets(goalsData, userId, 'focused', 'savings')}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, 'focused', 'expenses')}
+						{addWidgets(goalsData, userId, 'focused', 'expenses')}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, 'focused', 'investing')}
+						{addWidgets(goalsData, userId, 'focused', 'investing')}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, 'focused', 'charity')}
+						{addWidgets(goalsData, userId, 'focused', 'charity')}
 					</WidgetContainer>
 				</DashboardSection>
 				<DashboardSection title='These are the items I can work through:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, ['not_done', null], 'savings')}
+						{addWidgets(goalsData, userId, ['not_done', null], 'savings')}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, ['not_done', null], 'expenses')}
+						{addWidgets(goalsData, userId, ['not_done', null], 'expenses')}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, ['not_done', null], 'investing')}
+						{addWidgets(goalsData, userId, ['not_done', null], 'investing')}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, ['not_done', null], 'charity')}
+						{addWidgets(goalsData, userId, ['not_done', null], 'charity')}
 					</WidgetContainer>
 				</DashboardSection>
 			</DashboardContainer>

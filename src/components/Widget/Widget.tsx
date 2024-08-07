@@ -30,6 +30,8 @@ interface WidgetProps {
 	category: 'savings' | 'expenses' | 'investing' | 'charity';
 	description: string;
 	isCoreTask: boolean;
+	userId: number;
+	goalId: number;
 }
 
 interface Category {
@@ -68,7 +70,13 @@ const starStyles = {
 	selected: 'text-primaryBlack group-hover:text-offWhite',
 };
 
-function Widget({ category, description, isCoreTask }: WidgetProps) {
+function Widget({
+	category,
+	description,
+	isCoreTask,
+	userId,
+	goalId,
+}: WidgetProps) {
 	const [style, setStyle] = useState(styles.default);
 	const [starStyle, setStarStyle] = useState(starStyles.default);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -80,6 +88,49 @@ function Widget({ category, description, isCoreTask }: WidgetProps) {
 			? setStarStyle(starStyles.selected)
 			: setStarStyle(starStyles.default);
 	};
+
+	const handleSetFocus = async () => {
+		try {
+			console.log('Trying to set to focused');
+			const response = await fetch(
+				`https://nisa-invest-tfb-be.vercel.app/goals/user-goal/focus/${userId}/${goalId}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+			if (!response.ok) {
+				throw new Error('Failed to set goal to focus');
+			}
+			console.log('Goal set to focus');
+		} catch (error) {
+			console.error('Error setting goal to focus', error);
+		}
+	};
+
+	const handleSetComplete = async () => {
+		console.log('Trying to set to completed');
+		try {
+			const response = await fetch(
+				`https://nisa-invest-tfb-be.vercel.app/goals/user-goal/complete/${userId}/${goalId}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+			if (!response.ok) {
+				throw new Error('Failed to set goal to complete');
+			}
+			console.log('Goal set to complete');
+		} catch (error) {
+			console.error('Error setting goal to complete', error);
+		}
+	};
+
 	return (
 		<div>
 			<div className={style} onClick={handleClick}>
@@ -99,11 +150,11 @@ function Widget({ category, description, isCoreTask }: WidgetProps) {
 							<DropdownMenuLabel>Mark goal as</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
-								<DropdownMenuItem onClick={() => console.log('Complete')}>
+								<DropdownMenuItem onClick={handleSetComplete}>
 									<SquareCheckBig className='mr-2 h-5 w-5' />
 									<span>Complete</span>
 								</DropdownMenuItem>
-								<DropdownMenuItem onClick={() => console.log('Focused')}>
+								<DropdownMenuItem onClick={handleSetFocus}>
 									<Goal className='mr-2 h-5 w-5' />
 									<span>Focused</span>
 								</DropdownMenuItem>

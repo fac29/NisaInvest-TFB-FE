@@ -35,17 +35,19 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 							</NavigationMenuItem>
 						))
 					) : (
-						<Link
-							to={item.path}
-							className={buttonVariants({ variant: 'link' })}
-						>
-							<NavigationMenuLink>{item.name}</NavigationMenuLink>
-						</Link>
+						<NavigationMenuItem key={item.name}>
+							<Link
+								to={item.path}
+								className={buttonVariants({ variant: 'link' })}
+							>
+								<NavigationMenuLink>{item.name}</NavigationMenuLink>
+							</Link>
+						</NavigationMenuItem>
 					)
 				)}
 				{isLoggedIn ? (
 					<>
-						<NavigationMenuItem>
+						<NavigationMenuItem key='account'>
 							<Link
 								to='/account'
 								className={buttonVariants({ variant: 'link' })}
@@ -53,7 +55,7 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 								<NavigationMenuLink>Account</NavigationMenuLink>
 							</Link>
 						</NavigationMenuItem>
-						<NavigationMenuItem>
+						<NavigationMenuItem key='logout'>
 							<Link
 								to='/logout'
 								className={buttonVariants({ variant: 'link' })}
@@ -64,12 +66,12 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 					</>
 				) : (
 					<>
-						<NavigationMenuItem>
+						<NavigationMenuItem key='login'>
 							<Link to='/login' className={buttonVariants({ variant: 'link' })}>
 								<NavigationMenuLink>Login</NavigationMenuLink>
 							</Link>
 						</NavigationMenuItem>
-						<NavigationMenuItem>
+						<NavigationMenuItem key='signup'>
 							<Link
 								to='/signup'
 								className={buttonVariants({ variant: 'link' })}
@@ -79,7 +81,7 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 						</NavigationMenuItem>
 					</>
 				)}
-				<NavigationMenuItem>
+				<NavigationMenuItem key='corporate'>
 					<Link to='/corporate' className={buttonVariants({ variant: 'link' })}>
 						<NavigationMenuLink>Book a Demo</NavigationMenuLink>
 					</Link>

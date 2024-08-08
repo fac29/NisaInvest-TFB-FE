@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - deploy # branch  to deploy from
+      - deploy # branch to deploy from
 
 jobs:
   build:
@@ -20,6 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Fix Stripe Types
+        run: node fix-stripe-types.cjs
 
       - name: Build the project
         run: npm run build

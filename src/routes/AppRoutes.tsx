@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import SignUp from '../pages/SignUp/SignUp';
@@ -23,9 +24,16 @@ function AppRoutes() {
 			<Route path='/faq' element={<FAQs />} />
 			<Route path='/corporate' element={<Corporate />} />
 			<Route path='/advisors' element={<Advisors />} />
-			<Route path='/booking' element={<Booking />} />
+			<Route
+				path='/booking'
+				element={
+					<ProtectedRoute>
+						<Booking />
+					</ProtectedRoute>
+				}
+			/>
 			<Route path='/podcast' element={<Podcast />} />
-			<Route path='/quiz' element={< Quiz />} />
+			<Route path='/quiz' element={<Quiz />} />
 			<Route path='/dashboard' element={<Dashboard />} />
 		</Routes>
 	);

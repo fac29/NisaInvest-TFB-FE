@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -9,6 +8,8 @@ import {
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Button, buttonVariants } from '../ui/button';
+import { useAuth } from '@/AuthContext';
+import { signOut } from '@/lib/auth';
 
 export interface NavItemsProps {
 	classNameValue: string;
@@ -40,7 +41,6 @@ export const navItems = [
 		],
 	},
 ];
-
 /**
  * This iterates over the navItems array to render the navigation menu items automatically.
  * This means if the links change, you don't have to hardcode them but this should reflect those changes.
@@ -48,6 +48,18 @@ export const navItems = [
  * this isn't an issue.
  */
 function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
+	const { setIsLoggedIn } = useAuth();
+
+	const handleLogout = async () => {
+		try {
+			await signOut();
+			setIsLoggedIn(false);
+			// window.location.href = '/'; // Redirect to home page after logout
+		} catch (error) {
+			console.error('Logout failed:', error);
+		}
+	};
+
 	return (
 		<NavigationMenu>
 			<NavigationMenuList className={classNameValue}>
@@ -62,7 +74,9 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 											<li key={subItem.name}>
 												<Link
 													to={subItem.path}
-													className={buttonVariants({ variant: 'link' })}
+													className={buttonVariants({
+														variant: 'link',
+													})}
 												>
 													<NavigationMenuLink>
 														{subItem.name}
@@ -74,32 +88,41 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 								</NavigationMenuContent>
 							</>
 						) : (
-							<Link
-								to={item.path}
-								className={buttonVariants({ variant: 'link' })}
-							>
-								<NavigationMenuLink>{item.name}</NavigationMenuLink>
-							</Link>
+							<NavigationMenuLink asChild>
+								<Link
+									to={item.path}
+									className={buttonVariants({
+										variant: 'ghost',
+									})}
+								>
+									{item.name}
+								</Link>
+							</NavigationMenuLink>
 						)}
 					</NavigationMenuItem>
 				))}
+
 				{isLoggedIn ? (
 					<>
 						<NavigationMenuItem>
 							<Link
-								to='/account'
-								className={buttonVariants({ variant: 'outline' })}
+								to='/dashboard'
+								className={buttonVariants({
+									variant: 'outline',
+								})}
 							>
 								<NavigationMenuLink>Account</NavigationMenuLink>
 							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Link
-								to='/logout'
-								className={buttonVariants({ variant: 'outline' })}
+							<Button
+								onClick={handleLogout}
+								className={buttonVariants({
+									variant: 'secondary',
+								})}
 							>
-								<NavigationMenuLink>Log out</NavigationMenuLink>
-							</Link>
+								Log out
+							</Button>
 						</NavigationMenuItem>
 					</>
 				) : (
@@ -107,7 +130,9 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 						<NavigationMenuItem>
 							<Link
 								to='/login'
-								className={buttonVariants({ variant: 'outline' })}
+								className={buttonVariants({
+									variant: 'outline',
+								})}
 							>
 								<NavigationMenuLink>Login</NavigationMenuLink>
 							</Link>
@@ -115,13 +140,16 @@ function NavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 						<NavigationMenuItem>
 							<Link
 								to='/signup'
-								className={buttonVariants({ variant: 'outline' })}
+								className={buttonVariants({
+									variant: 'outline',
+								})}
 							>
 								<NavigationMenuLink>Sign up</NavigationMenuLink>
 							</Link>
 						</NavigationMenuItem>
 					</>
 				)}
+
 				<NavigationMenuItem>
 					<Link
 						to='/corporate'

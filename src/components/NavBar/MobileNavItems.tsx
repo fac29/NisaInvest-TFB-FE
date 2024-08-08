@@ -17,6 +17,7 @@ import { NavItemsProps, navItems } from './NavItems';
  * The buttons are currently hardcoded but as these are unlikely to change, hopefully
  * this isn't an issue.
  */
+
 function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 	return (
 		<NavigationMenu>
@@ -48,7 +49,7 @@ function MobileNavItems({ classNameValue, isLoggedIn }: NavItemsProps) {
 					<>
 						<NavigationMenuItem key='account'>
 							<Link
-								to='/account'
+								to='/dashboard'
 								className={buttonVariants({ variant: 'link' })}
 							>
 								<NavigationMenuLink>Account</NavigationMenuLink>

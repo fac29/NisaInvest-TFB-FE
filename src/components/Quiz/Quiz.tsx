@@ -52,9 +52,6 @@ export function QuestionSlide() {
 
 	if (!data || data.length === 0) return <div>Quiz Loading...</div>;
 
-	// Determine if the current question is multi-select (e.g., question 2 is multi-select)
-	const isMultiSelect = currentQuestion === 1; // Index 1 is the second question
-
 	// const handleStoreAnswers = (answerId: number) => {
 	// 	setToggle(!toggle);
 	// 	// console.log(`Look here DIANA at the toggle : ${toggle}`);
@@ -71,44 +68,26 @@ export function QuestionSlide() {
 		answerId: number
 	) => {
 		setStoreAnswers((prevAnswers) => {
-			const lastAnswer = prevAnswers[prevAnswers.length - 1];
-
-			if (lastAnswer === answerId) {
-				// If the last answer is the same as the current one, remove it
-				const newAnswers = prevAnswers.slice(0, -1);
-
-				// Update clicks
-				setClicks((prevClicks) => Math.max(0, prevClicks - 1));
-
-				return newAnswers;
-			} else if (prevAnswers.length < 2 || !isMultiSelect) {
-				// Add the new answer if we have less than 2 answers (for multi-select)
-				// or if it's a single-select question
-				const newAnswers = [...prevAnswers, answerId];
-
-				// Update clicks
-				setClicks((prevClicks) => prevClicks + 1);
-
-				return newAnswers;
-			} else {
-				// If we already have 2 answers for a multi-select question, don't add more
+				if (prevAnswers.includes(answerId)) {
+				  // If the answer is already selected, remove it
+				  return prevAnswers.filter(id => id !== answerId);
+				} else {
+				  // If we have less than 2 selections, add the new answer
+				  return [...prevAnswers, answerId];
+				}
+				// If we already have 2 selections, don't change anything
 				return prevAnswers;
-			}
-		});
-		handleClick(event);
-	};
+			  });
+			  handleClick(event);
+		};
+
+
 
 	const submitQuestion = () => {
-		if (isMultiSelect && clicks == 2) {
-			setClicks(0);
-			setCurrentQuestion(currentQuestion + 1);
-			// setToggle(!toggle);
-		} else {
-			setClicks(0);
-			setCurrentQuestion(currentQuestion + 1);
-			// setToggle(!toggle);
-			// console.log(`Look here Adamcxyk ${toggle}`);
-		}
+		setClicks(0);
+		setCurrentQuestion(currentQuestion + 1);
+		// setToggle(!toggle);
+		// console.log(`Look here Adamcxyk ${toggle}`);
 	};
 
 	const dataToPost: userIdQuizAnswer = {
@@ -197,7 +176,6 @@ export function QuestionSlide() {
 										type='submit'
 										onClick={submitQuestion}
 										className='bg-burntOrange  hover:bg-transparent  border-burntOrange border-2 rounded-full font-bold py-2 px-4 '
-										disabled={isMultiSelect && clicks < 2}
 									>
 										{' '}
 										continue{' '}

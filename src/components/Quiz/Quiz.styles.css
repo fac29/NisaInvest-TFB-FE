@@ -56,8 +56,9 @@
 	color: white;
 } */
 
-.answer-button:active, button:focus{
-	background-color: #DC602E;
+.answer-button:active,
+.answer-button:focus {
+	background-color: #dc602e;
 	color: white;
 }
 /* 
@@ -74,4 +75,3 @@ h4 {
 	font-weight: bold;
 	margin-top: 20px;
 }
-

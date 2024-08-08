@@ -34,6 +34,7 @@ export const navItems = [
 		name: 'Knowledge Hub',
 		items: [
 			{ name: 'Book a Session', path: '/booking' },
+			{ name: 'Quiz', path: '/quiz' },
 			{ name: 'Resources', path: '/resources' },
 			{ name: 'Podcast', path: '/podcast' },
 			{ name: 'FAQs', path: '/faq' },

@@ -225,7 +225,7 @@ export function DashboardLayout({ userId }: DashboardProps) {
 	return (
 		<div>
 			<DashboardContainer>
-				<DashboardSection title='Alhambulillah I can say that:'>
+				<DashboardSection title='Alhamdulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
 						{addWidgets(
 							goalsData,

@@ -26,15 +26,27 @@ interface userIdQuizAnswer {
 	goalIds: number[];
 }
 
+const styles = {
+	default: 'answer-button bg-lilac',
+	selected: 'answer-button bg-burntOrange',
+};
+
 export function QuestionSlide() {
 	const [storeAnswers, setStoreAnswers] = useState<number[]>([]);
 	const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 	const [clicks, setClicks] = useState<number>(0);
-	//const [toggle, setToggle] = useState<boolean>(true);
+	const [style, setStyle] = useState(styles.default);
 	const { data } = useFetch<jsonQuestion[]>(
 		'https://nisa-invest-tfb-be.vercel.app/quiz/questions-with-answers',
 		[]
 	);
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
+		style == styles.default
+			? setStyle(styles.selected)
+			: setStyle(styles.default);
+	};
 
 	console.log(`Here is the selected answer ids ${storeAnswers}`);
 
@@ -54,7 +66,10 @@ export function QuestionSlide() {
 	// 	}
 	// };
 
-	const handleStoreAnswers = (answerId: number) => {
+	const handleStoreAnswers = (
+		event: React.MouseEvent<HTMLElement>,
+		answerId: number
+	) => {
 		setStoreAnswers((prevAnswers) => {
 			const lastAnswer = prevAnswers[prevAnswers.length - 1];
 
@@ -80,6 +95,7 @@ export function QuestionSlide() {
 				return prevAnswers;
 			}
 		});
+		handleClick(event);
 	};
 
 	const submitQuestion = () => {
@@ -134,7 +150,7 @@ export function QuestionSlide() {
 									<Link to='/dashboard'>
 										<button
 											onClick={() => postDataURI(dataToPost)}
-											className=' submit-button bg-burntOrange border-2 rounded-full font-bold py-2 px-4'
+											className='submit-button bg-burntOrange border-2 rounded-full font-bold py-2 px-4'
 										>
 											{' '}
 											go to my dashboard{' '}
@@ -165,8 +181,10 @@ export function QuestionSlide() {
 											// Render button for other questions
 											<button
 												id={`button-${option.id}`}
-												className={`answer-button ${storeAnswers.includes(option.id) ? 'bg-burntOrange' : ''}`}
-												onClick={() => handleStoreAnswers(option.id)}
+												className={`answer-button`}
+												onClick={(event) =>
+													handleStoreAnswers(event, option.id)
+												}
 											>
 												{option.answer_text}
 											</button>

@@ -1,9 +1,17 @@
-import { Loader2 } from 'lucide-react';
-import React, { ReactElement, useEffect, useState } from 'react';
+import { Loader2, ChevronsUpDown } from 'lucide-react';
+import React, { ReactElement, useEffect, useState, useCallback } from 'react';
 import WidgetHeader from '@/components/WidgetHeader/WidgetHeader';
 import WidgetContainer from '@/components/WidgetContainer/WidgetContainer';
 import useFetch from '@/utils/fetchData';
 import Widget from '@/components/Widget/Widget';
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Button } from '../ui/button';
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // Define the types for the component props
 interface DashboardContainerProps {
@@ -23,9 +31,6 @@ interface WidgetProps {
 export interface DashboardProps {
 	userId: number;
 }
-
-// Import
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 // Define the types for the goals data structure
 interface Goal {
@@ -56,7 +61,12 @@ interface GoalsData {
 	{addWidgets(goalsData, 'completed', 'savings')} 
 	*/
 function addWidgets(
-	data: GoalsData,
+	data: GoalsData | null,
+	userId: number,
+	updateGoalStatus: (
+		goalId: number,
+		newStatus: 'completed' | 'focused' | 'not_done' | null
+	) => void,
 	status?:
 		| ('completed' | 'focused' | 'not_done' | null)[]
 		| ('completed' | 'focused' | 'not_done' | null),
@@ -79,6 +89,10 @@ function addWidgets(
 				category={goal.category}
 				description={goal.description}
 				isCoreTask={goal.is_recurrent}
+				goalId={goal.id}
+				userId={userId}
+				status={goal.status}
+				updateGoalStatus={updateGoalStatus}
 			/>
 		));
 
@@ -89,21 +103,44 @@ export function DashboardContainer({ children }: DashboardContainerProps) {
 	const sections = React.Children.toArray(children);
 
 	return (
-		<div className='container min-h-screen mx-auto p-4 space-y-8'>
+		<div className='container min-h-screen mx-auto p-4'>
 			{sections.map((section, index) => {
 				if (React.isValidElement<DashboardSectionProps>(section)) {
+					const [isOpen, setIsOpen] = React.useState(true);
 					return (
-						<div key={index} className='p-4 rounded-lg'>
-							<div className='flex gap-4 items-center bg-lilac rounded-lg p-4 mb-4'>
-								<div className='flex items-center justify-center w-10 h-10 bg-offWhite rounded-full'>
-									<p className='text-xl font-bold'>{index + 1}</p>
+						<Collapsible
+							open={isOpen}
+							onOpenChange={setIsOpen}
+							key={index}
+							className='lg:min-w-[1000px]'
+						>
+							<div key={index} className='p-4 rounded-lg'>
+								<div className='flex gap-4 items-center bg-lilac rounded-lg p-2 mb-4'>
+									<div className='flex items-center justify-center w-10 h-10 bg-offWhite rounded-full'>
+										<p className='text-xl font-bold'>{index + 1}</p>
+									</div>
+									<div className='w-full flex justify-between items-center'>
+										<h2 className='w-fit text-xl font-bold'>
+											{section.props.title}
+										</h2>
+										<CollapsibleTrigger>
+											<Button
+												variant='ghost'
+												size='sm'
+												className='w-9 p-0 hover:bg-offWhite hover:bg-opacity-20'
+											>
+												<ChevronsUpDown className='h-4 w-4' />
+											</Button>
+										</CollapsibleTrigger>
+									</div>
 								</div>
-								<h2 className='text-xl font-bold'>{section.props.title}</h2>
+								<CollapsibleContent>
+									<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+										{section.props.children}
+									</div>
+								</CollapsibleContent>
 							</div>
-							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-								{section.props.children}
-							</div>
-						</div>
+						</Collapsible>
 					);
 				}
 				return null;
@@ -133,14 +170,38 @@ export function DashboardSection({ title, children }: DashboardSectionProps) {
 export function DashboardLayout({ userId }: DashboardProps) {
 	const [isLoading, setIsLoading] = useState(true);
 	const fetchGoals = useFetch<GoalsData>(`${baseUrl}/goals/user/${userId}`);
-
-	const goalsData = fetchGoals.data as GoalsData;
+	const [goalsData, setGoalsData] = useState<GoalsData | null>(null);
 
 	useEffect(() => {
-		if (fetchGoals.data || fetchGoals.error) {
+		if (fetchGoals.data) {
+			setGoalsData(fetchGoals.data as GoalsData);
+			setIsLoading(false);
+		} else if (fetchGoals.error) {
 			setIsLoading(false);
 		}
-	}, [goalsData, fetchGoals.error]);
+	}, [fetchGoals.data, fetchGoals.error]);
+
+	const updateGoalStatus = useCallback(
+		(
+			goalId: number,
+			newStatus: 'completed' | 'focused' | 'not_done' | null
+		) => {
+			if (!goalsData) return;
+
+			const updatedGoalsData = {
+				...goalsData,
+				categorizedGoals: goalsData.categorizedGoals.map((categorizedGoal) => ({
+					...categorizedGoal,
+					goals: categorizedGoal.goals.map((goal) =>
+						goal.id === goalId ? { ...goal, status: newStatus } : goal
+					),
+				})),
+			};
+
+			setGoalsData(updatedGoalsData);
+		},
+		[goalsData]
+	);
 
 	if (isLoading) {
 		return (
@@ -166,44 +227,116 @@ export function DashboardLayout({ userId }: DashboardProps) {
 			<DashboardContainer>
 				<DashboardSection title='Alhambulillah I can say that:'>
 					<WidgetHeader category='savings' heading='Emergency Savings'>
-						{addWidgets(goalsData, 'completed', 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'savings'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='expenses' heading='Managing Expenses'>
-						{addWidgets(goalsData, 'completed', 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'expenses'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='investing' heading='Investing in the Future'>
-						{addWidgets(goalsData, 'completed', 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'investing'
+						)}
 					</WidgetHeader>
 					<WidgetHeader category='charity' heading='Giving Back'>
-						{addWidgets(goalsData, 'completed', 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'completed',
+							'charity'
+						)}
 					</WidgetHeader>
 				</DashboardSection>
 				<DashboardSection title='My current focus is to inshAllah say that:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, 'focused', 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'savings'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, 'focused', 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'expenses'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, 'focused', 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'investing'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, 'focused', 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							'focused',
+							'charity'
+						)}
 					</WidgetContainer>
 				</DashboardSection>
 				<DashboardSection title='These are the items I can work through:'>
 					<WidgetContainer category='savings'>
-						{addWidgets(goalsData, ['not_done', null], 'savings')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'savings'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='expenses'>
-						{addWidgets(goalsData, ['not_done', null], 'expenses')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'expenses'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='investing'>
-						{addWidgets(goalsData, ['not_done', null], 'investing')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'investing'
+						)}
 					</WidgetContainer>
 					<WidgetContainer category='charity'>
-						{addWidgets(goalsData, ['not_done', null], 'charity')}
+						{addWidgets(
+							goalsData,
+							userId,
+							updateGoalStatus,
+							['not_done', null],
+							'charity'
+						)}
 					</WidgetContainer>
 				</DashboardSection>
 			</DashboardContainer>

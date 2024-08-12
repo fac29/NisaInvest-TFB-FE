@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Fix Stripe Types
-        run: node fix-stripe-types.cjs
+        run: node fix-stripe-types.js
 
       - name: Build the project
         run: npm run build

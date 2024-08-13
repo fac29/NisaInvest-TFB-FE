@@ -18,10 +18,8 @@ export default defineConfig(({ mode }) => {
       'process.env': {
         VITE_SUPABASE_URL: env.VITE_SUPABASE_URL,
         VITE_SUPABASE_ANON_KEY: env.VITE_SUPABASE_ANON_KEY,
-        supabaseUrl: process.env.SUPABASE_URL,
       },
     },
   };
 });
-
 

@@ -3,10 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # branch to deploy from
+      - deploy # branch to deploy from
 
 jobs:
   build:
+    environment: github-pages
     runs-on: ubuntu-latest
 
     steps:

@@ -96,7 +96,9 @@ export function QuestionSlide() {
 	};
 
 	function postDataURI(data: userIdQuizAnswer) {
-		fetch('http://localhost:3000/user-goals/update-quiz-selected', {
+
+		const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+		fetch('https://nisa-invest-tfb-be.vercel.app/user-goals/update-quiz-selected', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

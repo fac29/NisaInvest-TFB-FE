@@ -1,6 +1,17 @@
 # NISA Invest
 
-NISA Invest is a personal finance platform for Muslim women.
+
+
+## Table of contents
+
+1. [About](#about)
+2. [Tech Stack](#tech-stack)
+3. [Local Environment](#local-environment)
+4. [Hosting & deployment](#hosting--deployment)
+
+
+## About
+NISA Invest is a personal finance platform for Muslim women. It's main functions are to be able to book a call with a fincial advisor, a quiz which then leads you to a dashboard where you can click to see a personalised list of goals (widgets). Once you have completed this goal, you make it as complete and it moves to the top of the page. Once you have finished all your pre-populated priorities, you can choose more goals from the bottom section to be your new focus. 
 
 ## Tech Stack
 
@@ -9,9 +20,9 @@ This project uses the following technologies:
 - **Frontend Framework**: React
 - **Language**: TypeScript
 - **Build Tool**: Vite
-- **UI Styling**: Tailwind CSS
+- **UI Styling**: Tailwind and CSS
 
-## Getting Started
+## Local Environment
 
 1. Clone the repository:
 
@@ -54,6 +65,10 @@ VITE_BASE_URL = "https://nisa-invest-tfb-be.vercel.app"
 ```bash
 npm run dev
 ```
+
+
+
+## Hosting & deployment
 
 ## Style Guide
 

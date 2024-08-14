@@ -1,7 +1,5 @@
 # NISA Invest
 
-
-
 ## Table of contents
 
 1. [About](#about)

@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - include_name_on_signup # branch to deploy from
+      - include_name_on_signup # branch to deploy from.
 
 jobs:
   build:

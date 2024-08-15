@@ -56,16 +56,16 @@ export function SignUpForm({ onSignUpSuccess }: SignUpFormProps) {
 		setIsLoading(true);
 		setError(null);
 		try {
-			await signUp(values.email, values.password);
-			onSignUpSuccess();
-			navigate('/login');
+		  await signUp(values.email, values.password, values.first_name, values.last_name);
+		  onSignUpSuccess();
+		  navigate('/login');
 		} catch (err) {
-			setError('Sign-up failed. Please try again.');
-			console.error('Sign-up error:', err);
+		  setError('Sign-up failed. Please try again.');
+		  console.error('Sign-up error:', err);
 		} finally {
-			setIsLoading(false);
+		  setIsLoading(false);
 		}
-	}
+	  }
 
 	return (
 		<>

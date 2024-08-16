@@ -32,9 +32,31 @@ export const signOut = async () => {
   if (error) throw error
 }
 
+// export const getCurrentUser = async () => {
+//   const { data: { user } } = await supabase.auth.getUser()
+//   return user
+// }
+
 export const getCurrentUser = async () => {
   const { data: { user } } = await supabase.auth.getUser()
-  return user
+  
+  if (user) {
+    // Fetch the corresponding user data from the public users table
+    const { data: publicUserData, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('auth_id', user.id)
+      .single()
+
+    if (error) {
+      console.error('Error fetching public user data:', error)
+      return { authUser: user, publicUser: null }
+    }
+
+    return { authUser: user, publicUser: publicUserData }
+  }
+
+  return { authUser: null, publicUser: null }
 }
 
 export const resetPassword = async (email: string) => {

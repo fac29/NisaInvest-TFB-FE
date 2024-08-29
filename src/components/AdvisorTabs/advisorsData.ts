@@ -1,10 +1,11 @@
 import { Advisor } from '@/utils/dataTypes';
+import fahanSquare from '/fahan_square.jpg';
 
 export const advisorsData: Advisor[] = [
 	{
 		value: 'fahan',
 		name: 'Fahan Ibrahim-Hashi',
-		image: 'fahan_square.jpg',
+		image: fahanSquare,
 		title: 'Financial Planner',
 		location: 'London, UK',
 		linkedInURL: '',

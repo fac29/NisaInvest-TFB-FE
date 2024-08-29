@@ -2,18 +2,19 @@
 
 ## 1. File Structure and Naming
 
-- Use ``PascalCase`` for component file names: `UserProfile.tsx`
-- Use ``camelCase`` for non-component file names: `utils.ts`, `hooks.ts`
+- Use `PascalCase` for component file names: `UserProfile.tsx`
+- Use `camelCase` for non-component file names: `utils.ts`, `hooks.ts`
 - Group related files in directories: `components/`, `hooks/`, `utils/`
 - Use index files to export from directories: `components/index.ts`
 - Variables:
-	- Use ``camelCase`` for variables. 
-	- Choose variable names that clearly describe the variable's purpose or content.
-	- Choose names that can be pronounced, making discussions about the code easier.
-	- Avoid single-letter names or numeric constants without context. Opt for names that can be easily searched in the codebase.
-	- For functions or methods, start with verbs that clearly indicate the action.
-	- If the variable's purpose isn't clear from its immediate context, add more information to the name.
-	- Use positive names for boolean variables, and consider prefix like 'is', 'has', or 'should'.
+  - Use `camelCase` for variables.
+  - Choose variable names that clearly describe the variable's purpose or content.
+  - Choose names that can be pronounced, making discussions about the code easier.
+  - Avoid single-letter names or numeric constants without context. Opt for names that can be easily searched in the codebase.
+  - For functions or methods, start with verbs that clearly indicate the action.
+  - If the variable's purpose isn't clear from its immediate context, add more information to the name.
+  - Use positive names for boolean variables, and consider prefix like 'is', 'has', or 'should'.
+
 ```typescript
 // Good
 const userAge = 25;
@@ -57,17 +58,17 @@ const User: React.FC<UserProps> = ({ name, age }) => {
 
 ```typescript
 interface User {
-  id: number;
-  name: string;
-  role: 'admin' | 'user';
+	id: number | string;
+	name: string;
+	role: 'admin' | 'user';
 }
 
 type ID = string | number;
 
 enum Status {
-  Active,
-  Inactive,
-  Pending
+	Active,
+	Inactive,
+	Pending,
 }
 ```
 
@@ -88,7 +89,7 @@ const [count, setCount] = useState<number>(0);
 
 ```typescript
 const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  // Handler logic
+	// Handler logic
 };
 ```
 
@@ -124,11 +125,12 @@ import axios from 'axios';
 import { Button } from './components';
 import { useDataFetcher } from './hooks';
 ```
+
 ## 8. Environments
 
-- use ``.env.development`` and ``.env.production`` environment files
-- use ``VITE_BASE_URL = 'Your URL' `` format for setting base URL in the ``env`` file.
-- use `` const baseUrl = import.meta.env.VITE_BASE_URL; `` to import the variable in the application
+- use `.env.development` and `.env.production` environment files
+- use `VITE_BASE_URL = 'Your URL' ` format for setting base URL in the `env` file.
+- use `const baseUrl = import.meta.env.VITE_BASE_URL;` to import the variable in the application
 
 ## 9. Comments and Documentation
 
@@ -142,7 +144,7 @@ import { useDataFetcher } from './hooks';
  * @param {UserProps} props - The component props
  */
 const UserInfo: React.FC<UserProps> = ({ name, age }) => {
-  // Component logic
+	// Component logic
 };
 ```
 
@@ -154,15 +156,16 @@ const UserInfo: React.FC<UserProps> = ({ name, age }) => {
 
 ```typescript
 describe('UserInfo', () => {
-  it('should render the user name and age', () => {
-    // Test logic
-  });
+	it('should render the user name and age', () => {
+		// Test logic
+	});
 });
 ```
 
 ## 11. Linting and Formatting
 
 - Use ESLint with TypeScript support
+
 ```json
 {
 	root: true,
@@ -186,7 +189,9 @@ describe('UserInfo', () => {
 	},
 };
 ```
+
 - Use Prettier for code formatting
+
 ```json
 {
 	trailingComma: 'es5',

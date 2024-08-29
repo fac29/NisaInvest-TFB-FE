@@ -1,7 +1,5 @@
 # NISA Invest
 
-
-
 ## Table of contents
 
 1. [About](#about)
@@ -49,23 +47,30 @@ npm install
  touch .env.production
 ```
 
-and include the following line:
+and include the following lines:
 
 - development:
 ```env
-VITE_BASE_URL = "https://nisa-invest-tfb-be.vercel.app"
+VITE_BASE_URL=https://nisa-invest-tfb-be.vercel.app
+VITE_SUPABASE_URL=http://localhost:54321
+VITE_SUPABASE_ANON_KEY=[Check this at Supabase Online Dashboard]
+VITE_SUPABASE_SERVICE_ROLE_KEY=[Check this at Supabase Online Dashboard]
 ```
 - production:
 ```env
-VITE_BASE_URL = "https://nisa-invest-tfb-be.vercel.app"
+VITE_BASE_URL=https://nisa-invest-tfb-be.vercel.app
+VITE_SUPABASE_URL=https://xzzacivebczssoporkmz.supabase.co
+VITE_SUPABASE_ANON_KEY=[Check this at Supabase Online Dashboard]
+VITE_SUPABASE_SERVICE_ROLE_KEY=[Check this at Supabase Online Dashboard]
 ```
+
+Supabase references are needed for auth purposes. Fetching data from supabase is done exclusively from the back-end
 
 5. Enter the following script to run the server in the development mode:
 
 ```bash
 npm run dev
 ```
-
 
 
 ## Hosting & deployment

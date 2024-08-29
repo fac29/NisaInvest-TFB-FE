@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import CarouselStages from '@/components/CarouselStages/CarouselStages';
 import StepsCard from '@/components/StepsCard/StepsCard';
 import { stepsList } from '../Advisors/Advisors';
+import camelImage from '/camel_logo.png'
 
 function Home() {
 	return (
@@ -27,7 +28,8 @@ function Home() {
 						<div className='flex-shrink-0 w-[200px] h-[200p]'>
 							<img
 								className='w-full h-full object-cover'
-								src='./camel_logo.png'
+								//src='./camel_logo.png'
+								src = {camelImage}
 								alt='Picture of a cartoon camel'
 							/>
 						</div>

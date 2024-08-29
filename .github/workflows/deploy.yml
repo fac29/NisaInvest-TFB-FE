@@ -3,10 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # branch to deploy from
+      - include_name_on_signup # branch to deploy from.
 
 jobs:
   build:
+    environment: github-pages
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +26,10 @@ jobs:
         run: node fix-stripe-types.js
 
       - name: Build the project
+        env:
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
 
       - name: Deploy to GitHub Pages

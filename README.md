@@ -11,6 +11,13 @@
 ## About
 NISA Invest is a personal finance platform for Muslim women. It's main functions are to be able to book a call with a fincial advisor, a quiz which then leads you to a dashboard where you can click to see a personalised list of goals (widgets). Once you have completed this goal, you make it as complete and it moves to the top of the page. Once you have finished all your pre-populated priorities, you can choose more goals from the bottom section to be your new focus. 
 
+
+Here is the link to the deployed app. ` https://github.com/fac29/NisaInvest-TFB-FE/actions/runs/10410426533 `
+When you click on this link you will see an empty dashboard. Please click on the Home button on the NavBar to see the  completed dashboard.
+![Screenshot 2024-08-29 at 14 00 17](https://github.com/user-attachments/assets/dd708183-10c4-4e0e-9986-71634ecbf13c)
+
+
+
 ## Tech Stack
 
 This project uses the following technologies:

@@ -1,8 +1,7 @@
-export const BE_BASE_URL: string = "https://nisa-invest-tfb-be.vercel.app/"
-
+export const BE_BASE_URL: string = 'https://nisa-invest-tfb-be.vercel.app/';
 
 export interface User {
-	id: number;
+	id: number | string;
 	created_at: Date;
 	email: string;
 	name: string;
